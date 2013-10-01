@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coffee.WebUi", "Coffee.WebUi\Coffee.WebUi.csproj", "{BE38B8B9-F494-4490-9105-4FCE745C4D01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coffee.Entities", "Coffee.Entities\Coffee.Entities.csproj", "{620CD09A-B6D2-4FFF-AF2B-008956163B06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coffee.IRepository", "Coffee.IRepository\Coffee.IRepository.csproj", "{E08E5315-5F8D-4A32-BC1B-F47FCA8B55A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coffee.Repository", "Coffee.Repository\Coffee.Repository.csproj", "{7FC51059-AF0E-45A6-A4F5-96EEE86E7D94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coffee.Tests", "Coffee.Tests\Coffee.Tests.csproj", "{AD3A6777-2167-4C0D-9F79-123378EEAEA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coffee.Logging", "Coffee.Logging\Coffee.Logging.csproj", "{709F2EC0-2256-4976-8068-FE355FF1E421}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coffee.Configuration", "Coffee.Configuration\Coffee.Configuration.csproj", "{AF86CB6C-2282-48DD-910C-F5FAA30B2CD7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE38B8B9-F494-4490-9105-4FCE745C4D01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE38B8B9-F494-4490-9105-4FCE745C4D01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE38B8B9-F494-4490-9105-4FCE745C4D01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE38B8B9-F494-4490-9105-4FCE745C4D01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{620CD09A-B6D2-4FFF-AF2B-008956163B06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{620CD09A-B6D2-4FFF-AF2B-008956163B06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{620CD09A-B6D2-4FFF-AF2B-008956163B06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{620CD09A-B6D2-4FFF-AF2B-008956163B06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E08E5315-5F8D-4A32-BC1B-F47FCA8B55A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E08E5315-5F8D-4A32-BC1B-F47FCA8B55A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E08E5315-5F8D-4A32-BC1B-F47FCA8B55A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E08E5315-5F8D-4A32-BC1B-F47FCA8B55A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FC51059-AF0E-45A6-A4F5-96EEE86E7D94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FC51059-AF0E-45A6-A4F5-96EEE86E7D94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FC51059-AF0E-45A6-A4F5-96EEE86E7D94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FC51059-AF0E-45A6-A4F5-96EEE86E7D94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD3A6777-2167-4C0D-9F79-123378EEAEA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD3A6777-2167-4C0D-9F79-123378EEAEA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD3A6777-2167-4C0D-9F79-123378EEAEA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD3A6777-2167-4C0D-9F79-123378EEAEA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{709F2EC0-2256-4976-8068-FE355FF1E421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{709F2EC0-2256-4976-8068-FE355FF1E421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{709F2EC0-2256-4976-8068-FE355FF1E421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{709F2EC0-2256-4976-8068-FE355FF1E421}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF86CB6C-2282-48DD-910C-F5FAA30B2CD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF86CB6C-2282-48DD-910C-F5FAA30B2CD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF86CB6C-2282-48DD-910C-F5FAA30B2CD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF86CB6C-2282-48DD-910C-F5FAA30B2CD7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
