@@ -12,7 +12,9 @@
 
 @Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm("LogOn", "Account", FormMethod.Post, new { @id = "logon-form" }))
+{
+    @Html.AntiForgeryToken()
     <div>
         <fieldset>
             <legend>Account Information</legend>
@@ -33,13 +35,13 @@
                 @Html.ValidationMessageFor(m => m.Password)
             </div>
 
-            <div class="editor-label">
-                @Html.CheckBoxFor(m => m.RememberMe)
+            <div class="editor-label inline-block" id="remember-me-block">
                 @Html.LabelFor(m => m.RememberMe)
+                @Html.CheckBoxFor(m => m.RememberMe)
             </div>
 
             <p>
-                <input type="submit" value="Log On" />
+                <input type="submit" class="btn btn-primary" value="Log On" />
             </p>
         </fieldset>
     </div>

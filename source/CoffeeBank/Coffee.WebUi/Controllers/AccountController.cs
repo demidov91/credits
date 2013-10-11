@@ -20,6 +20,7 @@ namespace Coffee.WebUi.Controllers
         // POST: /Account/LogOn
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult LogOn(LogOnModel model, string returnUrl)
         {
             if (ModelState.IsValid)

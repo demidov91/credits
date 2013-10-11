@@ -17,6 +17,7 @@ logs/
 *.suo
 *.user
 *.sln.docstates
+source/CoffeeBank/Coffee.WebUi/App_Data/*
 
 # Build results
 [Dd]ebug/

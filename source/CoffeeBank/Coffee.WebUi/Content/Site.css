@@ -1,3 +1,18 @@
-﻿#log-on-part{
+﻿#main{
+    width: 1200px;
+    margin: 0 auto;
+}
+
+#log-on-part{
     text-align:center;
+    width: 600px;
+    margin-left: 300px;
+}
+
+.inline-block *{
+    display: inline;
+}
+
+#remember-me-block>input{
+    margin-left: 1em;
 }
