@@ -1,0 +1,23 @@
+﻿@model Coffee.Entities.CreditRequest
+
+@{
+    ViewBag.Title = "Create credit request";
+}
+
+<h2>Create credit request</h2>
+
+@{ Html.BeginForm("New", "Request", FormMethod.Post); }
+
+<div class="new-request-amount">
+    @Html.Label("Enter amount of money, you want to receive: ")
+    @Html.TextAreaFor(x=>x.Amount)
+</div>
+
+<div class="new-request-period">
+    @Html.Label("Enter number of months: ")
+    @Html.TextAreaFor(x=>x.Period)
+</div>
+
+<input type="submit"/>
+
+

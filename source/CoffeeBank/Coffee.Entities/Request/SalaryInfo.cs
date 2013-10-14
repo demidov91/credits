@@ -10,6 +10,6 @@ namespace Coffee.Entities
 
         public TimeSpan WorkTime { get; set; }
 
-        public long AverageSalary { get; set; }
+        public decimal AverageSalary { get; set; }
     }
 }

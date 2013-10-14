@@ -13,5 +13,11 @@
         public SalaryInfo SalaryInfo { get; set; }
 
         //...some other info
+
+        public CreditRequest()
+        {
+            PassportInfo = new PassportInfo();
+            SalaryInfo = new SalaryInfo();
+        }
     }
 }
