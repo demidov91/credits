@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Coffee.Entities
 {
@@ -11,12 +8,16 @@ namespace Coffee.Entities
 
         public bool IssueCredit(CreditRequest approvedRequest)
         {
-            return _account.WithdrawMoney(approvedRequest.Sum);
+            return _account.WithdrawMoney(approvedRequest.Amount);
         }
 
         public bool TakePayment(Payment payment)
         {
             return _account.PutMoney(payment.Amount);
         }
+
+        public List<CreditLine> CreditLines { get; set; }
+
+        public List<BankWorker> Workers { get; set; }
     }
 }
