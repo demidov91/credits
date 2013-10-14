@@ -4,6 +4,8 @@ namespace Coffee.Entities
 {
     public class Bank
     {
+        public long Id { get; set; }
+
         private Account _account;
 
         public bool IssueCredit(CreditRequest approvedRequest)

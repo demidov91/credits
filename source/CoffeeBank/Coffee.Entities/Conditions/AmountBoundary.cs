@@ -2,6 +2,8 @@
 {
     public class AmountBoundary:IRequestBoundary
     {
+        public long Id { get; set; }
+
         public decimal MinAmount { get; set; }
 
         public decimal MaxAmount { get; set; }

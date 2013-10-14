@@ -5,6 +5,8 @@ namespace Coffee.Entities
 {
     public class AgeBoundary : IRequestBoundary
     {
+        public long Id { get; set; }
+
         public int MinAge { get; set; }
 
         public int MaxAge { get; set; }

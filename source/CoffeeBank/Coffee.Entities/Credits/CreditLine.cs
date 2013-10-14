@@ -6,6 +6,8 @@ namespace Coffee.Entities
 {
     public class CreditLine: IRequestBoundary
     {
+        public long Id { get; set; }
+
         public List<IRequestBoundary> Conditions { get; set; }
 
         public bool IsAcceptable(CreditRequest request)

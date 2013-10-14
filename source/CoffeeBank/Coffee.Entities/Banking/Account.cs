@@ -4,7 +4,7 @@ namespace Coffee.Entities
 {
     public class Account
     {
-        public readonly string Number;
+        public readonly string Number; //as primary id
 
         private decimal _currentSum;
 

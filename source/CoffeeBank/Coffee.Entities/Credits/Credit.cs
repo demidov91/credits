@@ -4,6 +4,8 @@ namespace Coffee.Entities
 {
     public class Credit
     {
+        public long Id { get; set; }
+
         public CreditLine Line { get; set; }
 
         public CreditRequest Request { get; set; }

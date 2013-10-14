@@ -2,6 +2,8 @@
 {
     public class CreditRequest
     {
+        public long Id { get; set; }
+
         public decimal Amount { get; set; } //In belorussian rubles only
 
         public int Period { get; set; } //in months

@@ -3,6 +3,8 @@ namespace Coffee.Entities.Conditions
 {
     public class PeriodBoundary: IRequestBoundary
     {
+        public long Id { get; set; }
+
         public int MinMonths { get; set; }
 
         public int MaxMonths { get; set; }

@@ -4,6 +4,8 @@ namespace Coffee.Entities
 {
     public class BankWorker
     {
+        public long Id { get; set; }
+
         public Approval ApproveRequest(CreditRequest request)
         {
             Approval approval = new Approval();
