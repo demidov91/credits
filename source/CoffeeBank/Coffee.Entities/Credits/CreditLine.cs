@@ -8,6 +8,10 @@ namespace Coffee.Entities
     {
         public long Id { get; set; }
 
+        public string Name { get; set; }
+
+        public double Rate { get; set; }
+
         public List<IRequestBoundary> Conditions { get; set; }
 
         public bool IsAcceptable(CreditRequest request)
@@ -24,6 +28,8 @@ namespace Coffee.Entities
         {
             StringBuilder builder = new StringBuilder();
 
+            builder.AppendLine(string.Format("Credit line \"{0}\" with {1}% rate.", Name, Rate));
+
             if (Conditions != null && Conditions.Any())
             {
                 builder.AppendLine("Credit requirements:");
@@ -37,6 +43,7 @@ namespace Coffee.Entities
 
             return builder.ToString();
             /*
+                Credit line "Easy Cash" with 39% rate.
                 Credit requirements:
                 21 - 65 years old
                 1000000 - 40000000 belorussian rubles

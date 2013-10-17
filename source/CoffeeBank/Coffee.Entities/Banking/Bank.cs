@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Coffee.Entities
 {
@@ -7,6 +8,10 @@ namespace Coffee.Entities
         public long Id { get; set; }
 
         private Account _account;
+
+        public List<CreditLine> CreditLines { get; set; }
+
+        public List<BankWorker> Workers { get; set; }
 
         public bool IssueCredit(CreditRequest approvedRequest)
         {
@@ -18,8 +23,9 @@ namespace Coffee.Entities
             return _account.PutMoney(payment.Amount);
         }
 
-        public List<CreditLine> CreditLines { get; set; }
-
-        public List<BankWorker> Workers { get; set; }
+        public IEnumerable<CreditLine> GetAvailableCreditLines(CreditRequest request)
+        {
+            return CreditLines.Where(x => x.IsAcceptable(request));
+        }
     }
 }
