@@ -15,7 +15,7 @@ namespace Coffee.WebUi.Controllers
         [HttpPost]
         public ActionResult New(CreditRequest model)
         {
-            //some DB-saving magic
+            
 
             return View(model);
         }

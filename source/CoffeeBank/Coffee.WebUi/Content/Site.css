@@ -3,11 +3,21 @@
     margin: 0 auto;
 }
 
-#log-on-part{
+#log-on-part, #public-request-area{
     text-align:center;
     width: 600px;
     margin-left: 300px;
 }
+
+#public-request-area>h2
+{
+    margin-bottom: 30px;
+    }
+#public-request-area>form>div
+{
+    margin-bottom: 15px;
+    }    
+
 
 .inline-block *{
     display: inline;
