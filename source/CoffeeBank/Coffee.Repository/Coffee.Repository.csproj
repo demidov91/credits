@@ -45,11 +45,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DummyRequestsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Coffee.Entities\Coffee.Entities.csproj">
+      <Project>{620CD09A-B6D2-4FFF-AF2B-008956163B06}</Project>
+      <Name>Coffee.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Coffee.IRepository\Coffee.IRepository.csproj">
+      <Project>{E08E5315-5F8D-4A32-BC1B-F47FCA8B55A0}</Project>
+      <Name>Coffee.IRepository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
