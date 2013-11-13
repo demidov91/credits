@@ -107,9 +107,20 @@
       <Project>{620CD09A-B6D2-4FFF-AF2B-008956163B06}</Project>
       <Name>Coffee.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Coffee.IRepository\Coffee.IRepository.csproj">
+      <Project>{E08E5315-5F8D-4A32-BC1B-F47FCA8B55A0}</Project>
+      <Name>Coffee.IRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Coffee.Repository\Coffee.Repository.csproj">
+      <Project>{7FC51059-AF0E-45A6-A4F5-96EEE86E7D94}</Project>
+      <Name>Coffee.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Request\New.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Request\SelectCreditLine.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

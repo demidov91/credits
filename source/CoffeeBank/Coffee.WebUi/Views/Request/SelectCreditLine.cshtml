@@ -1,0 +1,20 @@
+﻿@model List<CreditLine>
+
+@{
+    ViewBag.Title = "ResponseForNew";
+}
+
+<div class="center-info">
+<h2>Select one of the following credit lines:</h2>
+
+@Html.BeginForm("SelectCreditLine", "Request", FormMethod.Post)
+
+@foreach(var line in Model){
+    <div>
+        @Html.RadioButton("Id", line) <span>@line.Name</span>
+    </div>
+}
+
+<input type="submit" />
+@Html.EndForm()
+</div>

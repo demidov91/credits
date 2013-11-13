@@ -8,27 +8,43 @@ using Coffee.Entities;
 
 namespace Coffee.Repository
 {
-    class DummyRequestsRepository: IRepository.IRequestRepository 
+    public class DummyRequestsRepository: IRepository.IRequestRepository 
     {
+        private static DummyRequestsRepository instance = null;
         private static Object _createLock = new Object();
+        
+        private LinkedList<CreditRequest> requests = new LinkedList<CreditRequest>();
+        private Random random = new Random();
 
-        List<CreditRequest> GetAllCreditRequests() {
+        public List<CreditRequest> GetAllCreditRequests()
+        {
             return new List<CreditRequest>(requests);
         }
 
-        List<CreditRequest> GetApprovedCreditRequests();
+        public List<CreditRequest> GetApprovedCreditRequests()
+        {
+            return null;
+        }
 
-        List<CreditRequest> GetUnapprovedCreditRequests();
+        public List<CreditRequest> GetUnapprovedCreditRequests()
+        {
+            return null;
+        }
 
-        CreditRequest GetRequestById(long id);
+        public CreditRequest GetRequestById(long id)
+        {
+            return null;
+        }
 
-        bool Update(CreditRequest request);
+        public bool Update(CreditRequest request) {
+            return false;
+        }
 
-        bool Approve(Approval approval);
+        public bool Approve(Approval approval) {
+            return false;
+        }
 
-        private LinkedList<CreditRequest> requests = new LinkedList<CreditRequest>();
-        private static DummyRequestsRepository instance = null;
-
+        
         private DummyRequestsRepository() { }
 
         public static DummyRequestsRepository getInstance() {
@@ -38,6 +54,11 @@ namespace Coffee.Repository
                 }
             }
             return instance;
+        }
+
+        public void AddCreditRequest(CreditRequest request) {
+            request.Id = random.Next();
+            requests.AddLast(request);
         }
 
 

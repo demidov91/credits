@@ -16,5 +16,7 @@ namespace Coffee.IRepository
         bool Update(CreditRequest request);
 
         bool Approve(Approval approval);
+
+        void AddCreditRequest(CreditRequest request);
     }
 }

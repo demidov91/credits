@@ -3,7 +3,7 @@
     margin: 0 auto;
 }
 
-#log-on-part, #public-request-area{
+#log-on-part, .center-info{
     text-align:center;
     width: 600px;
     margin-left: 300px;
