@@ -42,17 +42,30 @@ namespace Coffee.WebUi.Controllers
         public ActionResult SelectCreditLine(CreditLine line)
         {
             CreditRequest preformulatedCreditRequest = (CreditRequest)Session["creditRequest"];
+            CreditLine lineFromDB = RepoFactory.GetCreditLineRepo().getById(line.Id);
             if (preformulatedCreditRequest == null) {
-                Session["creditLineRequest"] = RepoFactory.GetCreditLineRepo().getById(line.Id);
+                Session["creditLineRequest"] = lineFromDB;
                 return View("Request.New");
             }
+            preformulatedCreditRequest.CreditLine = lineFromDB;
             RepoFactory.GetRequestsRepo().AddCreditRequest(preformulatedCreditRequest);
             return View("Success", preformulatedCreditRequest);
         }
 
 
+        
         [Authorize]
-        public ActionResult List()
+        public ActionResult List(string passportNumber)
+        {
+            List<CreditRequest> requestsToShow = RepoFactory.GetRequestsRepo().GetAllCreditRequests();
+            if (passportNumber != null){
+                requestsToShow = requestsToShow.FindAll(x => x.PassportInfo.PassportNumber.StartsWith(passportNumber));
+            }
+            return View(requestsToShow);
+        }
+
+        [Authorize]
+        public ActionResult Details(CreditRequest requestToView)
         {
             return View();
         }
@@ -72,11 +85,7 @@ namespace Coffee.WebUi.Controllers
             return View();
         }
 
-        //[Authorize]
-        public ActionResult Details()
-        {
-            return View();
-        }
+        
 
         //[Authorize]
         public ActionResult Approve()

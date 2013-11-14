@@ -1,5 +1,33 @@
-﻿@{
+﻿@model List<Coffee.Entities.CreditRequest>
+
+@{
     ViewBag.Title = "List";
 }
 
-<h2>List</h2>
+<div class="center-info">
+<h2>Enter passport number to view this person's requests:</h2>
+
+@{Html.BeginForm(FormMethod.Get);}
+<div>
+    <input name="passportNumber" id="passport-id-to-view-request" type="text" />
+    <input type="submit" class="btn btn-success" />
+</div>
+@{Html.EndForm();}
+
+<table class="all-available-width">
+@foreach (var creditRequest in Model) { 
+    <tr>
+        <td>
+            <div>@creditRequest.Amount</div>
+            <div>@creditRequest.Period</div>    
+        </td>
+        <td>
+            @creditRequest.CreditLine.Name
+        </td>
+        <td>
+            @Html.ActionLink("View", "Details", "Request", new {Id = creditRequest.Id}, new {@class = "btn btn-success"})
+        </td>
+    </tr>
+}
+</table>
+</div>

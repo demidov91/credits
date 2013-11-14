@@ -12,6 +12,8 @@
 
         public SalaryInfo SalaryInfo { get; set; }
 
+        public CreditLine CreditLine { get; set; }
+
         //...some other info
 
         public CreditRequest()

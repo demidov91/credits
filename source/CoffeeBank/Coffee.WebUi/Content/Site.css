@@ -1,4 +1,19 @@
-﻿#main{
+﻿.toLeft
+{
+    float: left;
+    }
+    
+.toRight
+{
+    float: right;
+    }
+    
+.clear
+{
+    clear: both;
+    }
+    
+#main{
     width: 1200px;
     margin: 0 auto;
 }
@@ -6,6 +21,11 @@
 header
 {
    text-align:center;
+    }
+    
+.all-available-width
+{
+    width: 100%;
     }
     
 header h1>A, header h1>a:focus, header h1>a:hover
