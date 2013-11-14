@@ -19,17 +19,15 @@ namespace Coffee.WebUi.Controllers
         [HttpPost]
         public ActionResult New(CreditRequest model)
         {
-            LinkedList<CreditLine> acceptableCreditLines = new LinkedList<CreditLine>();
+            List<CreditLine> acceptableCreditLines = new List<CreditLine>();
             foreach (CreditLine line in RepoFactory.GetCreditLineRepo().getAll()) {
                 if (line.IsAcceptable(model)) {
-                    acceptableCreditLines.AddLast(line);
+                    acceptableCreditLines.Add(line);
                 }
             }
-            IRequestRepository repository = RepoFactory.GetRequestsRepo();
-            repository.AddCreditRequest(model);
             if (acceptableCreditLines.Count > 0) {
                 Session["creditRequest"] = model;
-                return View("Request.SelectCreditLine", acceptableCreditLines);
+                return View("SelectCreditLine", acceptableCreditLines);
             }
             return View(model);
         }
@@ -43,17 +41,25 @@ namespace Coffee.WebUi.Controllers
         [HttpPost]
         public ActionResult SelectCreditLine(CreditLine line)
         {
-            return null ;
+            CreditRequest preformulatedCreditRequest = (CreditRequest)Session["creditRequest"];
+            if (preformulatedCreditRequest == null) {
+                Session["creditLineRequest"] = RepoFactory.GetCreditLineRepo().getById(line.Id);
+                return View("Request.New");
+            }
+            RepoFactory.GetRequestsRepo().AddCreditRequest(preformulatedCreditRequest);
+            return View("Success", preformulatedCreditRequest);
         }
 
 
-        /*
-        //[Authorize]
+        [Authorize]
         public ActionResult List()
         {
             return View();
         }
 
+
+        /*
+        //
         //[Authorize]
         public ActionResult ApprovedList()
         {

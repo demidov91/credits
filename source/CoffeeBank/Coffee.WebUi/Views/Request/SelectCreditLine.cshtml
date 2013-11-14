@@ -1,20 +1,34 @@
-﻿@model List<CreditLine>
+﻿@model List<Coffee.Entities.CreditLine>
+           
+@section javascript
+{
+    <script type="text/javascript" src="@Url.Content("~/Content/js/lib/jquery.ezmark.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/selectCreditLine.js")"></script>
+}
+
+@section css
+{
+    <link href="@Url.Content("~/Content/css/lib/ezmark.css")" rel="stylesheet" type="text/css" />
+}
+
 
 @{
     ViewBag.Title = "ResponseForNew";
 }
 
+
+
 <div class="center-info">
 <h2>Select one of the following credit lines:</h2>
 
-@Html.BeginForm("SelectCreditLine", "Request", FormMethod.Post)
-
+@{Html.BeginForm("SelectCreditLine", "Request", FormMethod.Post);}
+<div id="public-list-of-credit-lines">
 @foreach(var line in Model){
     <div>
-        @Html.RadioButton("Id", line) <span>@line.Name</span>
+        @Html.RadioButton("Id", line.Id, new { @class = "select-credit-product-checkbox"} ) <span>@line.Name</span>
     </div>
 }
-
-<input type="submit" />
-@Html.EndForm()
+</div>
+<input type="submit" class="btn btn-primary" />
+@{Html.EndForm();}
 </div>

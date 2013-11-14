@@ -12,5 +12,7 @@ namespace Coffee.IRepository
     {
         List<CreditLine> getAll();
 
+        CreditLine getById(long id);
+
     }
 }

@@ -29,6 +29,10 @@ namespace Coffee.Repository
             lines.Add(sample);
         }
 
+        public CreditLine getById(long id) {
+            return lines.Find(x => x.Id == id);
+        }
+
         public List<CreditLine> getAll() {
             return new List<CreditLine>(lines);
         }

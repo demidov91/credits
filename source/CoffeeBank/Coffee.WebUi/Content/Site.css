@@ -3,6 +3,17 @@
     margin: 0 auto;
 }
 
+header
+{
+   text-align:center;
+    }
+    
+header h1>A, header h1>a:focus, header h1>a:hover
+{
+    color: Black;
+    }    
+
+
 #log-on-part, .center-info{
     text-align:center;
     width: 600px;
@@ -26,3 +37,22 @@
 #remember-me-block>input{
     margin-left: 1em;
 }
+
+.no-decoration, .no-decoration:hover, .no-decoration:focus
+{
+    text-decoration: none;
+    }
+
+/**
+-----------------------------------------------
+public credit requests
+*/
+    
+input.select-credit-product-checkbox
+{
+    margin-right: 0.2em;
+    }
+#public-list-of-credit-lines
+{
+    margin-bottom: 1em;
+    }

@@ -5,12 +5,15 @@
     <title>@ViewBag.Title</title>
     <link href="@Url.Content("~/Content/bootstrap/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    @RenderSection("css", required: false)
+    <script type="text/javascript" src="@Url.Content("~/Content/js/lib/jquery-1.10.2.min.js")"></script>
+    @RenderSection("javascript", required: false)
 </head>
 <body>
     <div class="page">
         <header>
             <div id="title">
-                <h1>My MVC Application</h1>
+                <h1><a href="/" class="no-decoration">Veni, vidi, vici</a></h1>
             </div>
             <div id="logindisplay">
                 @Html.Partial("_LogOnPartial")
