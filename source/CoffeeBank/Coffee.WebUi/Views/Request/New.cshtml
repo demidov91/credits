@@ -1,4 +1,9 @@
-﻿@model Coffee.Entities.CreditRequest
+﻿@model Coffee.WebUi.Models.CreditRequestFormModel
+
+@section javascript
+{
+    <script type="text/javascript" src="@Url.Content("~/Content/js/newRequest.js")"></script>
+}
 
 @{
     ViewBag.Title = "Create credit request";
@@ -6,29 +11,47 @@
 <div class="center-info">
 <h2>Create credit request</h2>
 
-@{ Html.BeginForm("New", "Request", FormMethod.Post); }
+@if(Model.NoLines){
+<div class="alert alert-danger">
+Unfortunately, we haven't credit products to satisfy you requirements. <br>
+Take a look at our <a href="">credits</a> or change the data you entered.
+</div>
+}
+
+@{ Html.BeginForm("New", "Request", FormMethod.Post, new {@id="new-credit-request-form"}); }
 
 <div>
     @Html.Label("Enter amount of money, you want to receive: ")
-    @Html.TextBoxFor(x=>x.Amount)
+    @Html.TextBoxFor(x=>x.CreditRequest.Amount)
 </div>
 
 <div>
     @Html.Label("Enter number of months: ")
-    @Html.TextBoxFor(x=>x.Period)
+    @Html.TextBoxFor(x=>x.CreditRequest.Period)
 </div>
 
 <div>
     @Html.Label("Your average salary: ")
-    @Html.TextBoxFor(x=>x.SalaryInfo.AverageSalary)
+    @Html.TextBoxFor(x=>x.CreditRequest.SalaryInfo.AverageSalary)
 </div>
 
 <div>
     @Html.Label("Passport number: ")
-    @Html.TextBoxFor(x=>x.PassportInfo.PassportNumber)
+    @Html.TextBoxFor(x=>x.CreditRequest.PassportInfo.PassportNumber)
 </div>
 
-<input class="btn btn-primary" type="submit"/>
+@if(Model.NoLines){
+<div class="inline-form-line">
+    @Html.Label("Force save")
+    @Html.CheckBoxFor(x => x.ForceSave, new { @id="force-save"})
+</div>
+<div id="additional-info">
+    @Html.Label("Additional info:")
+    @Html.TextAreaFor(x => x.CreditRequest.AdditionalTextInfo)
+</div>    
+}
+
+<input id="ok-for-new-credit-request" class="btn btn-primary" type="submit"/>
 
 @{Html.EndForm();}
 

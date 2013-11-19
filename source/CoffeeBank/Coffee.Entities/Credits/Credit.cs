@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Coffee.Entities
 {
@@ -10,9 +9,5 @@ namespace Coffee.Entities
         public DateTime IssueDate { get; set; }
 
         public CreditLine Line { get; set; }
-
-        public CreditRequest Request { get; set; }
-
-        public List<Approval> Approvals { get; set; }
     }
 }

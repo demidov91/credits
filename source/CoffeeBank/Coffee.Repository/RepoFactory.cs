@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Coffee.IRepository;
 
+using Coffee.Entities;
+
 namespace Coffee.Repository
 {
     public class RepoFactory
@@ -15,5 +17,9 @@ namespace Coffee.Repository
         public static ICreditLineRepository GetCreditLineRepo() {
             return DummyCreditLineRepository.getInstance();
         }
+
+        public static IDummyRepository<Approval> GetApprovalRepo() {
+            return DummyRepository<Approval>.getInstance();
+        } 
     }
 }

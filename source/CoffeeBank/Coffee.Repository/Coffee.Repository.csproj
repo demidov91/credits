@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DummyApprovalRepository.cs" />
     <Compile Include="DummyCreditLineRepository.cs" />
     <Compile Include="DummyRequestsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

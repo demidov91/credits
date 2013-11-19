@@ -70,9 +70,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\CreditRequestFormModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\js\listRequests.js" />
+    <Content Include="Content\js\newRequest.js" />
     <Content Include="Content\js\selectCreditLine.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />

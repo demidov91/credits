@@ -5,6 +5,8 @@ using Coffee.IRepository;
 
 using System.Collections.Generic;
 
+using Coffee.WebUi.Models; 
+
 namespace Coffee.WebUi.Controllers
 {
     public class RequestController : Controller
@@ -12,13 +14,14 @@ namespace Coffee.WebUi.Controllers
         [HttpGet]
         public ActionResult New()
         {
-            CreditRequest model = new CreditRequest();
+            CreditRequestFormModel model = new CreditRequestFormModel();
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult New(CreditRequest model)
+        public ActionResult New(CreditRequestFormModel form)
         {
+            CreditRequest model = form.CreditRequest;
             List<CreditLine> acceptableCreditLines = new List<CreditLine>();
             foreach (CreditLine line in RepoFactory.GetCreditLineRepo().getAll()) {
                 if (line.IsAcceptable(model)) {
@@ -29,7 +32,15 @@ namespace Coffee.WebUi.Controllers
                 Session["creditRequest"] = model;
                 return View("SelectCreditLine", acceptableCreditLines);
             }
-            return View(model);
+            if (form.ForceSave)
+            {
+                RepoFactory.GetRequestsRepo().AddCreditRequest(model);
+                return View("Success", model);
+            }
+            else {
+                form.NoLines = true;
+            }
+            return View(form);
         }
 
         [HttpGet]

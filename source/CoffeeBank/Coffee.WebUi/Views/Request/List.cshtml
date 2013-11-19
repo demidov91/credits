@@ -1,5 +1,10 @@
 ﻿@model List<Coffee.Entities.CreditRequest>
 
+@section javascript
+{
+    <script type="text/javascript" src="@Url.Content("~/Content/js/listRequests.js")"></script>
+}
+
 @{
     ViewBag.Title = "List";
 }
@@ -14,18 +19,48 @@
 </div>
 @{Html.EndForm();}
 
-<table class="all-available-width">
+<table id="list-of-requests" class="all-available-width">
+    <tr>
+        <td>Money/duration</td>
+        <td>Credit product</td>
+        <td>Passport number</td>
+        <td></td>
+    </tr>
 @foreach (var creditRequest in Model) { 
     <tr>
         <td>
-            <div>@creditRequest.Amount</div>
-            <div>@creditRequest.Period</div>    
+            <div class="amount">@creditRequest.Amount</div>
+            <div>@creditRequest.Period months</div>    
+        </td>
+        <td>@if (creditRequest.CreditLine != null)
+            {
+            @creditRequest.CreditLine.Name}
+            else {
+                <div class="problem-credit-request first">
+                    <div class="first-to-show"><b>Not specified.</b></div>
+                    <div class="details">
+                        <p>@if (creditRequest.AdditionalTextInfo != null)
+                           {
+                               @creditRequest.AdditionalTextInfo
+                           }
+                           else { 
+                           <i>No additional info.</i>
+                           }</p>
+                        <p><a href="#" class="hide-details btn btn-mini">hide</a><p>
+                    </div>
+                </div>
+            }
         </td>
         <td>
-            @creditRequest.CreditLine.Name
+            @creditRequest.PassportInfo.PassportNumber
         </td>
-        <td>
-            @Html.ActionLink("View", "Details", "Request", new {Id = creditRequest.Id}, new {@class = "btn btn-success"})
+        <td>@if (creditRequest.CreditLine != null)
+            {
+            @Html.ActionLink("View", "Details", "Request", new { Id = creditRequest.Id }, new { @class = "btn btn-success" })
+            }
+            else { 
+            @Html.ActionLink("View", "Details", "Request", new { Id = creditRequest.Id }, new { @class = "btn btn-warning" })
+            }
         </td>
     </tr>
 }

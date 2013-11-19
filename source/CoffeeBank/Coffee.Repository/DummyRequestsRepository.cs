@@ -61,6 +61,11 @@ namespace Coffee.Repository
             requests.AddLast(request);
         }
 
+        public List<Approval> ApprovalsForRrequest(CreditRequest request) {
+            List<Approval> all = RepoFactory.GetApprovalRepo().GetAll();
+            return all.FindAll(x => x.Request.Equals(request));
+        }
+
 
     }
 }

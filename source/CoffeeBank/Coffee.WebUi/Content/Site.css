@@ -28,6 +28,12 @@ header
     width: 100%;
     }
     
+.inline-form-line label
+{
+    display: inline;
+    
+    }
+    
 header h1>A, header h1>a:focus, header h1>a:hover
 {
     color: Black;
@@ -76,3 +82,62 @@ input.select-credit-product-checkbox
 {
     margin-bottom: 1em;
     }
+    
+#ok-for-new-credit-request
+{
+    margin-top: 1em;
+    }
+    
+/**
+----------------------------
+List of requests
+*/    
+#passport-id-to-view-request
+{
+    margin-bottom: 0px;
+    }
+#list-of-requests
+{
+    border:1;
+    }
+#list-of-requests tr, #list-of-requests tr:last-child 
+{
+    border-top: solid;
+    border-color: #C0C0C0;
+    border-width: 0.05em;
+    }
+#list-of-requests tr:first-child
+{
+    border-top: none;
+    }
+#list-of-requests .amount
+{
+    border-bottom: dotted;
+    border-color: #D0D0D0;
+    border-width: 0.01em;
+    }
+#list-of-requests .problem-credit-request.first .first-to-show,
+#list-of-requests .problem-credit-request .details
+{
+    display: block;
+    }   
+#list-of-requests .problem-credit-request .first-to-show,
+#list-of-requests .problem-credit-request.first .details
+{
+    display: none;
+    } 
+#list-of-requests .problem-credit-request .first-to-show
+{
+    cursor: pointer;
+    }    
+
+/**
+-----------
+New credit request
+*/
+#new-credit-request-form #additional-info
+{
+    display: none;}
+    
+    
+    

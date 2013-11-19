@@ -1,4 +1,6 @@
-﻿namespace Coffee.Entities
+﻿using System.Collections.Generic;
+
+namespace Coffee.Entities
 {
     public class CreditRequest
     {
@@ -13,6 +15,10 @@
         public SalaryInfo SalaryInfo { get; set; }
 
         public CreditLine CreditLine { get; set; }
+
+        public List<Approval> Approvals { get; set; }
+
+        public string AdditionalTextInfo { get; set; }
 
         //...some other info
 
