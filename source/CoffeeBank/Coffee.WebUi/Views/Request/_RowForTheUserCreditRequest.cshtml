@@ -1,0 +1,63 @@
+﻿@model Coffee.WebUi.Models.RequestPlusCreditProposesModel
+    
+<td>
+    <div class="view">
+        <div class="amount">@Model.Request.Amount</div>
+        <div>@Model.Request.Period months</div>    
+    </div>
+    <div class="edit">
+        <div class="amount">@Html.TextBoxFor(x => x.Request.Amount)</div>
+        <div>@Html.TextBoxFor(x => x.Request.Period, new {@class="duration" }) months</div> 
+    </div>
+    @Html.HiddenFor(x => x.Request.Id)
+    @Html.HiddenFor(x => x.Request.Username)
+</td>
+<td>
+    <div class="view">
+        @if (Model.Request.CreditLine != null)
+        {
+        @Model.Request.CreditLine.Name}
+        else
+        {
+            <p><b>Not specified.</b></p>
+            if (Model.Request.AdditionalTextInfo != null)
+            {<p><i>@Model.Request.AdditionalTextInfo</i></p>}
+        }
+    </div>
+    <div class="edit">
+        @Html.DropDownListFor(x => x.Request.CreditLine.Id, Model.GetCreditDropdownItems(), new {@class="select-credit-product" })<br/>
+        @Html.TextAreaFor(x => x.Request.AdditionalTextInfo)
+    </div>
+</td>
+<td>
+    <div class="view">@Model.Request.SalaryInfo.AverageSalary</div>
+    <div class="edit"></div>
+</td>
+<td>
+    <div class="view">
+        @Model.Request.PassportInfo.PassportNumber
+    </div>
+    <div class="edit">
+        @Html.TextBoxFor(x => x.Request.PassportInfo.PassportNumber)
+    </div>
+</td>
+<td>
+    <div class="view">
+     @if (Model.Request.CreditLine != null){
+        <button class="btn btn-success edit-row">Edit</button>
+     } else {
+        <button class="btn btn-warning edit-row">Edit</button>
+     }
+    </div>
+    <div class="edit">
+        @if (Model.Request.CreditLine != null)
+        {
+            
+        @Html.ActionLink("Save", "Details", "Request", new { Id = Model.Request.Id }, new { @class = "btn btn-success save-row" })
+        }
+        else
+        { 
+        @Html.ActionLink("Save", "Details", "Request", new { Id = Model.Request.Id }, new { @class = "btn btn-warning save-row" })
+        }
+    </div>
+</td>

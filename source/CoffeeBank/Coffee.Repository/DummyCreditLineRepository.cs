@@ -30,6 +30,10 @@ namespace Coffee.Repository
         }
 
         public CreditLine getById(long id) {
+            if (id < 1)
+            {
+                return null;
+            }
             return lines.Find(x => x.Id == id);
         }
 

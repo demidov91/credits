@@ -12,6 +12,9 @@
 {
     clear: both;
     }
+.hidden
+{
+    display: none;}
     
 #main{
     width: 1200px;
@@ -139,5 +142,36 @@ New credit request
 {
     display: none;}
     
+/**
+----------
+User home page.
+*/
+#user-home-content{
+    margin-top: 1em;
+}
+
+#user-home-content a{
+    line-height: 5em;
+    width: 92%;
+}
+
+
+#user-home-content .home-action-container{
+    width: 33%;
+}
     
+/**
+----------------------------------
+User list of requests.
+*/
+.view .view, .edit .edit{
+    display: block;
+}
+.edit .view, .view .edit{
+    display: none;
+}
+#list-of-requests input.duration{
+    width: 6em;
+}
+
     

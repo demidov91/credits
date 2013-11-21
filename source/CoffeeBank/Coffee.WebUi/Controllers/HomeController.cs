@@ -1,15 +1,37 @@
 ﻿using System.Web.Mvc;
 
+using Coffee.Repository;
+using System.Collections.Generic;
+
 namespace Coffee.WebUi.Controllers
 {
     public class HomeController : Controller
     {
-        //
-        // GET: /Home/
-
+        /// <summary>
+        /// Home page for the simple bank worker (not cashier) is a list of credit requests.
+        /// Home page for the authenticated outer user is UserHome.cshtml
+        /// Home page for none-authenticated user is Index.cstml
+        /// TODO: roles.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
+            if (Request.IsAuthenticated) {
+                bool isSimpleUser = User.Identity.Name != "BankWorker";
+                if (isSimpleUser) {
+                    return RedirectToAction("UserHome");
+                }
+                return RedirectToAction("List", "Request");
+            } 
             return View();
+        }
+
+        public ActionResult UserHome() 
+        {
+            bool hasRequests = RepoFactory.GetRequestsRepo().GetRequestsByOwner(User.Identity.Name).Count > 0;
+            Dictionary<string, object> data = new Dictionary<string, object>();
+            data["hasRequests"] = hasRequests;
+            return View(data);
         }
 
     }

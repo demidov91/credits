@@ -11,14 +11,20 @@
 
 <div class="center-info">
 <h2>Enter passport number to view this person's requests:</h2>
+    @{Html.BeginForm(FormMethod.Get);}
+    <div>
+        <input name="passportNumber" id="passport-id-to-view-request" type="text" />
+        <input type="submit" class="btn btn-success" />
+    </div>
+    @{Html.EndForm();}
 
-@{Html.BeginForm(FormMethod.Get);}
-<div>
-    <input name="passportNumber" id="passport-id-to-view-request" type="text" />
-    <input type="submit" class="btn btn-success" />
-</div>
-@{Html.EndForm();}
-
+ 
+@if (Model.Count == 0)
+{ 
+<div><i>No credit requests.</i></div>
+}
+else
+{
 <table id="list-of-requests" class="all-available-width">
     <tr>
         <td>Money/duration</td>
@@ -26,7 +32,8 @@
         <td>Passport number</td>
         <td></td>
     </tr>
-@foreach (var creditRequest in Model) { 
+@foreach (var creditRequest in Model)
+{ 
     <tr>
         <td>
             <div class="amount">@creditRequest.Amount</div>
@@ -35,7 +42,8 @@
         <td>@if (creditRequest.CreditLine != null)
             {
             @creditRequest.CreditLine.Name}
-            else {
+            else
+            {
                 <div class="problem-credit-request first">
                     <div class="first-to-show"><b>Not specified.</b></div>
                     <div class="details">
@@ -43,7 +51,8 @@
                            {
                                @creditRequest.AdditionalTextInfo
                            }
-                           else { 
+                           else
+                           { 
                            <i>No additional info.</i>
                            }</p>
                         <p><a href="#" class="hide-details btn btn-mini">hide</a><p>
@@ -58,11 +67,13 @@
             {
             @Html.ActionLink("View", "Details", "Request", new { Id = creditRequest.Id }, new { @class = "btn btn-success" })
             }
-            else { 
+            else
+            { 
             @Html.ActionLink("View", "Details", "Request", new { Id = creditRequest.Id }, new { @class = "btn btn-warning" })
             }
         </td>
     </tr>
 }
 </table>
+}
 </div>

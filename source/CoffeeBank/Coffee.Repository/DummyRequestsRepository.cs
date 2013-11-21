@@ -36,8 +36,36 @@ namespace Coffee.Repository
             return null;
         }
 
-        public bool Update(CreditRequest request) {
-            return false;
+        public CreditRequest Update(CreditRequest request) {
+            CreditRequest fromDb = requests.Single(x => x.Id == request.Id);
+            if (request.AdditionalTextInfo != null) {
+                fromDb.AdditionalTextInfo = request.AdditionalTextInfo;
+            }
+            if (request.Amount != null)
+            {
+                fromDb.Amount = request.Amount;
+            }
+            if (request.CreditLine != null && request.CreditLine != null)
+            {
+                fromDb.CreditLine = RepoFactory.GetCreditLineRepo().getById(request.CreditLine.Id);
+            }
+            if (request.PassportInfo != null)
+            {
+                fromDb.PassportInfo = request.PassportInfo;
+            }
+            if (request.Period != null)
+            {
+                fromDb.Period = request.Period;
+            }
+            if (request.SalaryInfo != null)
+            {
+                fromDb.SalaryInfo = request.SalaryInfo;
+            }
+            if (request.Username != null)
+            {
+                fromDb.Username = request.Username;
+            }
+            return fromDb;
         }
 
         public bool Approve(Approval approval) {
@@ -64,6 +92,10 @@ namespace Coffee.Repository
         public List<Approval> ApprovalsForRrequest(CreditRequest request) {
             List<Approval> all = RepoFactory.GetApprovalRepo().GetAll();
             return all.FindAll(x => x.Request.Equals(request));
+        }
+
+        public List<CreditRequest> GetRequestsByOwner(string username) {
+            return new List<CreditRequest>(requests.Where(x => x.Username == username));
         }
 
 

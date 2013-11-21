@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 
+
 namespace Coffee.Entities
 {
     public class CreditRequest
@@ -17,8 +18,15 @@ namespace Coffee.Entities
         public CreditLine CreditLine { get; set; }
 
         public List<Approval> Approvals { get; set; }
+        
 
         public string AdditionalTextInfo { get; set; }
+
+        /// <summary>
+        /// *User* is better but I thought we had 2 different databases fot these entities. 
+        /// </summary>
+        public string Username { get; set; }
+        
 
         //...some other info
 

@@ -70,11 +70,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\CreditRequestFormModel.cs" />
+    <Compile Include="Models\Request\CreditRequestFormModel.cs" />
+    <Compile Include="Models\Request\RequestPlusCreditProposesModel.cs" />
+    <Compile Include="Models\Request\RequestsPlusCreditProposesModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\js\listRequests.js" />
+    <Content Include="Content\js\listRequestsForUser.js" />
     <Content Include="Content\js\newRequest.js" />
     <Content Include="Content\js\selectCreditLine.js" />
     <Content Include="Global.asax" />
@@ -135,6 +138,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Request\Details.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\UserHome.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Request\ListForUser.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Request\_RowForTheUserCreditRequest.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

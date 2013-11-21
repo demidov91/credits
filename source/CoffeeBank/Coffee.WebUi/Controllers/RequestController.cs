@@ -28,6 +28,7 @@ namespace Coffee.WebUi.Controllers
                     acceptableCreditLines.Add(line);
                 }
             }
+            model.Username = User.Identity.Name;
             if (acceptableCreditLines.Count > 0) {
                 Session["creditRequest"] = model;
                 return View("SelectCreditLine", acceptableCreditLines);
@@ -53,14 +54,28 @@ namespace Coffee.WebUi.Controllers
         public ActionResult SelectCreditLine(CreditLine line)
         {
             CreditRequest preformulatedCreditRequest = (CreditRequest)Session["creditRequest"];
-            CreditLine lineFromDB = RepoFactory.GetCreditLineRepo().getById(line.Id);
             if (preformulatedCreditRequest == null) {
-                Session["creditLineRequest"] = lineFromDB;
+                Session["creditLineRequest"] = line;
                 return View("Request.New");
             }
-            preformulatedCreditRequest.CreditLine = lineFromDB;
+            preformulatedCreditRequest.CreditLine = line;
             RepoFactory.GetRequestsRepo().AddCreditRequest(preformulatedCreditRequest);
             return View("Success", preformulatedCreditRequest);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AjaxUpdateRequest(RequestPlusCreditProposesModel rawData)
+        {
+            CreditRequest request = rawData.Request;
+            
+            bool isOwner = User.Identity.Name.Equals(request.Username);
+            if (!isOwner) {
+                Response.StatusCode = 403;
+                return Json(null);
+            }
+            CreditRequest fromDb =  RepoFactory.GetRequestsRepo().Update(request);
+            return PartialView("_RowForTheUserCreditRequest", new RequestPlusCreditProposesModel(fromDb, RepoFactory.GetCreditLineRepo().getAll()));
         }
 
 
@@ -69,11 +84,21 @@ namespace Coffee.WebUi.Controllers
         public ActionResult List(string passportNumber)
         {
             List<CreditRequest> requestsToShow = RepoFactory.GetRequestsRepo().GetAllCreditRequests();
-            if (passportNumber != null){
+            bool isSimpleUser = User.Identity.Name != "BankWorker";
+            if(isSimpleUser){
+                requestsToShow = requestsToShow.FindAll(x => x.Username == User.Identity.Name);
+                return View("ListForUser", new RequestsPlusCreditProposesModel { 
+                    Requests=requestsToShow,
+                    Credits=RepoFactory.GetCreditLineRepo().getAll()
+                });
+            }
+            if (passportNumber != null)
+            {
                 requestsToShow = requestsToShow.FindAll(x => x.PassportInfo.PassportNumber.StartsWith(passportNumber));
             }
             return View(requestsToShow);
         }
+
 
         [Authorize]
         public ActionResult Details(CreditRequest requestToView)

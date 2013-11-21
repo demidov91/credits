@@ -11,9 +11,11 @@ namespace Coffee.IRepository
 
         List<CreditRequest> GetUnapprovedCreditRequests();
 
+        List<CreditRequest> GetRequestsByOwner(string username);
+
         CreditRequest GetRequestById(long id);
 
-        bool Update(CreditRequest request);
+        CreditRequest Update(CreditRequest request);
 
         bool Approve(Approval approval);
 
