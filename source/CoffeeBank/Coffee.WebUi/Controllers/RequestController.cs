@@ -101,9 +101,10 @@ namespace Coffee.WebUi.Controllers
 
 
         [Authorize]
+        [HttpGet]
         public ActionResult Details(CreditRequest requestToView)
         {
-            return View();
+            return View(RepoFactory.GetRequestsRepo().GetRequestById(requestToView.Id));
         }
 
 

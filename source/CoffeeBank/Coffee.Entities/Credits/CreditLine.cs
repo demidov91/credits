@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Coffee.Entities
 {
+    /// <summary>
+    /// Kind of credit.
+    /// </summary>
     public class CreditLine: IRequestBoundary
     {
         public long Id { get; set; }

@@ -33,7 +33,7 @@ namespace Coffee.Repository
 
         public CreditRequest GetRequestById(long id)
         {
-            return null;
+            return requests.First(x => x.Id == id);
         }
 
         public CreditRequest Update(CreditRequest request) {

@@ -173,5 +173,11 @@ User list of requests.
 #list-of-requests input.duration{
     width: 6em;
 }
-
+/**
+--------
+Credit request details.
+*/
+#detailed-credit-request-actions{
+    text-align: center;  
+}
     

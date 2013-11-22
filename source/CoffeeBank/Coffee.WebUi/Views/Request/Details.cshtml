@@ -1,5 +1,20 @@
-﻿@{
+﻿@model Coffee.Entities.CreditRequest
+
+@{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+@{Html.BeginForm(FormMethod.Post);}
+<div class="toLeft">
+    @{Html.RenderPartial("partials/_EditCreditRequest", Model);}
+</div>
+<div class="toLeft">
+    @{Html.RenderPartial("partials/_EditPassportInfo", Model.PassportInfo);}
+</div>
+<div class="clear"></div>
+<div id="detailed-credit-request-actions">
+    <input type="submit" class="btn btn-success" value="Save changes and check for the acceptance" />
+    <input type="submit" class="btn btn-primary" value="Save changes and view calendar of payments" />
+    <input type="submit" class="btn btn-danger" value="Open credit" />
+</div>
+@{Html.EndForm();}
