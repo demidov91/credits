@@ -26,7 +26,7 @@ namespace Coffee.Repository
             sample.Conditions.Add(sampleBoundary);
             sample.Name = "Sample credit product.";
             sample.Id = 1;
-            lines.Add(sample);
+            this.Add(sample);
         }
 
         public CreditLine getById(long id) {
@@ -51,6 +51,20 @@ namespace Coffee.Repository
                 }
             }
             return instance;
+        }
+
+        private event EventHandler wasUpdated;
+
+        public void AddUpdateListener(EventHandler handler) {
+            wasUpdated += handler;
+        }
+
+        public void Add(CreditLine oneMore) {
+            this.lines.Add(oneMore);
+            if (wasUpdated != null)
+            {
+                wasUpdated(null, null);
+            }
         }
 
     }

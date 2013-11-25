@@ -70,6 +70,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Request\CreditRequest.cs" />
     <Compile Include="Models\Request\CreditRequestFormModel.cs" />
     <Compile Include="Models\Request\RequestPlusCreditProposesModel.cs" />
     <Compile Include="Models\Request\RequestsPlusCreditProposesModel.cs" />

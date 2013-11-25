@@ -8,12 +8,12 @@ using Coffee.IRepository;
 
 namespace Coffee.Repository
 {
-    class DummyRepository<T>: IDummyRepository<T>
+    class DummyRepository<T>: IDummyRepository<T> where T: Coffee.Entities.IUpdateable<T>
     {
         protected static DummyRepository<T> instance = null;
         protected static Object _createLock = new Object();
 
-        protected LinkedList<T> requests = new LinkedList<T>();
+        protected LinkedList<T> items = new LinkedList<T>();
         public static DummyRepository<T> getInstance()
         {
             lock (_createLock)
@@ -29,7 +29,11 @@ namespace Coffee.Repository
         private DummyRepository(){}
 
         public List<T> GetAll() {
-            return new List<T>(this.requests);
+            return new List<T>(this.items);
+        }
+
+        public void Update(T newData){
+            
         }
 
     }

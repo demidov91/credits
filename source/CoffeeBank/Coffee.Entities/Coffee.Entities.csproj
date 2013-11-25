@@ -35,6 +35,7 @@
       <HintPath>..\ExternalDlls\NodaTime.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -50,6 +51,7 @@
     <Compile Include="Banking\Account.cs" />
     <Compile Include="Banking\Bank.cs" />
     <Compile Include="Helpers\DateTimeHelper.cs" />
+    <Compile Include="Helpers\IUpdateable.cs" />
     <Compile Include="Users\BankWorker.cs" />
     <Compile Include="Credits\Credit.cs" />
     <Compile Include="Credits\CreditLine.cs" />

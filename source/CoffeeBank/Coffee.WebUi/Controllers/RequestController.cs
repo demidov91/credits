@@ -104,7 +104,17 @@ namespace Coffee.WebUi.Controllers
         [HttpGet]
         public ActionResult Details(CreditRequest requestToView)
         {
-            return View(RepoFactory.GetRequestsRepo().GetRequestById(requestToView.Id));
+            return View(new Coffee.WebUi.Models.Request.CreditRequest(RepoFactory.GetRequestsRepo().GetRequestById(requestToView.Id)));
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Details(Coffee.WebUi.Models.Request.CreditRequest requestToView)
+        {
+            RepoFactory.GetRequestsRepo().Update(requestToView.GetAdaptee());
+            RepoFactory.GetPassportInfoRepo().Update(requestToView.PassportInfo);
+            return RedirectToAction("Details", "Request", new { Id = requestToView.Id });
+
         }
 
 

@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Coffee.IRepository
+namespace Coffee.Entities
 {
-    public interface IDummyRepository<T>
+    public interface IUpdateable<T>
     {
-        List<T> GetAll();
         void Update(T other);
 
     }

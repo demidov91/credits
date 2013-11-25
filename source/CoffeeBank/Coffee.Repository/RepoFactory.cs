@@ -20,6 +20,10 @@ namespace Coffee.Repository
 
         public static IDummyRepository<Approval> GetApprovalRepo() {
             return DummyRepository<Approval>.getInstance();
-        } 
+        }
+
+        public static IDummyRepository<PassportInfo> GetPassportInfoRepo() {
+            return DummyRepository<PassportInfo>.getInstance();
+        }
     }
 }

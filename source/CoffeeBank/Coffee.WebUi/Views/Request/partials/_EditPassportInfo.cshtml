@@ -1,7 +1,40 @@
-﻿@model Coffee.Entities.PassportInfo
+﻿@model Coffee.WebUi.Models.Request.CreditRequest
 
 @{
     ViewBag.Title = "_EditPassportInfo";
 }
 
-<h2>_EditPassportInfo</h2>
+<table>
+<tr>
+    <td colspan="2" class="text-center"><b>Passport Info</b></td>
+</tr>
+
+<tr>
+    <td>First name:</td>
+    <td>@Html.TextBoxFor(x => x.PassportInfo.FirstName)</td>
+</tr>
+<tr>
+    <td>Surname: </td>
+    <td>@Html.TextBoxFor(x => x.PassportInfo.FullName)</td>
+</tr>
+<tr>
+    <td>Patronimic: </td>
+    <td>@Html.TextBoxFor(x => x.PassportInfo.Patronymic)</td>
+</tr>
+<tr>
+    <td>Passport number: </td>
+    <td>@Html.TextBoxFor(x => x.PassportInfo.PassportNumber)</td>
+</tr>
+<tr>
+    <td>Identification number: </td>
+    <td> @Html.TextBoxFor(x => x.PassportInfo.IdentificationNumber)</td>
+</tr>
+<tr>
+    <td>Birth day: </td>
+    <td>@Html.EditorFor(x => x.PassportInfo.BirthDate)</td>
+</tr>
+<tr>
+    <td> Expirity date: </td>
+    <td> @Html.EditorFor(x => x.PassportInfo.ExpireDate)</td>
+</tr>
+</table>
