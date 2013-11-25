@@ -1,0 +1,17 @@
+﻿@model Coffee.Entities.CreditLine
+
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2>Detail</h2>
+
+<div>Credit line "@Model.Name" with @Model.Rate% annual rate.</div>
+<div>Requirements:</div>
+<ul>
+@foreach (var req in Model.Conditions)
+{
+    <li>@req.Visualize()</li>
+}</ul>
+
+@Html.ActionLink("Back", "List")

@@ -46,6 +46,7 @@
     <Compile Include="Conditions\AgeBoundary.cs" />
     <Compile Include="Conditions\AmountBoundary.cs" />
     <Compile Include="Conditions\PeriodBoundary.cs" />
+    <Compile Include="Conditions\SalaryBoundary.cs" />
     <Compile Include="Credits\Approval.cs" />
     <Compile Include="Banking\Account.cs" />
     <Compile Include="Banking\Bank.cs" />

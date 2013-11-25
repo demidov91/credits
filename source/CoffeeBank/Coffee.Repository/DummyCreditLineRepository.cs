@@ -24,9 +24,15 @@ namespace Coffee.Repository
             CreditLine sample = new CreditLine();
             AmountBoundary sampleBoundary = new AmountBoundary(2000000, 6000000);
             sample.Conditions.Add(sampleBoundary);
-            sample.Name = "Sample credit product.";
+            sample.Name = "Sample credit product";
+            sample.Rate = 25;
             sample.Id = 1;
             lines.Add(sample);
+
+            CreditLine sample2 = new CreditLine() { Name = "Credit product 2", Id = 2, Rate = 40 };
+            sample2.Conditions.Add(new AmountBoundary(1000000, 20000000));
+            sample2.Conditions.Add(new SalaryBoundary(TimeSpan.FromDays(365), 1500000));
+            lines.Add(sample2);
         }
 
         public CreditLine getById(long id) {

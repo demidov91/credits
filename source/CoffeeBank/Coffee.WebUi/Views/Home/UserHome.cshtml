@@ -7,7 +7,7 @@
     @Html.ActionLink("Add credit request", "New", "Request", null, new { @class= "btn"})
 </div>
 <div class="toLeft home-action-container">
-    @Html.ActionLink("View our credit lines", "SelectCreditLine", "Request", null, new { @class = "btn" })
+    @Html.ActionLink("View our credit lines", "List", "CreditLine", null, new { @class = "btn" })
 </div>
 @if (Model["hasRequests"])
 {

@@ -1,0 +1,18 @@
+﻿@model Coffee.Entities.CreditLine
+
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New</h2>
+
+@using (Html.BeginForm()) {
+    <span>Credit line name:</span>
+    @Html.TextBoxFor(x => x.Name)
+
+    <span>Credit line annual rate:</span>
+    @Html.TextBoxFor(x => x.Rate)<span>%</span>
+                                 
+    <input type="submit" value="Create" />
+}
+
