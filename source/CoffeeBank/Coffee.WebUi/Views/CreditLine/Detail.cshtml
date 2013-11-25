@@ -6,12 +6,6 @@
 
 <h2>Detail</h2>
 
-<div>Credit line "@Model.Name" with @Model.Rate% annual rate.</div>
-<div>Requirements:</div>
-<ul>
-@foreach (var req in Model.Conditions)
-{
-    <li>@req.Visualize()</li>
-}</ul>
+<div>@Model.ToString()</div>
 
 @Html.ActionLink("Back", "List")

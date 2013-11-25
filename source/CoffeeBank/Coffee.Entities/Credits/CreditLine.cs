@@ -1,47 +1,93 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System;
 
 namespace Coffee.Entities
 {
     /// <summary>
     /// Kind of credit.
     /// </summary>
-    public class CreditLine: IRequestBoundary
+    public class CreditLine
     {
+        /// <summary>
+        ///  Id in database
+        /// </summary>
         public long Id { get; set; }
 
+        /// <summary>
+        /// Credit line title
+        /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// Credit annual rate in %
+        /// </summary>
         public double Rate { get; set; }
 
-        public List<IRequestBoundary> Conditions { get; set; }
+        // constraints
+        public int? MinAgeBoundary { get; set; }
+        public int? MaxAgeBoundary { get; set; }
+        public decimal? MinAmountBoundary { get; set; }
+        public decimal? MaxAmountBoundary { get; set; }
+        public int? MinMonthsBoundary { get; set; }
+        public int? MaxMonthsBoundary { get; set; }
+        public TimeSpan? MinWorkTimeBoundary { get; set; }
+        public decimal? MinAverageSalaryBoundary { get; set; }
 
         public bool IsAcceptable(CreditRequest request)
         {
-            if (Conditions != null && Conditions.Any())
-            {
-                return Conditions.All(x => x.IsAcceptable(request));
-            }
-
-            return false;
+            return
+                (MinAmountBoundary != null && request.Amount >= MinAmountBoundary) && 
+                (MaxAmountBoundary != null && request.Amount <= MaxAmountBoundary) &&
+                (MinAgeBoundary != null && (DateTime.Now - request.PassportInfo.BirthDate).TotalDays >= MinAgeBoundary * 365) &&
+                (MaxAgeBoundary != null && (DateTime.Now - request.PassportInfo.BirthDate).TotalDays <= MaxAgeBoundary * 365) &&
+                (MinMonthsBoundary != null && request.Period >= MinMonthsBoundary) && 
+                (MaxMonthsBoundary != null && request.Period <= MaxMonthsBoundary) &&
+                (MinAverageSalaryBoundary != null && request.SalaryInfo.AverageSalary >= MinAverageSalaryBoundary) &&
+                (MinWorkTimeBoundary != null && request.SalaryInfo.WorkTime >= MinWorkTimeBoundary);
         }
 
-        public string Visualize()
+        public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
 
             builder.AppendLine(string.Format("Credit line \"{0}\" with {1}% rate.", Name, Rate));
 
-            if (Conditions != null && Conditions.Any())
+            if (MinAgeBoundary != null || MaxAgeBoundary != null || MinAmountBoundary != null || MaxAmountBoundary != null ||
+                MinMonthsBoundary != null || MaxMonthsBoundary != null || MinWorkTimeBoundary != null || MinAverageSalaryBoundary != null)
             {
                 builder.AppendLine("Credit requirements:");
+                if (MinAgeBoundary != null && MaxAgeBoundary != null)
+                    builder.AppendLine(string.Format("{0} - {1} years old", MinAgeBoundary, MaxAgeBoundary));
+                else if (MinAgeBoundary != null)
+                    builder.AppendLine(string.Format("No less than {0} years old.", MinAgeBoundary));
+                else if (MaxAgeBoundary != null)
+                    builder.AppendLine(string.Format("No more than {0} years old.", MaxAgeBoundary));
 
+                if (MinAmountBoundary != null && MaxAmountBoundary != null)
+                    builder.AppendLine(string.Format("From {0} to {1} belorussian rubles", MinAmountBoundary, MaxAmountBoundary));
+                else if (MinAmountBoundary != null)
+                    builder.AppendLine(string.Format("From {0} belorussian rubles", MinAmountBoundary));
+                else if (MaxAmountBoundary != null)
+                    builder.AppendLine(string.Format("Up to {0} belorussian rubles", MaxAmountBoundary));
 
-                foreach (var boundary in Conditions)
-                {
-                    builder.AppendLine(boundary.Visualize());
-                }
+                if (MinMonthsBoundary != null && MaxMonthsBoundary != null)
+                    builder.AppendLine(string.Format("{0} - {1} months", MinMonthsBoundary, MaxMonthsBoundary));
+                else if (MinMonthsBoundary != null)
+                    builder.AppendLine(string.Format("Form {0} months", MinMonthsBoundary));
+                else if (MaxMonthsBoundary != null)
+                    builder.AppendLine(string.Format("Up to {0} months", MaxMonthsBoundary));
+
+                if (MinWorkTimeBoundary != null)
+                    builder.AppendLine(string.Format("No less than {0} months working in your current company", (int)(MinWorkTimeBoundary.Value.TotalDays / 30)));
+
+                if (MinAverageSalaryBoundary != null)
+                    builder.AppendLine(string.Format("No less than {0}BYR average salary", (int)MinAverageSalaryBoundary));
+            }
+            else
+            {
+                builder.AppendLine("Only passport needed!");
             }
 
             return builder.ToString();
@@ -52,15 +98,6 @@ namespace Coffee.Entities
                 1000000 - 40000000 belorussian rubles
                 6 - 24 months
              */
-        }
-
-        public CreditLine():this(new List<IRequestBoundary>())
-        {
-        }
-
-        public CreditLine(IEnumerable<IRequestBoundary> conditions)
-        {
-            Conditions = conditions.ToList();
         }
     }
 }
