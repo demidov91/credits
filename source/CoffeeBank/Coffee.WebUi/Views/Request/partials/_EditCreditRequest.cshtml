@@ -1,7 +1,51 @@
-﻿@model Coffee.Entities.CreditRequest
+﻿@model Coffee.WebUi.Models.Request.CreditRequest
 
 @{
     ViewBag.Title = "_EditCreditRequest";
 }
 
-<h2>_EditCreditRequest</h2>
+<table id="b-worker-edit-credit-requets-data">
+<tr>
+    <td>Amount:</td>
+    <td>@Html.TextBoxFor(x => x.Amount, new { @id="amount"})</td>
+</tr>
+
+<tr>
+    <td>Credit product:</td>
+    <td>@Html.DropDownListFor(x => x.CreditLine.Id, Model.GetCreditDropdownItems())</td>
+</tr>
+
+<tr>
+    <td>Credit line duration: </td>
+    <td>@Html.TextBoxFor(x => x.Period)</td>
+</tr>
+@if (Model.AdditionalTextInfo != null && Model.AdditionalTextInfo.Length > 0) { 
+<tr>
+    <td>Last wish: </td>
+    <td>Model.AdditionalTextInfo</td>
+</tr>
+}
+
+<tr>
+    <td colspan="2" class="text-center"><b>Salary info</b></td>
+</tr>
+
+<tr>
+    <td>Place of work: </td>
+    <td>@Html.TextBoxFor(x => x.SalaryInfo.Company)</td>
+</tr>
+<tr>
+    <td>Position: </td>
+    <td>@Html.TextBoxFor(x => x.SalaryInfo.Position)</td>
+</tr>
+<tr>
+    <td>Average salary: </td>
+    <td>@Html.TextBoxFor(x => x.SalaryInfo.AverageSalary)</td>
+</tr>
+
+<tr><td colspan="2" class="text-center"><b>Information for the concrate credit: </b></td></tr>
+<tr>
+    <td>Issue date: </td>
+    <td>@Html.EditorFor(x => x.IssueDate)</td>
+</table>
+

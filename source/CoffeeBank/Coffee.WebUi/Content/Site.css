@@ -26,6 +26,10 @@ header
    text-align:center;
     }
     
+.text-center{
+    text-align: center;    
+}
+    
 .all-available-width
 {
     width: 100%;
@@ -179,5 +183,9 @@ Credit request details.
 */
 #detailed-credit-request-actions{
     text-align: center;  
+}
+
+#b-worker-edit-credit-requets-data{
+    margin-right: 3em;    
 }
     

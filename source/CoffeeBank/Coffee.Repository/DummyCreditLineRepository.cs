@@ -27,12 +27,12 @@ namespace Coffee.Repository
             sample.Name = "Sample credit product";
             sample.Rate = 25;
             sample.Id = 1;
-            lines.Add(sample);
+            this.Add(sample);
 
             CreditLine sample2 = new CreditLine() { Name = "Credit product 2", Id = 2, Rate = 40 };
             sample2.Conditions.Add(new AmountBoundary(1000000, 20000000));
             sample2.Conditions.Add(new SalaryBoundary(TimeSpan.FromDays(365), 1500000));
-            lines.Add(sample2);
+            this.Add(sample2);
         }
 
         public CreditLine getById(long id) {
@@ -57,6 +57,20 @@ namespace Coffee.Repository
                 }
             }
             return instance;
+        }
+
+        private event EventHandler wasUpdated;
+
+        public void AddUpdateListener(EventHandler handler) {
+            wasUpdated += handler;
+        }
+
+        public void Add(CreditLine oneMore) {
+            this.lines.Add(oneMore);
+            if (wasUpdated != null)
+            {
+                wasUpdated(null, null);
+            }
         }
 
     }

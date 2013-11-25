@@ -13,7 +13,6 @@ namespace Coffee.Entities
 
         public CreditLine Line { get; set; }
 
-
         /// <summary>
         /// Should be user, not string.
         /// </summary>
