@@ -6,7 +6,7 @@
         <div>@Model.Request.Period months</div>    
     </div>
     <div class="edit">
-        <div class="amount">@Html.TextBoxFor(x => x.Request.Amount)</div>
+        <div class="amount">@Html.TextBoxFor(x => x.Request.Amount, new { @class = "amount" })</div>
         <div>@Html.TextBoxFor(x => x.Request.Period, new {@class="duration" }) months</div> 
     </div>
     @Html.HiddenFor(x => x.Request.Id)
@@ -31,7 +31,7 @@
 </td>
 <td>
     <div class="view">@Model.Request.SalaryInfo.AverageSalary</div>
-    <div class="edit"></div>
+    <div class="edit">@Html.TextBoxFor(x => x.Request.SalaryInfo.AverageSalary, new { @class = "salary" })</div>
 </td>
 <td>
     <div class="view">

@@ -63,7 +63,7 @@ else
         <td>
             @creditRequest.PassportInfo.PassportNumber
         </td>
-        <td>@if (creditRequest.CreditLine != null)
+        <td>@if (creditRequest.CreditLine != null && creditRequest.CreditLine.IsAcceptable(creditRequest))
             {
             @Html.ActionLink("View", "Details", "Request", new { Id = creditRequest.Id }, new { @class = "btn btn-success" })
             }

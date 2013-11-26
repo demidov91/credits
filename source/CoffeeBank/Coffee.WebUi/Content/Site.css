@@ -177,6 +177,10 @@ User list of requests.
 #list-of-requests input.duration{
     width: 6em;
 }
+#list-of-requests input.amount, #list-of-requests input.salary{
+    width: 8em;
+}
+
 /**
 --------
 Credit request details.
