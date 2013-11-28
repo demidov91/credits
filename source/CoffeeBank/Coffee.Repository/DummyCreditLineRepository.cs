@@ -26,14 +26,16 @@ namespace Coffee.Repository
             sample.MaxAmountBoundary = 6000000;
             sample.Name = "Sample credit product";
             sample.Rate = 25;
+            sample.KindOfPayments = CreditLine.PaymentKind.FACTICAL;
             sample.Id = 1;
             this.Add(sample);
 
             CreditLine sample2 = new CreditLine() { Name = "Credit product 2", Id = 2, Rate = 30, MinAmountBoundary = 1000000,
-             MaxAmountBoundary = 20000000, MinWorkTimeBoundary = TimeSpan.FromDays(365), MinAverageSalaryBoundary = 1500000 };
+             MaxAmountBoundary = 20000000, MinWorkTimeBoundary = TimeSpan.FromDays(365), MinAverageSalaryBoundary = 1500000,
+             KindOfPayments = CreditLine.PaymentKind.ANNUITY };
             this.Add(sample2);
 
-            CreditLine sample3 = new CreditLine() { Name = "Easy cash", Id = 3, Rate = 40 };
+            CreditLine sample3 = new CreditLine() { Name = "Easy cash", Id = 3, Rate = 40, KindOfPayments = CreditLine.PaymentKind.PERCENTS_ONLY };
             this.Add(sample3);
         }
 

@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using Coffee.Entities;
 
+using Coffee.Repository;
+using Coffee.WebUi.Models.Credit;
+
 namespace Coffee.WebUi.Controllers
 {
     public class CreditLineController : Controller
@@ -24,6 +27,11 @@ namespace Coffee.WebUi.Controllers
         public ActionResult New()
         {
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult TeoreticalPayments(Coffee.Entities.CreditRequest creditRequest){
+            return View(new Payments(RepoFactory.GetRequestsRepo().GetRequestById(creditRequest.Id)));
         }
     }
 }

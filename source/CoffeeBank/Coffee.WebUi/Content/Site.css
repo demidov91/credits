@@ -192,4 +192,12 @@ Credit request details.
 #b-worker-edit-credit-requets-data{
     margin-right: 3em;    
 }
+/**
+---------------
+List of payments
+*/
+
+#teoretical-payments {
+    max-width: 800px;
+}    
     

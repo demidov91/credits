@@ -1,0 +1,22 @@
+﻿@model Coffee.WebUi.Models.Credit.Payments
+
+@{
+    ViewBag.Title = "TeoreticalPayments";
+}
+<div class="center-info">
+@Html.ActionLink("back", "Details", "Request", new {Id = Model.CreditRequest.Id}, new {@class = "btn toLeft"})
+<h2>Payments for credit</h2>
+<div class="clear"></div>
+<table class="table">
+    <tr>
+        <td>Last date to make payment</td>
+        <td>Payment amount</td>
+    </tr>
+    @foreach (var entry in Model.Calendar) { 
+    <tr>
+        <td>@entry.Key.ToString("dd MMM yyyy")</td>
+        <td>@entry.Value.ToString("0")</td>
+    </tr>    
+    }
+</table>
+</div>

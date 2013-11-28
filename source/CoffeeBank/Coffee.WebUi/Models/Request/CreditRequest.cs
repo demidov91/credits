@@ -17,6 +17,9 @@ namespace Coffee.WebUi.Models.Request
     /// </summary>
     public class CreditRequest
     {
+        public enum Action { SAVE, VIEW_PAYMENTS, MAKE_CREDIT}
+
+
         private static Object _singletonLock = new Object();
         private static List<CreditLine> _creditKinds = null;
         public static void OnCreditKindsUpdate(object sender, EventArgs eventArgs) {
@@ -24,7 +27,7 @@ namespace Coffee.WebUi.Models.Request
         }
 
         [DisplayFormat(ApplyFormatInEditMode=true, DataFormatString="{0:dd.mm.yyyy}")]
-        public DateTime IssueDate { get; set; }
+        public DateTime IssueDate { get { return adaptee.IssueDate; } set { adaptee.IssueDate = value; } }
 
         private Coffee.Entities.CreditRequest adaptee;
 
@@ -56,6 +59,12 @@ namespace Coffee.WebUi.Models.Request
 
         public CreditLine CreditLine { get { return adaptee.CreditLine; } set { adaptee.CreditLine = value; } }
 
+        /// <summary>
+        /// Actions for different submit buttons.
+        /// </summary>
+        public Object ActionEdit { get; set; }
+        public Object ActionViewPayments { get; set; }
+        public Object ActionOpenCreditLine { get; set; }
 
         public string AdditionalTextInfo { get { return adaptee.AdditionalTextInfo; } set { adaptee.AdditionalTextInfo = value; } }
 

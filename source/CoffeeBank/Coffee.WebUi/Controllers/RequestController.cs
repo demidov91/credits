@@ -109,11 +109,21 @@ namespace Coffee.WebUi.Controllers
 
         [Authorize]
         [HttpPost]
-        public ActionResult Details(Coffee.WebUi.Models.Request.CreditRequest requestToView)
+        public ActionResult Details(Coffee.WebUi.Models.Request.CreditRequest requestFromView)
         {
-            RepoFactory.GetRequestsRepo().Update(requestToView.GetAdaptee());
-            RepoFactory.GetPassportInfoRepo().Update(requestToView.PassportInfo);
-            return RedirectToAction("Details", "Request", new { Id = requestToView.Id });
+            if (requestFromView.ActionEdit != null || requestFromView.ActionViewPayments != null)
+            {
+                var requestFromDB = RepoFactory.GetRequestsRepo().Update(requestFromView.GetAdaptee());
+                RepoFactory.GetPassportInfoRepo().Update(requestFromView.PassportInfo);
+                if (requestFromView.ActionEdit != null){
+                    return RedirectToAction("Details", "Request", new { Id = requestFromView.Id });
+                } else {
+
+                    return RedirectToAction("TeoreticalPayments", "CreditLine", requestFromDB);    
+                }
+            }
+            //open credit line
+            return null;
 
         }
 

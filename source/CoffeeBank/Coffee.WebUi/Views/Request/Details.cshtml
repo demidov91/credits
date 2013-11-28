@@ -14,12 +14,12 @@
 <div class="clear"></div>
 
 <div id="detailed-credit-request-actions">
-    <input type="submit" class="btn btn-success" value="Save changes and check for the acceptance" />
-    <input type="submit" class="btn btn-primary" value="Save changes and view calendar of payments" />
+    <input type="submit" class="btn btn-success" name="ActionEdit" value="Save changes and check for the acceptance" />
+    <input type="submit" class="btn btn-primary" name="ActionViewPayments" value="Save changes and view calendar of payments" />
     @if(Model.CreditLine != null && Model.CreditLine.IsAcceptable(Model.GetAdaptee())){
-    <input type="submit" class="btn btn-danger"  value="Open credit" />
+    <input type="submit" class="btn btn-danger" name="ActionOpenCreditLine"  value="Open credit" />
     } else {
-    <input type="submit" class="btn btn-danger" disabled="disabled" value="Open credit" />
+    <input type="submit" class="btn btn-danger" name="ActionOpenCreditLine" disabled="disabled" value="Open credit" />
     }
 </div>
 @{Html.EndForm();}

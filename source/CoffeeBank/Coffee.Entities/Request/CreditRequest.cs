@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 
 
 namespace Coffee.Entities
@@ -18,6 +19,8 @@ namespace Coffee.Entities
         public CreditLine CreditLine { get; set; }
 
         public List<Approval> Approvals { get; set; }
+
+        public DateTime IssueDate { get; set; }
         
 
         public string AdditionalTextInfo { get; set; }

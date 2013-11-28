@@ -11,6 +11,14 @@ namespace Coffee.Entities
     public class CreditLine
     {
         /// <summary>
+        /// ANNUITY - same payment amount for each month.
+        /// FACTICAL - pay equal share of credit amount each month + less and less percents. 
+        /// PERCENTS_ONLY - pay only percents during all the credit period + all credit in the end.
+        /// </summary>
+        public enum PaymentKind { ANNUITY, FACTICAL, PERCENTS_ONLY }
+
+
+        /// <summary>
         ///  Id in database
         /// </summary>
         public long Id { get; set; }
@@ -23,7 +31,9 @@ namespace Coffee.Entities
         /// <summary>
         /// Credit annual rate in %
         /// </summary>
-        public double Rate { get; set; }
+        public decimal Rate { get; set; }
+
+        public PaymentKind KindOfPayments { get; set; }
 
         // constraints
         public int? MinAgeBoundary { get; set; }
