@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using Coffee.Entities;
+using Coffee.Repository;
 
 using Coffee.Repository;
 using Coffee.WebUi.Models.Credit;
@@ -14,13 +12,13 @@ namespace Coffee.WebUi.Controllers
     {
         public ActionResult List()
         {
-            List<CreditLine> model = Coffee.Repository.RepoFactory.GetCreditLineRepo().getAll();
+            List<CreditLine> model = RepoFactory.GetCreditLineRepo().getAll();
             return View(model);
         }
 
         public ActionResult Detail(long id)
         {
-            CreditLine model = Coffee.Repository.RepoFactory.GetCreditLineRepo().getById(id);
+            CreditLine model = RepoFactory.GetCreditLineRepo().getById(id);
             return View(model);
         }
 

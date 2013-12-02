@@ -1,9 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using System.Linq;
 using Coffee.Entities;
 using Coffee.Repository;
-using Coffee.IRepository;
-
 using System.Collections.Generic;
 
 using Coffee.WebUi.Models;
@@ -24,12 +23,9 @@ namespace Coffee.WebUi.Controllers
         public ActionResult New(CreditRequestFormModel form)
         {
             CreditRequest model = form.CreditRequest;
-            List<CreditLine> acceptableCreditLines = new List<CreditLine>();
-            foreach (CreditLine line in RepoFactory.GetCreditLineRepo().getAll()) {
-                if (line.IsAcceptable(model)) {
-                    acceptableCreditLines.Add(line);
-                }
-            }
+            List<CreditLine> acceptableCreditLines = RepoFactory.GetCreditLineRepo().getAll()
+                .Where(line => line.IsAcceptable(model)).ToList();
+
             model.Username = User.Identity.Name;
             if (acceptableCreditLines.Count > 0) {
                 Session["creditRequest"] = model;
@@ -40,9 +36,9 @@ namespace Coffee.WebUi.Controllers
                 RepoFactory.GetRequestsRepo().AddCreditRequest(model);
                 return View("Success", model);
             }
-            else {
-                form.NoLines = true;
-            }
+
+
+            form.NoLines = true;
             return View(form);
         }
 
