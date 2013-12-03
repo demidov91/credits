@@ -111,18 +111,21 @@ namespace Coffee.WebUi.Controllers
         [HttpPost]
         public ActionResult Details(Coffee.WebUi.Models.Request.CreditRequest requestFromView)
         {
-            if (requestFromView.ActionEdit != null || requestFromView.ActionViewPayments != null)
-            {
-                var requestFromDB = RepoFactory.GetRequestsRepo().Update(requestFromView.GetAdaptee());
-                RepoFactory.GetPassportInfoRepo().Update(requestFromView.PassportInfo);
-                if (requestFromView.ActionEdit != null){
-                    return RedirectToAction("Details", "Request", new { Id = requestFromView.Id });
-                } else {
-
-                    return RedirectToAction("TeoreticalPayments", "CreditLine", requestFromDB);    
+            Coffee.Entities.CreditRequest requestFromDB = RepoFactory.GetRequestsRepo().Update(requestFromView.GetAdaptee());
+            RepoFactory.GetPassportInfoRepo().Update(requestFromView.PassportInfo);
+            if (requestFromView.ActionEdit != null){
+                return RedirectToAction("Details", "Request", new { Id = requestFromView.Id });
+            } else if (requestFromView.ActionViewPayments != null) {
+                return RedirectToAction("TeoreticalPayments", "CreditLine", requestFromDB);    
+            } else if (requestFromView.ActionOpenCreditLine != null) {
+                if (requestFromDB.CreditLine.IsAcceptable(requestFromDB))
+                {
+                    return View("CreditWasOpened", RepoFactory.GetRequestsRepo().Accept(requestFromDB));
                 }
-            }
-            //open credit line
+                else {
+                    return null;
+                }
+            } 
             return null;
 
         }

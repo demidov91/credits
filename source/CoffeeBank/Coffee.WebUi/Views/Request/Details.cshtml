@@ -2,7 +2,10 @@
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_BankWorkerLayout.cshtml";
 }
+
+@section requestsActive{active}
 
 @{Html.BeginForm(FormMethod.Post);}
 <div class="toLeft">

@@ -98,6 +98,24 @@ namespace Coffee.Repository
             return new List<CreditRequest>(requests.Where(x => x.Username == username));
         }
 
+        /// <summary>
+        /// New entity of Credit will be created, new credit line will start working.  
+        /// Use it carefully as any conditions of credit line will be accepted without additional check.
+        /// </summary>
+        public Credit Accept(CreditRequest thiz) {
+            Credit justCreated = new Credit
+            {
+                Amount = thiz.Amount,
+                IssueDate = thiz.IssueDate,
+                Line = thiz.CreditLine,
+                Passport = thiz.PassportInfo,
+                Period = thiz.Period,
+                User = thiz.Username
+            };
+            RepoFactory.GetCreditRepo().Update(justCreated);
+            return justCreated;
+        }
+
 
     }
 }

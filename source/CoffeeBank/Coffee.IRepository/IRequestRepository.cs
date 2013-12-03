@@ -20,5 +20,13 @@ namespace Coffee.IRepository
         bool Approve(Approval approval);
 
         void AddCreditRequest(CreditRequest request);
+
+
+        /// <summary>
+        /// New entity of Credit will be created, new credit line will start working.  
+        /// </summary>
+        /// <param name="thiz">CreditRequest to make a credit.</param>
+        /// <returns>Just created entity.</returns>
+        Credit Accept(CreditRequest thiz);
     }
 }

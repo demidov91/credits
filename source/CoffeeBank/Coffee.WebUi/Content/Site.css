@@ -75,6 +75,9 @@ header h1>A, header h1>a:focus, header h1>a:hover
 {
     text-decoration: none;
     }
+    
+#change-modes-on-top ul{width:30%}
+#change-modes-on-top ul>li{width:100%; text-align:center;}
 
 /**
 -----------------------------------------------

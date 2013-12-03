@@ -48,14 +48,14 @@ namespace Coffee.Entities
         public bool IsAcceptable(CreditRequest request)
         {
             return
-                (MinAmountBoundary != null && request.Amount >= MinAmountBoundary) && 
-                (MaxAmountBoundary != null && request.Amount <= MaxAmountBoundary) &&
-                (MinAgeBoundary != null && (DateTime.Now - request.PassportInfo.BirthDate).TotalDays >= MinAgeBoundary * 365) &&
-                (MaxAgeBoundary != null && (DateTime.Now - request.PassportInfo.BirthDate).TotalDays <= MaxAgeBoundary * 365) &&
-                (MinMonthsBoundary != null && request.Period >= MinMonthsBoundary) && 
-                (MaxMonthsBoundary != null && request.Period <= MaxMonthsBoundary) &&
-                (MinAverageSalaryBoundary != null && request.SalaryInfo.AverageSalary >= MinAverageSalaryBoundary) &&
-                (MinWorkTimeBoundary != null && request.SalaryInfo.WorkTime >= MinWorkTimeBoundary);
+                (MinAmountBoundary == null || request.Amount >= MinAmountBoundary) && 
+                (MaxAmountBoundary == null || request.Amount <= MaxAmountBoundary) &&
+                (MinAgeBoundary == null || (DateTime.Now - request.PassportInfo.BirthDate).TotalDays >= MinAgeBoundary * 365) &&
+                (MaxAgeBoundary == null || (DateTime.Now - request.PassportInfo.BirthDate).TotalDays <= MaxAgeBoundary * 365) &&
+                (MinMonthsBoundary == null || request.Period >= MinMonthsBoundary) && 
+                (MaxMonthsBoundary == null || request.Period <= MaxMonthsBoundary) &&
+                (MinAverageSalaryBoundary == null || request.SalaryInfo.AverageSalary >= MinAverageSalaryBoundary) &&
+                (MinWorkTimeBoundary == null || request.SalaryInfo.WorkTime >= MinWorkTimeBoundary);
         }
 
         public override string ToString()

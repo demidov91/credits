@@ -1,0 +1,34 @@
+﻿
+    @{
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    }
+
+
+@section javascript{
+    @RenderSection("javascript", false)
+}
+
+@section css{
+    @RenderSection("css", false)
+}
+
+@section AfterHeader{
+
+<div class="navbar">
+    <div class="navbar-inner" id="change-modes-on-top"> 
+        <ul class="nav">
+            <li class="@RenderSection("requestsActive", required: false)">
+            @Html.ActionLink("Credit requests", "List", "Request")
+             </li>
+        </ul>
+        <ul class="nav pull-right">
+            <li class="@RenderSection("creditsActive", required: false)">
+            @Html.ActionLink("Active credits", "List", "Credit")
+            </li>
+        </ul>
+    </div>
+</div>
+}
+
+@RenderBody()

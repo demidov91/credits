@@ -1,13 +1,18 @@
 ﻿@model List<Coffee.Entities.CreditRequest>
 
+
+@{
+    Layout = "~/Views/Shared/_BankWorkerLayout.cshtml";
+    ViewBag.Title = "List";
+}
+
 @section javascript
 {
     <script type="text/javascript" src="@Url.Content("~/Content/js/listRequests.js")"></script>
 }
 
-@{
-    ViewBag.Title = "List";
-}
+@section requestsActive{active}
+
 
 <div class="center-info">
 <h2>Enter passport number to view this person's requests:</h2>

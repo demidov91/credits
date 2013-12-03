@@ -37,6 +37,7 @@ namespace Coffee.Entities
         {
             PassportInfo = new PassportInfo();
             SalaryInfo = new SalaryInfo();
-        }
+        }       
+
     }
 }

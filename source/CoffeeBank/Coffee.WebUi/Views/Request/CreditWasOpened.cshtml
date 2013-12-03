@@ -1,0 +1,30 @@
+﻿@model Coffee.Entities.Credit
+
+@{
+    ViewBag.Title = "CreditWasOpened";
+}
+
+<h2>Credit line was successfully opened.</h2>
+
+<table>
+    <tr>
+        <td>Credit product: </td>
+        <td>@Model.Line.Name</td>
+    </tr>
+    <tr>
+        <td>Amount: </td>
+        <td>@Model.Amount </td>
+    </tr>
+    <tr>
+        <td>From: </td>
+        <td>@Model.IssueDate </td>
+    </tr>
+    <tr>
+        <td>For: </td>
+        <td>@Model.Period months</td>
+    </tr>
+    <tr>
+        <td>Identification number: </td>
+        <td>@Model.Passport.IdentificationNumber</td>
+    </tr>
+</table>
