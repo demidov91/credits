@@ -116,6 +116,17 @@ namespace Coffee.Repository
             return justCreated;
         }
 
+        private LinkedList<Payment> payments = new LinkedList<Payment>();
 
+        public List<Payment> GetPaymentsForCredit(long creditId)
+        {
+            return payments.Where(x => x.Credit.Id == creditId).ToList();
+        }
+
+        public bool AcceptPayment(Payment p)
+        {
+            payments.AddLast(p);
+            return true;
+        }
     }
 }

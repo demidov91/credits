@@ -21,6 +21,7 @@ namespace Coffee.IRepository
 
         void AddCreditRequest(CreditRequest request);
 
+        List<Payment> GetPaymentsForCredit(long creditId);
 
         /// <summary>
         /// New entity of Credit will be created, new credit line will start working.  
