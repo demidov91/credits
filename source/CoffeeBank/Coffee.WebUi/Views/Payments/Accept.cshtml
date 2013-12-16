@@ -8,7 +8,8 @@
 
 @using (Html.BeginForm())
 {
-
-
-
+    <span>@Model.Credit.ToString()</span>
+    <span>Amount of payment:</span>
+    @Html.TextBoxFor(x => x.Amount)
+    <!-- submit -->
 }

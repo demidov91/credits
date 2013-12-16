@@ -1,4 +1,4 @@
-﻿@model Tuple<Coffee.Entities.CreditRequest, decimal, decimal, List<Tuple<DateTime, decimal>>>
+﻿@model Coffee.WebUi.Models.TotalCreditInfo
 
 @{
     ViewBag.Title = "PaymentChart";
@@ -7,11 +7,10 @@
 <h2>Credit Info</h2>
 
 <p>@Model.Item1.Amount BYR issued @Model.Item1.IssueDate for @Model.Item1.Period months</p>
-<p>@Model.Item1.PassportInfo.FullName, Passport#@Model.Item1.PassportInfo.PassportNumber</p>
-<p>@Model.Item1.AdditionalTextInfo</p>
+<p>@Model.Item1.Passport.FullName, Passport#@Model.Item1.Passport.PassportNumber</p>
 
 <p>Already paid: @Model.Item2</p>
-<p>Total to pay: @Model.Item3</p>
+<p>Current debt: @Model.Item3</p>
 
 Remaining payments:
 @foreach (var p in Model.Item4)

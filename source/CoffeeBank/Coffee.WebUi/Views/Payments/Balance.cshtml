@@ -1,0 +1,17 @@
+﻿@model Coffee.WebUi.Models.TotalAccountInfo
+
+@{
+    ViewBag.Title = "Balance";
+}
+
+<h2>Balance</h2>
+
+<p>Name: @Model.Username</p>
+<p>Total Debt: @Model.TotalDebt</p>
+<p>Credit breakdown:</p>
+@foreach (var info in Model.Info)
+{
+    <p>@info.Item1.Amount BYR issued @info.Item1.IssueDate for @info.Item1.Period months under "@info.Item1.Line.Name" conditions</p>
+    <p>Already paid: @info.Item2</p>
+    <p>Credit debt: @info.Item3</p>
+}

@@ -72,7 +72,6 @@ namespace Coffee.Repository
             return false;
         }
 
-        
         private DummyRequestsRepository() { }
 
         public static DummyRequestsRepository getInstance() {
@@ -114,19 +113,6 @@ namespace Coffee.Repository
             };
             RepoFactory.GetCreditRepo().Update(justCreated);
             return justCreated;
-        }
-
-        private LinkedList<Payment> payments = new LinkedList<Payment>();
-
-        public List<Payment> GetPaymentsForCredit(long creditId)
-        {
-            return payments.Where(x => x.Credit.Id == creditId).ToList();
-        }
-
-        public bool AcceptPayment(Payment p)
-        {
-            payments.AddLast(p);
-            return true;
         }
     }
 }

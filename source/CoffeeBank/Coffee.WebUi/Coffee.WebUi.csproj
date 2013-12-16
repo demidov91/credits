@@ -73,6 +73,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\CashierModels.cs" />
     <Compile Include="Models\Credit\Payments.cs" />
     <Compile Include="Models\Request\CreditRequest.cs" />
     <Compile Include="Models\Request\CreditRequestFormModel.cs" />
@@ -185,6 +186,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Payments\Accept.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Payments\Balance.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

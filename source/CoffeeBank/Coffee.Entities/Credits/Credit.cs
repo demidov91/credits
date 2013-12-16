@@ -32,5 +32,11 @@ namespace Coffee.Entities
         /// Should be user, not string.
         /// </summary>
         public string User { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("Credit \"{0}\", {1}BYR for {2} months issued on {3} to {4}, passport №{5}",
+                Line.Name, Amount, Period, IssueDate.ToLocalDate(), Passport.FullName, Passport.PassportNumber);
+        }
     }
 }

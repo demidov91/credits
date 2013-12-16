@@ -36,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ICreditLineRepository.cs" />
+    <Compile Include="ICreditRepository.cs" />
     <Compile Include="IDummyRepository.cs" />
     <Compile Include="IRequestRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
