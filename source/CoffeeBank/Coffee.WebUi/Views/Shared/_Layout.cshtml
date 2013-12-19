@@ -16,6 +16,9 @@
             <div id="title">
                 <h1><a href="/" class="no-decoration">Veni, vidi, vici</a></h1>
             </div>
+            <div class="current-date">
+                <i>@Coffee.Entities.DateTimeHelper.GetCurrentTime().Day/@Coffee.Entities.DateTimeHelper.GetCurrentTime().Month/@Coffee.Entities.DateTimeHelper.GetCurrentTime().Year</i>
+            </div>
             <div id="logindisplay">
                 @Html.Partial("_LogOnPartial")
             </div>

@@ -1,0 +1,19 @@
+﻿@model System.TimeSpan
+
+@{
+    ViewBag.Title = "Date";
+}
+
+<div class="center-info">
+    <div>
+        <h2>Current date is:</h2>
+        <h3>@Coffee.Entities.DateTimeHelper.GetCurrentTime().Day/@Coffee.Entities.DateTimeHelper.GetCurrentTime().Month/@Coffee.Entities.DateTimeHelper.GetCurrentTime().Year</h3>
+    </div>
+
+    <div>
+    @{Html.BeginForm("Date", "GodMode", FormMethod.Post);}
+        <span>Add</span><input id="add-hour" name="hours" type="text" /><span>hours</span><br> 
+        <input type="submit" class="btn" />
+    @{Html.EndForm();}
+    </div>
+</div>

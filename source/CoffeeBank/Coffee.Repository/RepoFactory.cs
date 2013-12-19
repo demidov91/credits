@@ -26,10 +26,6 @@ namespace Coffee.Repository
             return DummyRepository<PassportInfo>.getInstance();
         }
 
-        public static IDummyRepository<Credit> GetCreditRepo() {
-            return DummyRepository<Credit>.getInstance();
-        }
-
         public static ICreditRepository GetCreditsRepo() {
             return DummyCreditRepository.GetInstance();
         }

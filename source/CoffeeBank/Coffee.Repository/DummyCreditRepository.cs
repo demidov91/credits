@@ -22,6 +22,10 @@ namespace Coffee.Repository
             return instance;
         }
 
+        public void Add(Credit oneMore) {
+            credits.Add(oneMore);    
+        }
+
         public List<Payment> GetPaymentsForCredit(long creditId)
         {
             return payments.Where(x => x.Credit.Id == creditId).ToList();

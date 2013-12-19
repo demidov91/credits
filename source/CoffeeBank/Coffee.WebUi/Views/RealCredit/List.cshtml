@@ -1,5 +1,51 @@
-﻿@{
+﻿@model List<Coffee.Entities.Credit>
+
+@{
+    Layout = "~/Views/Shared/_BankWorkerLayout.cshtml";
     ViewBag.Title = "List";
 }
 
-<h2>List</h2>
+@section creditsActive{active}
+
+<div class="center-info">
+
+
+<h2>Enter passport number to view this person's requests:</h2>
+    @{Html.BeginForm(FormMethod.Get);}
+    <div>
+        <input name="passportNumber" id="passport-id-to-view-request" type="text" />
+        <input type="submit" class="btn btn-success" />
+    </div>
+    @{Html.EndForm();}
+@if(Model.Count == 0){
+<div>There is no active credits.</div>
+}
+else
+{
+<table class="table table-hover all-available-width" id="active-credits-list">
+    <tr>
+        <td>Passport number</td>
+        <td>Client name</td>
+        <td>Issue date</td>
+        <td>Amount</td>
+        <td>Duration</td>
+        <td>Credit product</td>
+    </tr>
+
+@foreach (var credit in Model)
+{
+    <tr>
+        <td>@credit.Passport.PassportNumber</td>
+        <td>@credit.Passport.FullName</td>
+        <td>@credit.IssueDate</td>
+        <td>@credit.Amount</td>
+        <td>@credit.Period</td>
+        <td>@credit.Line.Name</td>
+    </tr>
+}
+
+
+</table>
+
+}
+</div>

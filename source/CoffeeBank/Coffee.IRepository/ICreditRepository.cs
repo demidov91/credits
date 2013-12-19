@@ -5,6 +5,8 @@ namespace Coffee.IRepository
 {
     public interface ICreditRepository
     {
+        void Add(Credit oneMore);
+
         List<Credit> GetAllIssuedCredits();
 
         List<Credit> GetCreditsByOwner(string username);

@@ -65,6 +65,9 @@ namespace Coffee.Repository
             {
                 fromDb.Username = request.Username;
             }
+            if (request.IssueDate != null) {
+                fromDb.IssueDate = request.IssueDate;
+            }
             return fromDb;
         }
 
@@ -111,7 +114,8 @@ namespace Coffee.Repository
                 Period = thiz.Period,
                 User = thiz.Username
             };
-            RepoFactory.GetCreditRepo().Update(justCreated);
+            RepoFactory.GetCreditsRepo().Add(justCreated);
+            requests.Remove(thiz);
             return justCreated;
         }
     }

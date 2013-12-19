@@ -45,6 +45,13 @@ header h1>A, header h1>a:focus, header h1>a:hover
 {
     color: Black;
     }    
+    
+header > .current-date
+{
+    position:absolute;
+    top: 2em;
+    right: 1em;
+    }
 
 
 #log-on-part, .center-info{
@@ -203,4 +210,18 @@ List of payments
 #teoretical-payments {
     max-width: 800px;
 }    
+
+/**
+---------------------
+List of active credits
+*/    
+#active-credits-list tr:first-child,
+ #active-credits-list tr:first-child td
+{
+    border-top:none;
+    }
     
+#active-credits-list tbody
+{
+    border-top: none;
+    }
