@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Linq;
 using Coffee.Entities;
 using Coffee.Repository;
 using Coffee.IRepository;
@@ -130,7 +131,54 @@ namespace Coffee.WebUi.Controllers
 
         }
 
+        [HttpGet]
+        public ActionResult ChooseCreditLine()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult ChooseCreditLine(CreditLineCriteria criteria)
+        {
+            var lines = RepoFactory.GetCreditLineRepo().getAll();
+            var complies = lines.FirstOrDefault(x =>
+                criteria.Amount >= x.MinAmountBoundary &&
+                criteria.Amount <= x.MaxAmountBoundary &&
+                criteria.MaxRate <= x.Rate &&
+                criteria.MaxPeriod >= x.MinMonthsBoundary &&
+                criteria.MinPeriod <= x.MaxMonthsBoundary
+                );
+            if (complies != null) return View("OptimalCreditLine", complies);
+
+            complies = lines.FirstOrDefault(x =>
+                //criteria.Amount >= x.MinAmountBoundary &&
+                criteria.Amount <= x.MaxAmountBoundary &&
+                criteria.MaxRate <= x.Rate &&
+                criteria.MaxPeriod >= x.MinMonthsBoundary &&
+                criteria.MinPeriod <= x.MaxMonthsBoundary
+                );
+            if (complies != null) return View("OptimalCreditLine", complies);
+
+            complies = lines.FirstOrDefault(x =>
+                criteria.Amount >= x.MinAmountBoundary &&
+                criteria.Amount <= x.MaxAmountBoundary &&
+                criteria.MaxRate <= x.Rate &&
+                //criteria.MaxPeriod >= x.MinMonthsBoundary &&
+                criteria.MinPeriod <= x.MaxMonthsBoundary
+                );
+            if (complies != null) return View("OptimalCreditLine", complies);
+
+            complies = lines.FirstOrDefault(x =>
+                criteria.Amount >= x.MinAmountBoundary &&
+                criteria.Amount <= x.MaxAmountBoundary &&
+                criteria.MaxRate <= x.Rate + 10 &&
+                criteria.MaxPeriod >= x.MinMonthsBoundary &&
+                criteria.MinPeriod <= x.MaxMonthsBoundary
+                );
+            if (complies != null) return View("OptimalCreditLine", complies);
+
+            return View("OptimalCreditLine", null);
+        }
         /*
         //
         //[Authorize]

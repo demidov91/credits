@@ -1,0 +1,17 @@
+﻿@model Coffee.WebUi.Models.CreditLineCriteria
+
+@{
+    ViewBag.Title = "ChooseCreditLine";
+}
+
+<h2>ChooseCreditLine</h2>
+
+@using (Html.BeginForm())
+{
+    <p>Money amount:</p>
+    Html.TextBoxFor(x => x.Amount);
+    <p>Maximal rate:</p>
+    Html.TextBoxFor(x => x.MaxRate);
+    <p>Period from </p>Html.TextBoxFor(x => x.MinPeriod);<p> to </p>Html.TextBoxFor(x => x.MaxPeriod);<p> months</p>
+    <input type="submit" />
+}

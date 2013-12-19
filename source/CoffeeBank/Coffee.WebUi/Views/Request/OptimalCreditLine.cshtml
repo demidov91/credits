@@ -1,0 +1,17 @@
+﻿@model Coffee.Entities.CreditLine
+
+@{
+    ViewBag.Title = "OptimalCreditLine";
+}
+
+<h2>Optimal credit line</h2>
+
+@if (Model == null)
+{
+    <p>Unfortunately, no credit lines satisfy your request.</p>
+}
+else
+{
+    <p>Credit line that might suit you most:</p>
+    <p>@Model.ToString();</p>
+}

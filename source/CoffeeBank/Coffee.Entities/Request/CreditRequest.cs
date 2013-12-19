@@ -18,7 +18,7 @@ namespace Coffee.Entities
 
         public CreditLine CreditLine { get; set; }
 
-        public List<Approval> Approvals { get; set; }
+        public Decision Decision { get; set; }
 
         public DateTime IssueDate { get; set; }
         

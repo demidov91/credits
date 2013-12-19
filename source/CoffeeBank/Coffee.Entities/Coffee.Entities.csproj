@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Credits\Approval.cs" />
+    <Compile Include="Credits\Decision.cs" />
     <Compile Include="Banking\Account.cs" />
     <Compile Include="Banking\Bank.cs" />
     <Compile Include="Helpers\DateTimeHelper.cs" />

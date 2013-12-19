@@ -6,15 +6,24 @@ namespace Coffee.Entities
     {
         public long Id { get; set; }
 
-        public Approval ApproveRequest(CreditRequest request)
+        public Decision ApproveRequest(CreditRequest request)
         {
-            Approval approval = new Approval();
+            return new Decision {
+                Authority = this,
+                Request = request,
+                DecisionTime = DateTime.Now,
+                Verdict = true
+            };
+        }
 
-            approval.Approver = this;
-            approval.Request = request;
-            approval.ApproveTime = DateTime.Now;
-
-            return approval;
+        public Decision RejectRequest(CreditRequest request)
+        {
+            return new Decision {
+                Authority = this,
+                Request = request,
+                DecisionTime = DateTime.Now,
+                Verdict = false
+            };
         }
     }
 }

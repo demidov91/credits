@@ -9,7 +9,9 @@ namespace Coffee.IRepository
 
         List<CreditRequest> GetApprovedCreditRequests();
 
-        List<CreditRequest> GetUnapprovedCreditRequests();
+        List<CreditRequest> GetUndecidedCreditRequests();
+
+        List<CreditRequest> GetRejectedCreditRequests();
 
         List<CreditRequest> GetRequestsByOwner(string username);
 
@@ -17,7 +19,7 @@ namespace Coffee.IRepository
 
         CreditRequest Update(CreditRequest request);
 
-        bool Approve(Approval approval);
+        bool RegisterDecision(Decision decision);
 
         void AddCreditRequest(CreditRequest request);
 

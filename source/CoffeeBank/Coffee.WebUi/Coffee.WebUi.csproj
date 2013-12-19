@@ -76,6 +76,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\CashierModels.cs" />
     <Compile Include="Models\Credit\Payments.cs" />
+    <Compile Include="Models\Request\CreditLineCriteria.cs" />
     <Compile Include="Models\Request\CreditRequest.cs" />
     <Compile Include="Models\Request\CreditRequestFormModel.cs" />
     <Compile Include="Models\Request\RequestPlusCreditProposesModel.cs" />
@@ -193,6 +194,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\GodMode\Date.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Request\ChooseCreditLine.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Request\OptimalCreditLine.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

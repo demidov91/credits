@@ -23,12 +23,17 @@ namespace Coffee.Repository
 
         public List<CreditRequest> GetApprovedCreditRequests()
         {
-            return null;
+            return requests.Where(x => x.Decision != null && x.Decision.Verdict == true).ToList();
         }
 
-        public List<CreditRequest> GetUnapprovedCreditRequests()
+        public List<CreditRequest> GetUndecidedCreditRequests()
         {
-            return null;
+            return requests.Where(x => x.Decision == null).ToList();
+        }
+
+        public List<CreditRequest> GetRejectedCreditRequests()
+        {
+            return requests.Where(x => x.Decision != null && x.Decision.Verdict == false).ToList();
         }
 
         public CreditRequest GetRequestById(long id)
@@ -71,7 +76,7 @@ namespace Coffee.Repository
             return fromDb;
         }
 
-        public bool Approve(Approval approval) {
+        public bool RegisterDecision(Decision decision) {
             return false;
         }
 
@@ -89,11 +94,6 @@ namespace Coffee.Repository
         public void AddCreditRequest(CreditRequest request) {
             request.Id = random.Next();
             requests.AddLast(request);
-        }
-
-        public List<Approval> ApprovalsForRrequest(CreditRequest request) {
-            List<Approval> all = RepoFactory.GetApprovalRepo().GetAll();
-            return all.FindAll(x => x.Request.Equals(request));
         }
 
         public List<CreditRequest> GetRequestsByOwner(string username) {
