@@ -6,7 +6,8 @@ using Coffee.IRepository;
 
 using System.Collections.Generic;
 
-using Coffee.WebUi.Models; 
+using Coffee.WebUi.Models;
+using System; 
 
 namespace Coffee.WebUi.Controllers
 {
@@ -179,26 +180,52 @@ namespace Coffee.WebUi.Controllers
 
             return View("OptimalCreditLine", null);
         }
+        
         /*
-        //
         //[Authorize]
         public ActionResult ApprovedList()
         {
             return View();
         }
+        //*/
 
-        //[Authorize]
         public ActionResult UnapprovedList()
         {
-            return View();
+            return View(RepoFactory.GetRequestsRepo().GetUndecidedCreditRequests());
         }
 
-        
-
-        //[Authorize]
-        public ActionResult Approve()
+        [HttpGet]
+        public ActionResult RequestDetail(long reqId)
         {
-            return View();
-        }*/
+            return View(RepoFactory.GetRequestsRepo().GetRequestById(reqId));
+        }
+
+        [HttpPost]
+        public ActionResult Approve(CreditRequest req)
+        {
+            Decision decision = new Decision
+            {
+                Authority = User.Identity.Name,
+                Request = req,
+                DecisionTime = DateTime.Now,
+                Verdict = true
+            };
+            RepoFactory.GetRequestsRepo().RegisterDecision(decision);
+            return Redirect("~");
+        }
+
+        [HttpPost]
+        public ActionResult Reject(CreditRequest req)
+        {
+            Decision decision = new Decision
+            {
+                Authority = User.Identity.Name,
+                Request = req,
+                DecisionTime = DateTime.Now,
+                Verdict = false
+            };
+            RepoFactory.GetRequestsRepo().RegisterDecision(decision);
+            return Redirect("~");
+        }
     }
 }

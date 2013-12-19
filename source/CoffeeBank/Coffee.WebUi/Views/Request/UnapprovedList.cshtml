@@ -1,0 +1,29 @@
+﻿@model List<Coffee.Entities.CreditRequest>
+
+@{
+    ViewBag.Title = "UnapprovedList";
+}
+
+<h2>UnapprovedList</h2>
+
+<table>
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Line</td>
+            <td>Amount</td>
+            <td>Details</td>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (Coffee.Entities.CreditRequest req in Model)
+{
+        <tr>
+            <td>@req.PassportInfo.FullName</td>
+            <td>@req.CreditLine.Name</td>
+            <td>@req.Amount</td>
+            <td>@Html.ActionLink("Details", "RequestDetail", new { reqId = req.Id })</td>
+        </tr>
+}
+    </tbody>
+</table>

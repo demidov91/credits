@@ -76,8 +76,10 @@ namespace Coffee.Repository
             return fromDb;
         }
 
-        public bool RegisterDecision(Decision decision) {
-            return false;
+        public bool RegisterDecision(Decision decision)
+        {
+            decision.Request.Decision = decision;
+            return true;
         }
 
         private DummyRequestsRepository() { }

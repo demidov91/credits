@@ -8,7 +8,7 @@ namespace Coffee.Entities
 
         public CreditRequest Request { get; set; }
 
-        public BankWorker Authority { get; set; }
+        public string Authority { get; set; }
 
         public DateTime DecisionTime { get; set; }
 

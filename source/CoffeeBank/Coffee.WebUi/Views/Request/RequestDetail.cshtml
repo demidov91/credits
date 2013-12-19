@@ -1,0 +1,20 @@
+﻿@model Coffee.Entities.CreditRequest
+
+@{
+    ViewBag.Title = "RequestDetail";
+}
+
+<h2>RequestDetail</h2>
+
+<p>Name: @Model.PassportInfo.FullName</p>
+<p>Born: @Model.PassportInfo.BirthDate</p>
+<p>@Model.SalaryInfo.Position in @Model.SalaryInfo.Company for @((int)Model.SalaryInfo.WorkTime.TotalDays / 30) months</p>
+<p>Average salary: @Model.SalaryInfo.AverageSalary BYR</p>
+
+<p>Credit line: @Model.CreditLine.Name</p>
+<p>Amount: @Model.Amount BYR</p>
+<p>Period: @Model.Period months</p>
+<p>Additional info:</p>
+<p>@Model.AdditionalTextInfo</p>
+
+<!-- two buttons -->
