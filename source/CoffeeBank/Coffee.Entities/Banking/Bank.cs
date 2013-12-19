@@ -11,7 +11,7 @@ namespace Coffee.Entities
 
         public List<CreditLine> CreditLines { get; set; }
 
-        public List<BankWorker> Workers { get; set; }
+        //public List<BankWorker> Workers { get; set; }
 
         public bool IssueCredit(CreditRequest approvedRequest)
         {
