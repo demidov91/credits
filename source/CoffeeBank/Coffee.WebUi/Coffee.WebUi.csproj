@@ -85,6 +85,7 @@
     <Compile Include="Scripts\CreditHelper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\js\listCredits.js" />
     <Content Include="Content\js\listRequests.js" />
     <Content Include="Content\js\listRequestsForUser.js" />
     <Content Include="Content\js\newRequest.js" />

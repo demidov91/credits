@@ -11,6 +11,8 @@ namespace Coffee.Repository
         private LinkedList<Payment> payments = new LinkedList<Payment>();
         private static DummyCreditRepository instance = null;
         private static Object _createLock = new Object();
+        private Random random = new Random(); 
+
 
         private DummyCreditRepository() {}
 
@@ -23,6 +25,9 @@ namespace Coffee.Repository
         }
 
         public void Add(Credit oneMore) {
+            if (oneMore.Id == 0) {
+                oneMore.Id = random.Next();
+            }
             credits.Add(oneMore);    
         }
 
@@ -39,7 +44,11 @@ namespace Coffee.Repository
 
         public List<Credit> GetAllIssuedCredits()
         {
-            return credits;
+            var resultCredits = credits;
+            foreach (var credit in resultCredits) {
+                credit.Line = DummyCreditLineRepository.getInstance().getById(credit.Line.Id);
+            }
+            return resultCredits;
         }
 
         public List<Credit> GetCreditsByOwner(string username)

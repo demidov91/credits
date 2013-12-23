@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Coffee.Entities;
+using Coffee.Repository;
 
 namespace Coffee.WebUi.Controllers
 {
@@ -13,7 +14,7 @@ namespace Coffee.WebUi.Controllers
         public ActionResult Accept(Credit req)
         {
             var model = new Payment();
-            model.Credit = req;
+            model.Credit = RepoFactory.GetCreditsRepo().GetCreditById(req.Id);
             return View(model);
         }
 

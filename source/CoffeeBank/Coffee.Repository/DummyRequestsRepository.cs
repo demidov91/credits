@@ -18,6 +18,9 @@ namespace Coffee.Repository
 
         public List<CreditRequest> GetAllCreditRequests()
         {
+            foreach (CreditRequest request in requests){
+                request.CreditLine = DummyCreditLineRepository.getInstance().getById(request.CreditLine.Id);
+            } 
             return new List<CreditRequest>(requests);
         }
 

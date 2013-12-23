@@ -230,3 +230,8 @@ List of active credits
 {
     border-top: none;
     }
+    
+.active-credit
+{
+    cursor: pointer;
+    }
