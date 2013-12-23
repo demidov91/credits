@@ -1,12 +1,13 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-
-<div class="toLeft">
-    @Html.ActionLink("Add credit request", "New", "Request")
+<div id="user-home-content" class="anonimus">
+    <div class="toLeft">
+        @Html.ActionLink("Add credit request", "New", "Request", new { @class="btn"})
+    </div>
+    <div class="toLeft">
+        @Html.ActionLink("View our credit lines", "SelectCreditLine", "Request", new { @class = "btn" })
 </div>
-<div class="toRight">
-    @Html.ActionLink("View our credit lines", "SelectCreditLine", "Request")
 </div>
 <div class="clear"> 
 </div>

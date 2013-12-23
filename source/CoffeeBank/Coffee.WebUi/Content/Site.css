@@ -173,6 +173,11 @@ User home page.
 #user-home-content .home-action-container{
     width: 33%;
 }
+
+#user-home-content.anonimus>div{
+    width:50%;    
+}
+
     
 /**
 ----------------------------------
