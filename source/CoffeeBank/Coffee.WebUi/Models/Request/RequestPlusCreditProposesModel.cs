@@ -27,7 +27,7 @@ namespace Coffee.WebUi.Models
             this.creditDropdownItems.Add(new SelectListItem { 
                 Text = "- no credit product -",
                 Value = "0",
-                Selected = request.CreditLine == null || request.CreditLine.Id == null || request.CreditLine.Id == 0
+                Selected = request.CreditLine == null || request.CreditLine.Id == 0
             });
             foreach (CreditLine credit in Credits) { 
                 bool isSelected = credit.Equals(request.CreditLine);

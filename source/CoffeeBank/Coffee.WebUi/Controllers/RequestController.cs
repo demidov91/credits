@@ -79,8 +79,6 @@ namespace Coffee.WebUi.Controllers
             CreditRequest fromDb =  RepoFactory.GetRequestsRepo().Update(request);
             return PartialView("_RowForTheUserCreditRequest", new RequestPlusCreditProposesModel(fromDb, RepoFactory.GetCreditLineRepo().getAll()));
         }
-
-
         
         [Authorize]
         public ActionResult List(string passportNumber)
@@ -106,7 +104,9 @@ namespace Coffee.WebUi.Controllers
         [HttpGet]
         public ActionResult Details(CreditRequest requestToView)
         {
-            return View(new Coffee.WebUi.Models.Request.CreditRequest(RepoFactory.GetRequestsRepo().GetRequestById(requestToView.Id)));
+            var request = RepoFactory.GetRequestsRepo().GetRequestById(requestToView.Id);
+            request.IssueDate = DateTimeHelper.GetCurrentTime();
+            return View(new Coffee.WebUi.Models.Request.CreditRequest(request));
         }
 
         [Authorize]
@@ -129,7 +129,6 @@ namespace Coffee.WebUi.Controllers
                 }
             } 
             return null;
-
         }
 
         [HttpGet]
@@ -207,7 +206,7 @@ namespace Coffee.WebUi.Controllers
             {
                 Authority = User.Identity.Name,
                 Request = req,
-                DecisionTime = DateTime.Now,
+                DecisionTime = DateTimeHelper.GetCurrentTime(),
                 Verdict = true
             };
             RepoFactory.GetRequestsRepo().RegisterDecision(decision);
@@ -221,7 +220,7 @@ namespace Coffee.WebUi.Controllers
             {
                 Authority = User.Identity.Name,
                 Request = req,
-                DecisionTime = DateTime.Now,
+                DecisionTime = DateTimeHelper.GetCurrentTime(),
                 Verdict = false
             };
             RepoFactory.GetRequestsRepo().RegisterDecision(decision);

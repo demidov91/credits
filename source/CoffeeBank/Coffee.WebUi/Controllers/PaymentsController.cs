@@ -10,17 +10,18 @@ namespace Coffee.WebUi.Controllers
     public class PaymentsController : Controller
     {
         [HttpGet]
-        public ActionResult Accept(Credit req)
+        public ActionResult Accept(long reqId)
         {
             var model = new Payment();
-            model.Credit = req;
+            model.Credit = Repository.RepoFactory.GetCreditsRepo().GetCreditById(reqId);
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Accept(Payment p)
         {
-            p.PaymentTime = DateTime.Now;
+            p.PaymentTime = DateTimeHelper.GetCurrentTime();
+            p.Credit = Repository.RepoFactory.GetCreditsRepo().GetCreditById(p.Credit.Id);
             Coffee.Repository.RepoFactory.GetCreditsRepo().AcceptPayment(p);
             return Redirect("~");
         }
@@ -40,7 +41,7 @@ namespace Coffee.WebUi.Controllers
             }
             catch (Exception)
             {
-                return new HttpStatusCodeResult(404);
+                return new HttpStatusCodeResult(500);
             }
         }
 

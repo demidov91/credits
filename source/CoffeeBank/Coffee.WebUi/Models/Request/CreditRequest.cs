@@ -26,7 +26,7 @@ namespace Coffee.WebUi.Models.Request
             _creditKinds = RepoFactory.GetCreditLineRepo().getAll();        
         }
 
-        [DisplayFormat(ApplyFormatInEditMode=true, DataFormatString="{0:dd.mm.yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode=true, DataFormatString="{0:dd.MM.yyyy}")]
         public DateTime IssueDate { get { return adaptee.IssueDate; } set { adaptee.IssueDate = value; } }
 
         private Coffee.Entities.CreditRequest adaptee;
@@ -80,7 +80,7 @@ namespace Coffee.WebUi.Models.Request
             {
                 Text = "- no credit product -",
                 Value = "0",
-                Selected = CreditLine == null || CreditLine.Id == null || CreditLine.Id == 0
+                Selected = CreditLine == null || CreditLine.Id == 0
             });
             foreach (CreditLine credit in _creditKinds)
             {

@@ -46,7 +46,7 @@ namespace Coffee.Repository
             if (request.AdditionalTextInfo != null) {
                 fromDb.AdditionalTextInfo = request.AdditionalTextInfo;
             }
-            if (request.Amount != null)
+            if (request.Amount != 0)
             {
                 fromDb.Amount = request.Amount;
             }
@@ -58,7 +58,7 @@ namespace Coffee.Repository
             {
                 fromDb.PassportInfo = request.PassportInfo;
             }
-            if (request.Period != null)
+            if (request.Period != 0)
             {
                 fromDb.Period = request.Period;
             }

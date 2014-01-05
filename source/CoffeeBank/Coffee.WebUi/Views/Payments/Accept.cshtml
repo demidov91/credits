@@ -6,10 +6,11 @@
 
 <h2>Accept</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(FormMethod.Post))
 {
     <span>@Model.Credit.ToString()</span>
     <span>Amount of payment:</span>
     @Html.TextBoxFor(x => x.Amount)
-    <!-- submit -->
+    @Html.HiddenFor(x => x.Credit.Id)
+    <input type="submit" value="Accept" />
 }

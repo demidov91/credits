@@ -50,8 +50,8 @@ namespace Coffee.Entities
             return
                 (MinAmountBoundary == null || request.Amount >= MinAmountBoundary) && 
                 (MaxAmountBoundary == null || request.Amount <= MaxAmountBoundary) &&
-                (MinAgeBoundary == null || (DateTime.Now - request.PassportInfo.BirthDate).TotalDays >= MinAgeBoundary * 365) &&
-                (MaxAgeBoundary == null || (DateTime.Now - request.PassportInfo.BirthDate).TotalDays <= MaxAgeBoundary * 365) &&
+                (MinAgeBoundary == null || (DateTimeHelper.GetCurrentTime() - request.PassportInfo.BirthDate).TotalDays >= MinAgeBoundary * 365) &&
+                (MaxAgeBoundary == null || (DateTimeHelper.GetCurrentTime() - request.PassportInfo.BirthDate).TotalDays <= MaxAgeBoundary * 365) &&
                 (MinMonthsBoundary == null || request.Period >= MinMonthsBoundary) && 
                 (MaxMonthsBoundary == null || request.Period <= MaxMonthsBoundary) &&
                 (MinAverageSalaryBoundary == null || request.SalaryInfo.AverageSalary >= MinAverageSalaryBoundary) &&
