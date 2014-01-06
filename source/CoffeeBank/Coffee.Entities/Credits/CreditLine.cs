@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using System;
 
@@ -10,17 +10,7 @@ namespace Coffee.Entities
     /// </summary>
     public class CreditLine
     {
-        /// <summary>
-        /// ANNUITY - same payment amount for each month.
-        /// FACTICAL - pay equal share of credit amount each month + less and less percents. 
-        /// PERCENTS_ONLY - pay only percents during all the credit period + all credit in the end.
-        /// </summary>
-        public enum PaymentKind { ANNUITY, FACTICAL, PERCENTS_ONLY }
-
-
-        /// <summary>
-        ///  Id in database
-        /// </summary>
+        [Key]
         public long Id { get; set; }
 
         /// <summary>
@@ -33,7 +23,16 @@ namespace Coffee.Entities
         /// </summary>
         public decimal Rate { get; set; }
 
+        [NotMapped]
         public PaymentKind KindOfPayments { get; set; }
+
+        [Column("PaymentKind")]
+        public int KindOfPaymentsId
+        {
+            get { return (int)this.KindOfPayments; }
+
+            set { this.KindOfPayments = (PaymentKind)value; }
+        }
 
         // constraints
         public int? MinAgeBoundary { get; set; }
@@ -110,4 +109,11 @@ namespace Coffee.Entities
              */
         }
     }
+
+    /// <summary>
+    /// ANNUITY - same payment amount for each month.
+    /// FACTICAL - pay equal share of credit amount each month + less and less percents. 
+    /// PERCENTS_ONLY - pay only percents during all the credit period + all credit in the end.
+    /// </summary>
+    public enum PaymentKind { ANNUITY, FACTICAL, PERCENTS_ONLY }
 }

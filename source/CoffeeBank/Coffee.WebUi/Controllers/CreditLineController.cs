@@ -2,8 +2,6 @@
 using System.Web.Mvc;
 using Coffee.Entities;
 using Coffee.Repository;
-
-using Coffee.Repository;
 using Coffee.WebUi.Models.Credit;
 
 namespace Coffee.WebUi.Controllers

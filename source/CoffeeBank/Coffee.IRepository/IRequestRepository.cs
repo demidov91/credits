@@ -19,7 +19,7 @@ namespace Coffee.IRepository
 
         CreditRequest Update(CreditRequest request);
 
-        bool RegisterDecision(Decision decision);
+        void CommitChanges();
 
         void AddCreditRequest(CreditRequest request);
 
