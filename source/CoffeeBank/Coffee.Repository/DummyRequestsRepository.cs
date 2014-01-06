@@ -28,7 +28,7 @@ namespace Coffee.Repository
 
         public List<CreditRequest> GetUndecidedCreditRequests()
         {
-            return requests.Where(x => x.Decision == null).ToList();
+            return requests.Where(x => x.Decision != null && x.Decision.Verdict == null).ToList();
         }
 
         public List<CreditRequest> GetRejectedCreditRequests()

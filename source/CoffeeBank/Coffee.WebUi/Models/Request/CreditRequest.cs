@@ -64,6 +64,7 @@ namespace Coffee.WebUi.Models.Request
         /// </summary>
         public Object ActionEdit { get; set; }
         public Object ActionViewPayments { get; set; }
+        public Object ActionTentative { get; set; }
         public Object ActionOpenCreditLine { get; set; }
 
         public string AdditionalTextInfo { get { return adaptee.AdditionalTextInfo; } set { adaptee.AdditionalTextInfo = value; } }
@@ -94,6 +95,5 @@ namespace Coffee.WebUi.Models.Request
             }
             return creditDropdownItems;
         }
-        
     }
 }

@@ -12,7 +12,7 @@ namespace Coffee.Entities
 
         public DateTime DecisionTime { get; set; }
 
-        public bool Verdict { get; set; }
+        public bool? Verdict { get; set; }
 
         public void Update(Decision other) {
             this.Authority = other.Authority;

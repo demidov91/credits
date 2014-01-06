@@ -1,10 +1,10 @@
 ﻿@model List<Coffee.Entities.CreditRequest>
 
 @{
-    ViewBag.Title = "UnapprovedList";
+    ViewBag.Title = "ApprovedList";
 }
 
-<h2>UnapprovedList</h2>
+<h2>ApprovedList</h2>
 
 <table>
     <thead>
@@ -12,7 +12,7 @@
             <td>Name</td>
             <td>Line</td>
             <td>Amount</td>
-            <td>Details</td>
+            <td>Open</td>
         </tr>
     </thead>
     <tbody>
@@ -22,7 +22,7 @@
             <td>@req.PassportInfo.FullName</td>
             <td>@req.CreditLine.Name</td>
             <td>@req.Amount</td>
-            <td>@Html.ActionLink("Details", "RequestDetail", new RouteValueDictionary() { { "reqId", req.Id } })</td>
+            <td>@Html.ActionLink("Open credit", "OpenCredit", new RouteValueDictionary() { { "reqId", req.Id } })</td>
         </tr>
 }
     </tbody>

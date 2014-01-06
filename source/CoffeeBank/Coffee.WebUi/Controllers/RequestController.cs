@@ -99,7 +99,6 @@ namespace Coffee.WebUi.Controllers
             return View(requestsToShow);
         }
 
-
         [Authorize]
         [HttpGet]
         public ActionResult Details(CreditRequest requestToView)
@@ -115,16 +114,20 @@ namespace Coffee.WebUi.Controllers
         {
             Coffee.Entities.CreditRequest requestFromDB = RepoFactory.GetRequestsRepo().Update(requestFromView.GetAdaptee());
             RepoFactory.GetPassportInfoRepo().Update(requestFromView.PassportInfo);
+
             if (requestFromView.ActionEdit != null){
                 return RedirectToAction("Details", "Request", new { Id = requestFromView.Id });
             } else if (requestFromView.ActionViewPayments != null) {
                 return RedirectToAction("TeoreticalPayments", "CreditLine", requestFromDB);    
+            } else if (requestFromView.ActionTentative != null) {
+                return Tentative(requestFromDB.Id);
             } else if (requestFromView.ActionOpenCreditLine != null) {
                 if (requestFromDB.CreditLine.IsAcceptable(requestFromDB))
                 {
                     return View("CreditWasOpened", RepoFactory.GetRequestsRepo().Accept(requestFromDB));
                 }
-                else {
+                else
+                {
                     return null;
                 }
             } 
@@ -180,17 +183,14 @@ namespace Coffee.WebUi.Controllers
             return View("OptimalCreditLine", null);
         }
         
-        /*
-        //[Authorize]
-        public ActionResult ApprovedList()
-        {
-            return View();
-        }
-        //*/
-
         public ActionResult UnapprovedList()
         {
             return View(RepoFactory.GetRequestsRepo().GetUndecidedCreditRequests());
+        }
+
+        public ActionResult ApprovedList()
+        {
+            return View(RepoFactory.GetRequestsRepo().GetApprovedCreditRequests());
         }
 
         [HttpGet]
@@ -199,13 +199,12 @@ namespace Coffee.WebUi.Controllers
             return View(RepoFactory.GetRequestsRepo().GetRequestById(reqId));
         }
 
-        [HttpPost]
-        public ActionResult Approve(CreditRequest req)
+        public ActionResult Approve(long reqId)
         {
             Decision decision = new Decision
             {
                 Authority = User.Identity.Name,
-                Request = req,
+                Request = Repository.RepoFactory.GetRequestsRepo().GetRequestById(reqId),
                 DecisionTime = DateTimeHelper.GetCurrentTime(),
                 Verdict = true
             };
@@ -213,18 +212,36 @@ namespace Coffee.WebUi.Controllers
             return Redirect("~");
         }
 
-        [HttpPost]
-        public ActionResult Reject(CreditRequest req)
+        public ActionResult Tentative(long reqId)
         {
             Decision decision = new Decision
             {
                 Authority = User.Identity.Name,
-                Request = req,
+                Request = Repository.RepoFactory.GetRequestsRepo().GetRequestById(reqId),
+                DecisionTime = DateTimeHelper.GetCurrentTime(),
+                Verdict = null
+            };
+            RepoFactory.GetRequestsRepo().RegisterDecision(decision);
+            return Redirect("~");
+        }
+
+        public ActionResult Reject(long reqId)
+        {
+            Decision decision = new Decision
+            {
+                Authority = User.Identity.Name,
+                Request = Repository.RepoFactory.GetRequestsRepo().GetRequestById(reqId),
                 DecisionTime = DateTimeHelper.GetCurrentTime(),
                 Verdict = false
             };
             RepoFactory.GetRequestsRepo().RegisterDecision(decision);
             return Redirect("~");
+        }
+
+        public ActionResult OpenCredit(long reqId)
+        {
+            var repo = RepoFactory.GetRequestsRepo();
+            return View("CreditWasOpened", repo.Accept(repo.GetRequestById(reqId)));
         }
     }
 }
