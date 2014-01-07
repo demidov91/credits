@@ -22,6 +22,16 @@
             @Html.ActionLink("Credit requests", "List", "Request")
              </li>
         </ul>
+        <ul class="nav">
+            <li>
+            @Html.ActionLink("Undecided requests", "UnapprovedList", "Request")
+            </li>
+        </ul>
+        <ul class="nav">
+            <li>
+            @Html.ActionLink("Approved requests", "ApprovedList", "Request")
+            </li>
+        </ul>
         <ul class="nav pull-right">
             <li class="@RenderSection("creditsActive", required: false)">
             @Html.ActionLink("Active credits", "List", "Credit")

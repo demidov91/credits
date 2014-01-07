@@ -10,6 +10,38 @@ namespace Coffee.WebUi.Scripts
     public class CreditHelper
     {
         /// <summary>
+        /// Rounds all payments so that they are multiplies of X rubles
+        /// </summary>
+        /// <param name="list">List of decimals to normalize</param>
+        /// <param name="leastNominal">Least valued banknote used</param>
+        /// <returns>List of integer payments</returns>
+        private static List<decimal> Normalize(List<decimal> list, int leastNominal = 50)
+        {
+            decimal roundError = 0;
+            List<decimal> result = new List<decimal>();
+            foreach (decimal x in list)
+            {
+                decimal p = (Math.Ceiling(x / leastNominal)) * leastNominal;
+                roundError += (p - x);
+                result.Add(p);
+            }
+
+            result[result.Count - 1] -= Math.Floor(roundError / leastNominal) * leastNominal;
+            return result;
+        }
+
+        /// <summary>
+        /// Rounds a number so that it is a multiple of X rubles
+        /// </summary>
+        /// <param name="amount">Decimal to normalize up.</param>
+        /// <param name="leastNominal">Least valued banknote used</param>
+        /// <returns>Decimal </returns>
+        private static decimal Normalize(decimal amount, int leastNominal = 50)
+        {
+            return Math.Ceiling(amount / leastNominal) * leastNominal;
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="duration">Number of months.</param>
@@ -24,7 +56,7 @@ namespace Coffee.WebUi.Scripts
             for (int i = 0; i < duration; i++) {
                 result.Add((decimal)perMonth);
             }
-            return result;
+            return Normalize(result);
         }
 
         /// <summary>
@@ -43,7 +75,7 @@ namespace Coffee.WebUi.Scripts
                 payments.Add(partOfCreditPerMonth + remainigToPay * monthPercent);
                 remainigToPay -= partOfCreditPerMonth;
             }
-            return payments;
+            return Normalize(payments);
         }
 
         /// <summary>
@@ -60,13 +92,13 @@ namespace Coffee.WebUi.Scripts
                 payments.Add(payPerMonth);
             }
             payments[payments.Count - 1] =  payments.Last() + amount;
-            return payments;
+            return Normalize(payments);
         }
 
         public static SortedDictionary<DateTime, decimal> GetPaymentsCalendar(Coffee.Entities.CreditRequest request){
             SortedDictionary<DateTime, decimal> paymentsTodo = new SortedDictionary<DateTime, decimal>();
             List<decimal> payments = null;
-            switch (request.CreditLine.KindOfPayments) { 
+            switch (request.CreditLine.KindOfPayments) {
                 case CreditLine.PaymentKind.ANNUITY:
                     payments = GetAnnuityPaymentsList(request.Amount, request.CreditLine.Rate / 100, request.Period);
                     break;
@@ -91,10 +123,25 @@ namespace Coffee.WebUi.Scripts
         {
             SortedDictionary<DateTime, decimal> payments = new SortedDictionary<DateTime, decimal>();
             List<decimal> paymentAmounts = null;
-            decimal amount = GetCurrentDebt(credit);
-            int duration = (int)((credit.IssueDate.Date.AddMonths(credit.Period) - DateTime.Now).TotalDays / 31);
-            DateTime endDate = credit.IssueDate.Date.AddMonths(credit.Period);
-            while (DateTime.Now.Date.AddMonths(duration) <= endDate) ++duration;
+            
+            int duration;
+            DateTime endDate = credit.IssueDate.AddMonths(credit.Period).Date;
+            if (DateTimeHelper.GetCurrentTime().Date == credit.IssueDate.Date)
+            {
+                duration = credit.Period;
+            }
+            else
+            {
+                DateTime currentDate = DateTimeHelper.GetCurrentTime().Date;
+                duration = (endDate.Year - currentDate.Year) * 12 + 
+                    (endDate.Month - currentDate.Month) + (currentDate.Day <= endDate.Day ? 1 : 0);
+            }
+
+            List<Payment> p = Repository.RepoFactory.GetCreditsRepo().GetPaymentsForCredit(credit.Id);
+            DateTime startOfMonth = credit.IssueDate.Date;
+            while (startOfMonth.AddMonths(1) <= DateTimeHelper.GetCurrentTime().Date) startOfMonth = startOfMonth.AddMonths(1);
+            decimal amount = GetCurrentDebt(credit, p.Where(x => x.PaymentTime < startOfMonth).ToList());
+
             switch (credit.Line.KindOfPayments)
             {
                 case CreditLine.PaymentKind.ANNUITY:
@@ -108,9 +155,15 @@ namespace Coffee.WebUi.Scripts
                     break;
                 default: throw new NotImplementedException();
             }
+            decimal paidThisMonth = p.Where(x => x.PaymentTime >= startOfMonth).Sum(x => x.Amount);
+            for (int i = 0; i < paymentAmounts.Count; ++i) {
+                if (paidThisMonth == 0) break;
+                decimal min = Math.Min(paymentAmounts[i], paidThisMonth);
+                paymentAmounts[i] -= min;
+                paidThisMonth -= min;
+            }
 
-            DateTime start = credit.IssueDate.Date;
-            while (start < DateTime.Now.Date) start = start.AddMonths(1);
+            DateTime start = startOfMonth.AddMonths(1);
             foreach (decimal payment in paymentAmounts) {
                 payments.Add(start, payment);
                 start = start.AddMonths(1);
@@ -118,24 +171,24 @@ namespace Coffee.WebUi.Scripts
             return payments;
         }
 
-        public static decimal GetCurrentDebt(Credit credit)
+        public static decimal GetCurrentDebt(Credit credit, int leastNominal = 50)
         {
-            return GetCurrentDebt(credit, Repository.RepoFactory.GetCreditsRepo().GetPaymentsForCredit(credit.Id));
+            return GetCurrentDebt(credit, Repository.RepoFactory.GetCreditsRepo().GetPaymentsForCredit(credit.Id), leastNominal);
         }
 
-        private static decimal GetCurrentDebt(Credit credit, List<Payment> p)
+        private static decimal GetCurrentDebt(Credit credit, List<Payment> p, int leastNominal = 50)
         {
             decimal ans = credit.Amount;
             DateTime start = credit.IssueDate.Date, next = start.AddMonths(1);
             int ptr = 0;
-            while (start < DateTime.Now)
+            while (start <= DateTimeHelper.GetCurrentTime().Date)
             {
                 ans *= (1 + credit.Line.Rate / 1200);
                 while (ptr < p.Count && p[ptr].PaymentTime < next) ans -= p[ptr++].Amount;
                 start = next;
                 next = next.AddMonths(1);
             }
-            return ans;
+            return (Math.Ceiling(ans / leastNominal)) * leastNominal;
         }
 
         public static TotalAccountInfo GetAccountInfo(string username)

@@ -19,6 +19,7 @@
 <div id="detailed-credit-request-actions">
     <input type="submit" class="btn btn-success" name="ActionEdit" value="Save changes and check for the acceptance" />
     <input type="submit" class="btn btn-primary" name="ActionViewPayments" value="Save changes and view calendar of payments" />
+    <input type="submit" class="btn btn-warning" name="ActionTentative" value="Submit as tentative" />
     @if(Model.CreditLine != null && Model.CreditLine.IsAcceptable(Model.GetAdaptee())){
     <input type="submit" class="btn btn-danger" name="ActionOpenCreditLine"  value="Open credit" />
     } else {

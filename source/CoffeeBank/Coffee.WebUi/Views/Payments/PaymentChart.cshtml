@@ -15,8 +15,8 @@
 Remaining payments:
 @foreach (var p in Model.Item4)
 {
-    string style = p.Item1 < DateTime.Now ? "background-color: red;" : "";
+    string style = p.Item1 < Coffee.Entities.DateTimeHelper.GetCurrentTime().Date ? "background-color: red;" : "";
     <p style="@style">@(p.Item1.ToShortDateString() + " -- " + p.Item2.ToString() + "BYR")</p>
 }
 
-@Html.ActionLink("Accept payment", "Accept", new RouteValueDictionary() { { "req", @Model.Item1 } })
+@Html.ActionLink("Accept payment", "Accept", new RouteValueDictionary() { { "reqId", Model.Item1.Id } })

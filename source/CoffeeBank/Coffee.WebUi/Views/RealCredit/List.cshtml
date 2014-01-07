@@ -35,6 +35,7 @@ else
         <td>Amount</td>
         <td>Duration</td>
         <td>Credit product</td>
+        <td>Details</td>
     </tr>
 
 @foreach (var credit in Model)
@@ -46,6 +47,7 @@ else
         <td>@credit.Amount</td>
         <td>@credit.Period</td>
         <td>@credit.Line.Name</td>
+        <td>@Html.ActionLink("Details", "PaymentChart", "Payments", new RouteValueDictionary() { { "creditId", credit.Id } }, null)</td>
     </tr>
 }
 

@@ -22,7 +22,7 @@
             <td>@req.PassportInfo.FullName</td>
             <td>@req.CreditLine.Name</td>
             <td>@req.Amount</td>
-            <td>@Html.ActionLink("Details", "RequestDetail", new { reqId = req.Id })</td>
+            <td>@Html.ActionLink("Details", "RequestDetail", new RouteValueDictionary() { { "reqId", req.Id } })</td>
         </tr>
 }
     </tbody>

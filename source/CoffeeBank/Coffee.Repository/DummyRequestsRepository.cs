@@ -31,7 +31,7 @@ namespace Coffee.Repository
 
         public List<CreditRequest> GetUndecidedCreditRequests()
         {
-            return requests.Where(x => x.Decision == null).ToList();
+            return requests.Where(x => x.Decision != null && x.Decision.Verdict == null).ToList();
         }
 
         public List<CreditRequest> GetRejectedCreditRequests()
@@ -49,7 +49,7 @@ namespace Coffee.Repository
             if (request.AdditionalTextInfo != null) {
                 fromDb.AdditionalTextInfo = request.AdditionalTextInfo;
             }
-            if (request.Amount != null)
+            if (request.Amount != 0)
             {
                 fromDb.Amount = request.Amount;
             }
@@ -61,7 +61,7 @@ namespace Coffee.Repository
             {
                 fromDb.PassportInfo = request.PassportInfo;
             }
-            if (request.Period != null)
+            if (request.Period != 0)
             {
                 fromDb.Period = request.Period;
             }

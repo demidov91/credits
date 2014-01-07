@@ -17,4 +17,5 @@
 <p>Additional info:</p>
 <p>@Model.AdditionalTextInfo</p>
 
-<!-- two buttons -->
+<p>@Html.ActionLink("Approve", "Approve", new RouteValueDictionary() { { "reqId", Model.Id } })</p>
+<p>@Html.ActionLink("Reject",  "Reject",  new RouteValueDictionary() { { "reqId", Model.Id } })</p>

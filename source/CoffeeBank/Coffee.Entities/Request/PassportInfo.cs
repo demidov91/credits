@@ -44,11 +44,11 @@ namespace Coffee.Entities
             this.Surname = other.Surname;
         }
 
-        public long GetHashCode() {
+        public override int GetHashCode() {
             return this.IdentificationNumber[0].GetHashCode();
         }
 
-        public bool Equals(Object other) {
+        public override bool Equals(Object other) {
             PassportInfo otherPassport = other as PassportInfo;
             if (otherPassport == null) {
                 return false;
