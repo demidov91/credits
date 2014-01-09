@@ -46,6 +46,7 @@
     <Compile Include="DummyRepository.cs" />
     <Compile Include="DummyCreditLineRepository.cs" />
     <Compile Include="DummyRequestsRepository.cs" />
+    <Compile Include="PassportInfoRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepoFactory.cs" />
     <Compile Include="RequestsRepository.cs" />

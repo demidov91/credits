@@ -7,19 +7,19 @@ namespace Coffee.Repository
     public class RepoFactory
     {
         public static IRequestRepository GetRequestsRepo() {
-            return DummyRequestsRepository.getInstance();
+            return new RequestsRepository();
         }
 
         public static ICreditLineRepository GetCreditLineRepo() {
-            return DummyCreditLineRepository.getInstance();
+            return new CreditLineRepository();
         }
 
         public static IDummyRepository<PassportInfo> GetPassportInfoRepo() {
-            return DummyRepository<PassportInfo>.getInstance();
+            return new PassportInfoRepository();
         }
 
         public static ICreditRepository GetCreditsRepo() {
-            return DummyCreditRepository.GetInstance();
+            return new CreditRepository();
         }
     }
 }
