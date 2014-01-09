@@ -209,7 +209,6 @@ namespace Coffee.WebUi.Controllers
 
             request.Decision = decision;
             
-            RepoFactory.GetRequestsRepo().CommitChanges();
             return Redirect("~");
         }
 
@@ -227,7 +226,6 @@ namespace Coffee.WebUi.Controllers
 
             request.Decision = decision;
 
-            RepoFactory.GetRequestsRepo().CommitChanges();
             return Redirect("~");
         }
 
@@ -245,7 +243,6 @@ namespace Coffee.WebUi.Controllers
 
             request.Decision = decision;
 
-            RepoFactory.GetRequestsRepo().CommitChanges();
             return Redirect("~");
         }
 

@@ -21,7 +21,8 @@ namespace Coffee.Repository
         private Random random = new Random();
         private static DummyCreditLineRepository instance = null;
 
-        private DummyCreditLineRepository() {
+        private DummyCreditLineRepository()
+        {
             CreditLine sample = new CreditLine();
             sample.MinAmountBoundary = 2000000;
             sample.MaxAmountBoundary = 6000000;
@@ -31,9 +32,17 @@ namespace Coffee.Repository
             sample.Id = 1;
             this.lines.Add(sample);
 
-            CreditLine sample2 = new CreditLine() { Name = "Credit product 2", Id = 2, Rate = 30, MinAmountBoundary = 1000000,
-             MaxAmountBoundary = 20000000, MinWorkTimeBoundary = TimeSpan.FromDays(365), MinAverageSalaryBoundary = 1500000,
-             KindOfPayments = PaymentKind.ANNUITY };
+            CreditLine sample2 = new CreditLine()
+            {
+                Name = "Credit product 2",
+                Id = 2,
+                Rate = 30,
+                MinAmountBoundary = 1000000,
+                MaxAmountBoundary = 20000000,
+                MinWorkTimeBoundary = TimeSpan.FromDays(365),
+                MinAverageSalaryBoundary = 1500000,
+                KindOfPayments = PaymentKind.ANNUITY
+            };
             this.lines.Add(sample2);
 
             CreditLine sample3 = new CreditLine() { Name = "Easy cash", Id = 3, Rate = 40, KindOfPayments = PaymentKind.PERCENTS_ONLY };
@@ -71,7 +80,8 @@ namespace Coffee.Repository
             wasUpdated += handler;
         }
 
-        public void Add(CreditLine oneMore) {
+        public void Add(CreditLine oneMore)
+        {
             oneMore.Id = lines.Max(x => x.Id) + 1;
             this.lines.Add(oneMore);
             if (wasUpdated != null)
