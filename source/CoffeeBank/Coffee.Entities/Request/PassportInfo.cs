@@ -33,12 +33,12 @@ namespace Coffee.Entities
             set { this.Gender = (Gender)value; }
         }
 
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.mm.yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
         public DateTime BirthDate { get; set; }
 
         public DateTime IssueDate { get; set; }
 
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.mm.yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
         public DateTime ExpireDate { get; set; }
 
         public string PassportNumber { get; set; }
