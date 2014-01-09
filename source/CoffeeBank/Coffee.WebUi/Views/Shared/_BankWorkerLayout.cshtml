@@ -16,22 +16,26 @@
 @section AfterHeader{
 
 <div class="navbar">
-    <div class="navbar-inner" id="change-modes-on-top"> 
+    <div class="navbar-inner @(HttpContext.Current.User.IsInRole("Clerk") ? "clerk" : "")" id="change-modes-on-top"> 
         <ul class="nav">
             <li class="@RenderSection("requestsActive", required: false)">
             @Html.ActionLink("Credit requests", "List", "Request")
              </li>
         </ul>
-        <ul class="nav">
-            <li>
-            @Html.ActionLink("Undecided requests", "UnapprovedList", "Request")
-            </li>
-        </ul>
-        <ul class="nav">
-            <li>
-            @Html.ActionLink("Approved requests", "ApprovedList", "Request")
-            </li>
-        </ul>
+        @if(HttpContext.Current.User.IsInRole("Committee")){
+            <ul class="nav">
+                <li>
+                @Html.ActionLink("Undecided requests", "UnapprovedList", "Request")
+                </li>
+            </ul>
+        }
+         @if(HttpContext.Current.User.IsInRole("Cashier")){
+            <ul class="nav">
+                <li>
+                @Html.ActionLink("Approved requests", "ApprovedList", "Request")
+                </li>
+            </ul>
+        }
         <ul class="nav pull-right">
             <li class="@RenderSection("creditsActive", required: false)">
             @Html.ActionLink("Active credits", "List", "Credit")
@@ -39,6 +43,6 @@
         </ul>
     </div>
 </div>
-}
+    }
 
 @RenderBody()
