@@ -6,12 +6,20 @@
 
 <h2>New</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm(FormMethod.Post)) {
     <span>Credit line name: </span>
     @Html.TextBoxFor(x => x.Name)
 
     <span>Credit line annual rate: </span>
     @Html.TextBoxFor(x => x.Rate)<span>%</span>
+    
+    <span>Credit line payments:</span>
+    @Html.RadioButtonFor(x => x.KindOfPayments, Coffee.Entities.CreditLine.PaymentKind.ANNUITY,
+        new Dictionary<string, object>{{ "checked", "checked" }, { "name", "payments" }} )
+    @Html.RadioButtonFor(x => x.KindOfPayments, Coffee.Entities.CreditLine.PaymentKind.FACTICAL,
+        new Dictionary<string, object>{{ "name", "payments" }})
+    @Html.RadioButtonFor(x => x.KindOfPayments, Coffee.Entities.CreditLine.PaymentKind.PERCENTS_ONLY,
+        new Dictionary<string, object>{{ "name", "payments" }})
                             
     <span>(leave field blank to specify no constraint)</span>
     <br />

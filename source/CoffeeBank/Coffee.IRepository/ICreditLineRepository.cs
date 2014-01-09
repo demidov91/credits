@@ -14,6 +14,8 @@ namespace Coffee.IRepository
 
         CreditLine getById(long id);
 
+        void Add(CreditLine line);
+
         void AddUpdateListener(EventHandler handler);
 
     }

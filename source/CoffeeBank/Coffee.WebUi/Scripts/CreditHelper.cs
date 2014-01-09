@@ -49,12 +49,22 @@ namespace Coffee.WebUi.Scripts
         /// <param name="percent">0.4 for 40% / year, for example.</param>
         /// <returns></returns>
         private static List<decimal> GetAnnuityPaymentsList(decimal amount, decimal percent, int duration) {
-            percent = percent / 12;
-            double koeficientFromPrettyDocThatLeschevSentUs = (double)percent / (1 - 1 / Math.Pow((double)(1 + percent), (double)duration));
-            double perMonth = (double)amount * koeficientFromPrettyDocThatLeschevSentUs;
+            //        m
+            //      Ap (p - 1)                 percent
+            // x = ------------, where p = 1 + -------
+            //         m                         12
+            //        p  - 1
+
             List<decimal> result = new List<decimal>(duration);
-            for (int i = 0; i < duration; i++) {
-                result.Add((decimal)perMonth);
+            if (Math.Abs(percent) < 1e-9M)
+            {
+                for (int i = 0; i < duration; ++i) result.Add(amount / duration);
+            }
+            else
+            {
+                double p = 1 + (double)(percent / 12), m = duration, A = (double)amount;
+                double x = (A * Math.Pow(p, m) * (p - 1)) / (Math.Pow(p, m) - 1);
+                for (int i = 0; i < duration; ++i) result.Add((decimal)x);
             }
             return Normalize(result);
         }

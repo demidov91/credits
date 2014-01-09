@@ -24,9 +24,17 @@ namespace Coffee.WebUi.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public ActionResult New()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult New(CreditLine line)
+        {
+            RepoFactory.GetCreditLineRepo().Add(line);
+            return Redirect("~");
         }
 
         [HttpGet]
