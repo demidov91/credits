@@ -12,17 +12,13 @@ namespace Coffee.WebUi.Controllers
 {
     public class CreditController : Controller
     {
-  
+        [Authorize(Roles = "Clerk, Cashier, Committee, CoffeeAdmin")]
         public ActionResult List(string passportNumber)
         {
             List<Credit> creditsToShow = RepoFactory.GetCreditsRepo().GetAllIssuedCredits();
-            bool isSimpleUser = User.Identity.Name != "BankWorker";                             ///kill this part of code
             if (passportNumber != null)
             {
                 creditsToShow = creditsToShow.FindAll(x => x.Passport.PassportNumber.StartsWith(passportNumber));
-            }
-            else if (isSimpleUser) {
-                creditsToShow = creditsToShow.FindAll(x => x.User == User.Identity.Name);
             }
             return View("~/Views/RealCredit/List.cshtml", creditsToShow);
         }

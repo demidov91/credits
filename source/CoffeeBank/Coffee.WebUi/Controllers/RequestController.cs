@@ -73,7 +73,7 @@ namespace Coffee.WebUi.Controllers
             return PartialView("_RowForTheUserCreditRequest", new RequestPlusCreditProposesModel(fromDb, RepoFactory.GetCreditLineRepo().getAll()));
         }
         
-        [Authorize]
+        [Authorize(Roles = "Clerk, Cashier, CoffeeAdmin, Committee")]
         public ActionResult List(string passportNumber)
         {
             List<CreditRequest> requestsToShow = RepoFactory.GetRequestsRepo().GetAllCreditRequests();
@@ -92,7 +92,7 @@ namespace Coffee.WebUi.Controllers
             return View(requestsToShow);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Clerk, Cashier, CoffeeAdmin, Committee")]
         [HttpGet]
         public ActionResult Details(CreditRequest requestToView)
         {
@@ -101,7 +101,7 @@ namespace Coffee.WebUi.Controllers
             return View(new Coffee.WebUi.Models.Request.CreditRequest(request));
         }
 
-        [Authorize]
+        [Authorize(Roles = "Clerk, Cashier, CoffeeAdmin, Committee")]
         [HttpPost]
         public ActionResult Details(Coffee.WebUi.Models.Request.CreditRequest requestFromView)
         {
@@ -176,22 +176,26 @@ namespace Coffee.WebUi.Controllers
             return View("OptimalCreditLine", null);
         }
         
+        [Authorize(Roles = "Committee, CoffeeAdmin")]
         public ActionResult UnapprovedList()
         {
             return View(RepoFactory.GetRequestsRepo().GetUndecidedCreditRequests());
         }
 
+        [Authorize(Roles = "Cashier, CoffeeAdmin, Committee")]
         public ActionResult ApprovedList()
         {
             return View(RepoFactory.GetRequestsRepo().GetApprovedCreditRequests());
         }
 
         [HttpGet]
+        [Authorize(Roles = "Committee, CoffeeAdmin")]
         public ActionResult RequestDetail(long reqId)
         {
             return View(RepoFactory.GetRequestsRepo().GetRequestById(reqId));
         }
 
+        [Authorize(Roles = "Committee, CoffeeAdmin")]
         public ActionResult Approve(long reqId)
         {
             var request = Repository.RepoFactory.GetRequestsRepo().GetRequestById(reqId);
@@ -209,6 +213,7 @@ namespace Coffee.WebUi.Controllers
             return Redirect("~");
         }
 
+        [Authorize(Roles = "Clerk, Committee, CoffeeAdmin")]
         public ActionResult Tentative(long reqId)
         {
             var request = Repository.RepoFactory.GetRequestsRepo().GetRequestById(reqId);
@@ -226,6 +231,7 @@ namespace Coffee.WebUi.Controllers
             return Redirect("~");
         }
 
+        [Authorize(Roles = "CoffeeAdmin, Committee")]
         public ActionResult Reject(long reqId)
         {
             var request = Repository.RepoFactory.GetRequestsRepo().GetRequestById(reqId);
@@ -243,6 +249,7 @@ namespace Coffee.WebUi.Controllers
             return Redirect("~");
         }
 
+        [Authorize(Roles = "Cashier, Clerk, CoffeeAdmin")]
         public ActionResult OpenCredit(long reqId)
         {
             var repo = RepoFactory.GetRequestsRepo();

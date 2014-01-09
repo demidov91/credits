@@ -21,12 +21,14 @@ namespace Coffee.WebUi.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Committee, CoffeeAdmin")]
         public ActionResult New()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Committee, CoffeeAdmin")]
         public ActionResult New(CreditLine line)
         {
             RepoFactory.GetCreditLineRepo().Add(line);
@@ -34,6 +36,7 @@ namespace Coffee.WebUi.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Clerk, CoffeeAdmin")]
         public ActionResult TeoreticalPayments(Coffee.Entities.CreditRequest creditRequest){
             return View(new Payments(RepoFactory.GetRequestsRepo().GetRequestById(creditRequest.Id)));
         }
