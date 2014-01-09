@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 using Coffee.Entities;
 using Coffee.Repository;
+using Coffee.WebUi.Scripts;
 
 
 namespace Coffee.WebUi.Controllers
