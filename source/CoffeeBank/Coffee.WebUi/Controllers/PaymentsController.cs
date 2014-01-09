@@ -10,6 +10,7 @@ namespace Coffee.WebUi.Controllers
     public class PaymentsController : Controller
     {
         [HttpGet]
+        [Authorize(Roles = "Cashier, CoffeeAdmin")]
         public ActionResult Accept(long reqId)
         {
             var model = new Payment();
@@ -18,6 +19,7 @@ namespace Coffee.WebUi.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Cashier, CoffeeAdmin")]
         public ActionResult Accept(Payment p)
         {
             p.PaymentTime = DateTimeHelper.GetCurrentTime();
@@ -27,6 +29,7 @@ namespace Coffee.WebUi.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Cashier, Clerk, CoffeeAdmin")]
         public ActionResult PaymentChart(long creditId)
         {
             try
@@ -46,6 +49,7 @@ namespace Coffee.WebUi.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Cashier, Clerk, CoffeeAdmin")]
         public ActionResult Balance(string username)
         {
             return View(Coffee.WebUi.Scripts.CreditHelper.GetAccountInfo(username));

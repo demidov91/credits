@@ -135,21 +135,26 @@ namespace Coffee.WebUi.Scripts
             List<decimal> paymentAmounts = null;
             
             int duration;
-            DateTime endDate = credit.IssueDate.AddMonths(credit.Period).Date;
-            if (DateTimeHelper.GetCurrentTime().Date == credit.IssueDate.Date)
+            DateTime endDate = credit.IssueDate.AddMonths(credit.Period).Date, startOfMonth, start;
+            if ((DateTimeHelper.GetCurrentTime().Date.Month == credit.IssueDate.Date.Month) ||
+                (DateTimeHelper.GetCurrentTime().Date.Month == credit.IssueDate.Date.Month + 1 &&
+                 DateTimeHelper.GetCurrentTime().Date.Day <= credit.IssueDate.Date.Day))
             {
                 duration = credit.Period;
+                startOfMonth = credit.IssueDate.Date;
+                start = startOfMonth.AddMonths(1);
             }
             else
             {
                 DateTime currentDate = DateTimeHelper.GetCurrentTime().Date;
                 duration = (endDate.Year - currentDate.Year) * 12 + 
                     (endDate.Month - currentDate.Month) + (currentDate.Day <= endDate.Day ? 1 : 0);
+                startOfMonth = credit.IssueDate.Date.AddDays(1);
+                while (startOfMonth.AddMonths(1) <= DateTimeHelper.GetCurrentTime().Date) startOfMonth = startOfMonth.AddMonths(1);
+                start = startOfMonth.AddMonths(1).AddDays(-1);
             }
 
             List<Payment> p = Repository.RepoFactory.GetCreditsRepo().GetPaymentsForCredit(credit.Id);
-            DateTime startOfMonth = credit.IssueDate.Date;
-            while (startOfMonth.AddMonths(1) <= DateTimeHelper.GetCurrentTime().Date) startOfMonth = startOfMonth.AddMonths(1);
             decimal amount = GetCurrentDebt(credit, p.Where(x => x.PaymentTime < startOfMonth).ToList()) / (1 + credit.Line.Rate / 1200);
 
             switch (credit.Line.KindOfPayments)
@@ -173,7 +178,6 @@ namespace Coffee.WebUi.Scripts
                 paidThisMonth -= min;
             }
 
-            DateTime start = startOfMonth.AddMonths(1);
             foreach (decimal payment in paymentAmounts) {
                 payments.Add(start, payment);
                 start = start.AddMonths(1);
@@ -191,13 +195,14 @@ namespace Coffee.WebUi.Scripts
             decimal ans = credit.Amount;
             DateTime start = credit.IssueDate.Date, next = start.AddMonths(1);
             int ptr = 0;
-            while (start <= DateTimeHelper.GetCurrentTime().Date)
+            do
             {
                 ans *= (1 + credit.Line.Rate / 1200);
-                while (ptr < p.Count && p[ptr].PaymentTime < next) ans -= p[ptr++].Amount;
+                while (ptr < p.Count && p[ptr].PaymentTime.Date <= next) ans -= p[ptr++].Amount;
                 start = next;
                 next = next.AddMonths(1);
             }
+            while (start < DateTimeHelper.GetCurrentTime().Date);
             return (Math.Ceiling(ans / leastNominal)) * leastNominal;
         }
 

@@ -6,13 +6,13 @@ using System.Web.Mvc;
 
 using Coffee.Entities;
 using Coffee.Repository;
-using Coffee.WebUi.Scripts;
+
 
 namespace Coffee.WebUi.Controllers
 {
     public class CreditController : Controller
     {
-  
+        [Authorize(Roles = "Clerk, Cashier, Committee, CoffeeAdmin")]
         public ActionResult List(string passportNumber)
         {
             List<Credit> creditsToShow = RepoFactory.GetCreditsRepo().GetAllIssuedCredits();
