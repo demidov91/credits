@@ -7,6 +7,8 @@ namespace Coffee.Repository
 {
     public class DummyCreditRepository : IRepository.ICreditRepository
     {
+        private CoffeeDb _database; 
+
         private List<Credit> credits = new List<Credit>();
         private LinkedList<Payment> payments = new LinkedList<Payment>();
         private static DummyCreditRepository instance = null;
@@ -14,7 +16,10 @@ namespace Coffee.Repository
         private Random random = new Random(); 
 
 
-        private DummyCreditRepository() {}
+        private DummyCreditRepository()
+        {
+            _database = new CoffeeDb();
+        }
 
         public static DummyCreditRepository GetInstance()
         {

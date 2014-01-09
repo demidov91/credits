@@ -1,24 +1,26 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace Coffee.Entities
 {
     public class CreditRequest
     {
+        [Key]
         public long Id { get; set; }
 
         public decimal Amount { get; set; } //In belorussian rubles only
 
         public int Period { get; set; } //in months
 
-        public PassportInfo PassportInfo { get; set; }
+        public virtual PassportInfo PassportInfo { get; set; }
 
-        public SalaryInfo SalaryInfo { get; set; }
+        public virtual SalaryInfo SalaryInfo { get; set; }
 
-        public CreditLine CreditLine { get; set; }
+        public virtual CreditLine CreditLine { get; set; }
 
-        public Decision Decision { get; set; }
+        public virtual Decision Decision { get; set; }
 
         public DateTime IssueDate { get; set; }
         
@@ -37,7 +39,7 @@ namespace Coffee.Entities
         {
             PassportInfo = new PassportInfo();
             SalaryInfo = new SalaryInfo();
-        }       
+        }
 
     }
 }

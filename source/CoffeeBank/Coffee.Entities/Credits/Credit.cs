@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Coffee.Entities
 {
@@ -7,15 +8,16 @@ namespace Coffee.Entities
     /// </summary>
     public class Credit: IUpdateable<Credit>
     {
+        [Key]
         public long Id { get; set; }
 
-        public DateTime IssueDate { get; set; }
+        public virtual DateTime IssueDate { get; set; }
 
-        public CreditLine Line { get; set; }
+        public virtual CreditLine Line { get; set; }
 
         public decimal Amount { get; set; }
 
-        public PassportInfo Passport { get; set; }
+        public virtual PassportInfo Passport { get; set; }
 
         public int Period { get; set; }
 

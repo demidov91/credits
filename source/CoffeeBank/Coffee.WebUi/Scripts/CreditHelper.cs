@@ -109,13 +109,13 @@ namespace Coffee.WebUi.Scripts
             SortedDictionary<DateTime, decimal> paymentsTodo = new SortedDictionary<DateTime, decimal>();
             List<decimal> payments = null;
             switch (request.CreditLine.KindOfPayments) {
-                case CreditLine.PaymentKind.ANNUITY:
+                case PaymentKind.ANNUITY:
                     payments = GetAnnuityPaymentsList(request.Amount, request.CreditLine.Rate / 100, request.Period);
                     break;
-                case CreditLine.PaymentKind.FACTICAL:
+                case PaymentKind.FACTICAL:
                     payments = GetFacticalPaymentsList(request.Amount, request.CreditLine.Rate / 100, request.Period);
                     break;
-                case CreditLine.PaymentKind.PERCENTS_ONLY:
+                case PaymentKind.PERCENTS_ONLY:
                     payments = GetOnlyPercentsPaymentsList(request.Amount, request.CreditLine.Rate / 100, request.Period);
                     break;
                 default:
@@ -154,13 +154,13 @@ namespace Coffee.WebUi.Scripts
 
             switch (credit.Line.KindOfPayments)
             {
-                case CreditLine.PaymentKind.ANNUITY:
+                case PaymentKind.ANNUITY:
                     paymentAmounts = GetAnnuityPaymentsList(amount, credit.Line.Rate / 100, duration);
                     break;
-                case CreditLine.PaymentKind.FACTICAL:
+                case PaymentKind.FACTICAL:
                     paymentAmounts = GetFacticalPaymentsList(amount, credit.Line.Rate / 100, duration);
                     break;
-                case CreditLine.PaymentKind.PERCENTS_ONLY:
+                case PaymentKind.PERCENTS_ONLY:
                     paymentAmounts = GetOnlyPercentsPaymentsList(amount, credit.Line.Rate / 100,  duration);
                     break;
                 default: throw new NotImplementedException();

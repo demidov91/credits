@@ -1,13 +1,9 @@
-﻿using System.Web.Mvc;
-using System.Linq;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Coffee.Entities;
 using Coffee.Repository;
-using Coffee.IRepository;
-
 using System.Collections.Generic;
-
 using Coffee.WebUi.Models;
-using System; 
 
 namespace Coffee.WebUi.Controllers
 {
@@ -24,12 +20,9 @@ namespace Coffee.WebUi.Controllers
         public ActionResult New(CreditRequestFormModel form)
         {
             CreditRequest model = form.CreditRequest;
-            List<CreditLine> acceptableCreditLines = new List<CreditLine>();
-            foreach (CreditLine line in RepoFactory.GetCreditLineRepo().getAll()) {
-                if (line.IsAcceptable(model)) {
-                    acceptableCreditLines.Add(line);
-                }
-            }
+            List<CreditLine> acceptableCreditLines = RepoFactory.GetCreditLineRepo().getAll()
+                .Where(line => line.IsAcceptable(model)).ToList();
+
             model.Username = User.Identity.Name;
             if (acceptableCreditLines.Count > 0) {
                 Session["creditRequest"] = model;
@@ -40,9 +33,9 @@ namespace Coffee.WebUi.Controllers
                 RepoFactory.GetRequestsRepo().AddCreditRequest(model);
                 return View("Success", model);
             }
-            else {
-                form.NoLines = true;
-            }
+
+
+            form.NoLines = true;
             return View(form);
         }
 
@@ -58,7 +51,7 @@ namespace Coffee.WebUi.Controllers
             CreditRequest preformulatedCreditRequest = (CreditRequest)Session["creditRequest"];
             if (preformulatedCreditRequest == null) {
                 Session["creditLineRequest"] = line;
-                return View("Request.New");
+                return View("New");
             }
             preformulatedCreditRequest.CreditLine = line;
             RepoFactory.GetRequestsRepo().AddCreditRequest(preformulatedCreditRequest);
@@ -201,40 +194,52 @@ namespace Coffee.WebUi.Controllers
 
         public ActionResult Approve(long reqId)
         {
+            var request = Repository.RepoFactory.GetRequestsRepo().GetRequestById(reqId);
+
             Decision decision = new Decision
             {
                 Authority = User.Identity.Name,
-                Request = Repository.RepoFactory.GetRequestsRepo().GetRequestById(reqId),
                 DecisionTime = DateTimeHelper.GetCurrentTime(),
                 Verdict = true
             };
-            RepoFactory.GetRequestsRepo().RegisterDecision(decision);
+
+            request.Decision = decision;
+            
+            RepoFactory.GetRequestsRepo().CommitChanges();
             return Redirect("~");
         }
 
         public ActionResult Tentative(long reqId)
         {
+            var request = Repository.RepoFactory.GetRequestsRepo().GetRequestById(reqId);
+
             Decision decision = new Decision
             {
                 Authority = User.Identity.Name,
-                Request = Repository.RepoFactory.GetRequestsRepo().GetRequestById(reqId),
                 DecisionTime = DateTimeHelper.GetCurrentTime(),
                 Verdict = null
             };
-            RepoFactory.GetRequestsRepo().RegisterDecision(decision);
+
+            request.Decision = decision;
+
+            RepoFactory.GetRequestsRepo().CommitChanges();
             return Redirect("~");
         }
 
         public ActionResult Reject(long reqId)
         {
+            var request = Repository.RepoFactory.GetRequestsRepo().GetRequestById(reqId);
+
             Decision decision = new Decision
             {
                 Authority = User.Identity.Name,
-                Request = Repository.RepoFactory.GetRequestsRepo().GetRequestById(reqId),
                 DecisionTime = DateTimeHelper.GetCurrentTime(),
                 Verdict = false
             };
-            RepoFactory.GetRequestsRepo().RegisterDecision(decision);
+
+            request.Decision = decision;
+
+            RepoFactory.GetRequestsRepo().CommitChanges();
             return Redirect("~");
         }
 

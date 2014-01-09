@@ -1,10 +1,14 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Coffee.Entities
 {
     public class PassportInfo: IUpdateable<PassportInfo>
     {
+        [Key]
+        public long Id { get; set; }
+
         public string FirstName { get; set; }
 
         public string Surname { get; set; }
@@ -17,8 +21,17 @@ namespace Coffee.Entities
                 return string.Format("{0} {1} {2}", Surname, FirstName, Patronymic).Trim();
             }
         }
-
+        
+        [NotMapped]
         public Gender Gender { get; set; }
+
+        [Column("Gender")]
+        public int GenderId
+        {
+            get { return (int)this.Gender; }
+
+            set { this.Gender = (Gender)value; }
+        }
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.mm.yyyy}")]
         public DateTime BirthDate { get; set; }
@@ -32,7 +45,9 @@ namespace Coffee.Entities
 
         public string IdentificationNumber { get; set; }
 
-        public void Update(PassportInfo other) {
+        public void Update(PassportInfo other)
+        {
+            this.Id = other.Id;
             this.BirthDate = other.BirthDate;
             this.ExpireDate = other.ExpireDate;
             this.FirstName = other.FirstName;

@@ -16,11 +16,11 @@
     <br />
     
     <span>Credit line payments:</span><br />
-    @Html.RadioButtonFor(x => x.KindOfPayments, Coffee.Entities.CreditLine.PaymentKind.ANNUITY,
+    @Html.RadioButtonFor(x => x.KindOfPayments, Coffee.Entities.PaymentKind.ANNUITY,
         new Dictionary<string, object>{{ "checked", "checked" }, { "name", "payments" }} )<span>Annuity</span><br />
-    @Html.RadioButtonFor(x => x.KindOfPayments, Coffee.Entities.CreditLine.PaymentKind.FACTICAL,
+    @Html.RadioButtonFor(x => x.KindOfPayments, Coffee.Entities.PaymentKind.FACTICAL,
         new Dictionary<string, object>{{ "name", "payments" }})<span>Factical</span><br />
-    @Html.RadioButtonFor(x => x.KindOfPayments, Coffee.Entities.CreditLine.PaymentKind.PERCENTS_ONLY,
+    @Html.RadioButtonFor(x => x.KindOfPayments, Coffee.Entities.PaymentKind.PERCENTS_ONLY,
         new Dictionary<string, object>{{ "name", "payments" }})<span>Percents only</span><br />
                             
     <span>(leave field blank to specify no constraint)</span>
