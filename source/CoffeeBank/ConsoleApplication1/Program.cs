@@ -1,7 +1,10 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using Coffee.Repository;
 
-namespace Coffee.DbInitializer
+namespace ConsoleApplication1
 {
     class Program
     {
