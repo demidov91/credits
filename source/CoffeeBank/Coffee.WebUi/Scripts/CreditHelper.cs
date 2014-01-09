@@ -150,7 +150,7 @@ namespace Coffee.WebUi.Scripts
             List<Payment> p = Repository.RepoFactory.GetCreditsRepo().GetPaymentsForCredit(credit.Id);
             DateTime startOfMonth = credit.IssueDate.Date;
             while (startOfMonth.AddMonths(1) <= DateTimeHelper.GetCurrentTime().Date) startOfMonth = startOfMonth.AddMonths(1);
-            decimal amount = GetCurrentDebt(credit, p.Where(x => x.PaymentTime < startOfMonth).ToList());
+            decimal amount = GetCurrentDebt(credit, p.Where(x => x.PaymentTime < startOfMonth).ToList()) / (1 + credit.Line.Rate / 1200);
 
             switch (credit.Line.KindOfPayments)
             {

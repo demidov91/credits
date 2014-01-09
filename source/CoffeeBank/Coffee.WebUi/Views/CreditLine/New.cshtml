@@ -9,17 +9,19 @@
 @using (Html.BeginForm(FormMethod.Post)) {
     <span>Credit line name: </span>
     @Html.TextBoxFor(x => x.Name)
+    <br />
 
     <span>Credit line annual rate: </span>
     @Html.TextBoxFor(x => x.Rate)<span>%</span>
+    <br />
     
-    <span>Credit line payments:</span>
+    <span>Credit line payments:</span><br />
     @Html.RadioButtonFor(x => x.KindOfPayments, Coffee.Entities.CreditLine.PaymentKind.ANNUITY,
-        new Dictionary<string, object>{{ "checked", "checked" }, { "name", "payments" }} )
+        new Dictionary<string, object>{{ "checked", "checked" }, { "name", "payments" }} )<span>Annuity</span><br />
     @Html.RadioButtonFor(x => x.KindOfPayments, Coffee.Entities.CreditLine.PaymentKind.FACTICAL,
-        new Dictionary<string, object>{{ "name", "payments" }})
+        new Dictionary<string, object>{{ "name", "payments" }})<span>Factical</span><br />
     @Html.RadioButtonFor(x => x.KindOfPayments, Coffee.Entities.CreditLine.PaymentKind.PERCENTS_ONLY,
-        new Dictionary<string, object>{{ "name", "payments" }})
+        new Dictionary<string, object>{{ "name", "payments" }})<span>Percents only</span><br />
                             
     <span>(leave field blank to specify no constraint)</span>
     <br />
