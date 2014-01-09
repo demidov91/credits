@@ -23,7 +23,7 @@
     @{Html.EndForm();}
 
 @if(Model.Count == 0){
-<div>There is no active credits.</div>
+<div>There are no active credits.</div>
 }
 else
 {
@@ -47,7 +47,9 @@ else
         <td>@credit.Amount</td>
         <td>@credit.Period</td>
         <td>@credit.Line.Name</td>
-        <td>@Html.ActionLink("Details", "PaymentChart", "Payments", new RouteValueDictionary() { { "creditId", credit.Id } }, null)</td>
+        <td>
+            @Html.ActionLink("Details", "PaymentChart", "Payments", new RouteValueDictionary() { { "creditId", credit.Id } }, null)
+        </td>
     </tr>
 }
 
