@@ -74,7 +74,6 @@ namespace Coffee.WebUi.Controllers
             return PartialView("_RowForTheUserCreditRequest", new RequestPlusCreditProposesModel(fromDb, RepoFactory.GetCreditLineRepo().getAll()));
         }
         
-        [Authorize(Roles = "Clerk, Cashier, CoffeeAdmin, Committee")]
         public ActionResult List(string passportNumber)
         {
             List<CreditRequest> requestsToShow = RepoFactory.GetRequestsRepo().GetAllCreditRequests();

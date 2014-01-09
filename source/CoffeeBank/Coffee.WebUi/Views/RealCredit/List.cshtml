@@ -47,7 +47,7 @@ else
         <td>@credit.Amount</td>
         <td>@credit.Period</td>
         <td>@credit.Line.Name</td>
-        <td>@Html.ActionLink("Details", "PaymentChart", "Payments", new RouteValueDictionary() { { "creditId", credit.Id } }, null)</td>
+        <td>@Html.ActionLink("Details", "PaymentChart", "Payments", new RouteValueDictionary() { { "creditId", credit.Id } }, new { @class = "btn btn-success"})</td>
     </tr>
 }
 
