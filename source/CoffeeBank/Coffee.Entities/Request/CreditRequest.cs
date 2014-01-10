@@ -39,6 +39,7 @@ namespace Coffee.Entities
         {
             PassportInfo = new PassportInfo();
             SalaryInfo = new SalaryInfo();
+            IssueDate = new DateTime(2000, 1, 1);
         }
 
     }

@@ -33,6 +33,10 @@ namespace Coffee.Entities
             set { this.Gender = (Gender)value; }
         }
 
+        public PassportInfo() {
+            this.BirthDate = this.IssueDate = this.ExpireDate = new DateTime(2000, 1, 1);
+        }
+
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
         public DateTime BirthDate { get; set; }
 
