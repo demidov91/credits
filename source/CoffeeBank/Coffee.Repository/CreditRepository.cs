@@ -32,11 +32,19 @@ namespace Coffee.Repository
 
         public Credit GetCreditById(long id)
         {
+            var result = Context.Credits.Find(id);
+            Context.Entry(result).Reference(x => x.Line);
+            Context.Entry(result).Reference(x => x.Passport);
             return Context.Credits.Find(id);
         }
 
         public List<Payment> GetPaymentsForCredit(long creditId)
         {
+            var results = Context.Payments.Where(x => x.Credit.Id == creditId).ToList();
+            foreach (var result in results)
+            {
+                Context.Entry(result).Reference(x => x.Credit);
+            }
             return Context.Payments.Where(x => x.Credit.Id == creditId).ToList();
         }
 
