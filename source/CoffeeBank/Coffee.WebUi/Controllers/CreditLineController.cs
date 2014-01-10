@@ -44,5 +44,14 @@ namespace Coffee.WebUi.Controllers
         {
             return View(new Payments(RepoFactory.GetRequestsRepo().GetRequestById(creditRequest.Id)));
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Committee, CoffeeAdmin")]
+        public ActionResult ListForCommittee()
+        {
+            List<CreditLine> model = RepoFactory.GetCreditLineRepo().getAll();
+            return View(model);
+        }
+
     }
 }

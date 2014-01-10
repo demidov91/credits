@@ -49,6 +49,11 @@ header
 .text-center{
     text-align: center;    
 }
+
+.text-right
+{
+    text-align: right;
+    }
     
 .all-available-width
 {
@@ -103,9 +108,9 @@ header > .current-date
     text-decoration: none;
     }
     
-#change-modes-on-top.clerk ul{width:40%}
+#change-modes-on-top.clerk ul{width:48%}
 #change-modes-on-top ul>li{width:100%; text-align:center;}
-#change-modes-on-top.committee ul{width:20%;}
+#change-modes-on-top.committee ul{width:22%;}
 #change-modes-on-top.external ul{width:30%;}
 
 #change-modes-on-top.committee .statistics.nav .dropdown-menu {width: 100%;}
@@ -286,4 +291,18 @@ validation styles
     list-style: none;
     }    
 
+
+/**
+-----------
+*/
     
+    .accordion-toggle
+    {
+        width: 20em;
+        }
+        a.accordion-toggle
+        {
+            text-decoration: none;
+            }
+            
+#credit-products-committee{margin-top: 3em;}

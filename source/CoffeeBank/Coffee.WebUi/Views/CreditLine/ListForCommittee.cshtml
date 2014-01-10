@@ -1,0 +1,57 @@
+﻿@model List<Coffee.Entities.CreditLine>
+
+
+@{
+    Layout = "~/Views/Shared/_BankWorkerLayout.cshtml";
+    ViewBag.Title = "Create new product";
+}
+
+@section manageCreditLineActive{active}
+
+
+
+
+<div class="text-right">
+    @Html.ActionLink("Create New Credit Line", "New", "CreditLine", null, new {@class="btn btn-large btn-success"})
+</div>
+
+
+<div class="accordion" id="credit-products-committee">
+    @foreach (var line in Model)
+    {
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle toLeft" data-toggle="collapse" data-parent="#credit-products-committee" href="#collapse@(line.Id)">
+                @line.Name
+            </a>
+            <div class="text-right">
+            <a href="#modal-status-@(line.Id)" role="button" class="activate-deactivate btn btn-warning" data-toggle="modal">@(line.IsActive ? "Deactivate" : "Activate")</a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div id="collapse@(line.Id)" class="accordion-body collapse">
+            <div class="accordion-inner">
+                @line.ToString()
+            </div>
+        </div>
+        <div class="clear"></div>
+
+        <div id="modal-status-@(line.Id)" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">Warning!</h3>
+            </div>
+            <form method="post">
+                <div class="modal-body">
+                    <p>@line.ToString()</p>
+                    <p>Are you shure, you want to @(line.IsActive ? "Deactivate" : "Activate") this credit product?</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
+                    <input class="btn btn-primary" value="Yes" />
+                </div>
+            </form>
+        </div>
+    </div>
+    }
+</div>
