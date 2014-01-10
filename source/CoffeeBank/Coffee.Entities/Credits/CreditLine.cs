@@ -46,6 +46,8 @@ namespace Coffee.Entities
         public TimeSpan? MinWorkTimeBoundary { get; set; }
         public decimal? MinAverageSalaryBoundary { get; set; }
 
+        public bool IsActive { get; set; }
+
         public bool IsAcceptable(CreditRequest request)
         {
             return
@@ -109,6 +111,11 @@ namespace Coffee.Entities
                 1000000 - 40000000 belorussian rubles
                 6 - 24 months
              */
+        }
+
+        public CreditLine()
+        {
+            IsActive = true;
         }
     }
 
