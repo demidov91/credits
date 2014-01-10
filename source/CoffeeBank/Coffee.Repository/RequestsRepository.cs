@@ -73,6 +73,10 @@ namespace Coffee.Repository
         
         public void AddCreditRequest(CreditRequest request)
         {
+            if (request.CreditLine != null && request.CreditLine.Id == 0)
+            {
+                request.CreditLine = null;
+            }
             Context.CreditRequests.Add(request);
             Context.SaveChanges();
         }

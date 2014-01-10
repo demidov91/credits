@@ -22,6 +22,7 @@ namespace Coffee.WebUi.Controllers
         public ActionResult Detail(long id)
         {
             CreditLine model = RepoFactory.GetCreditLineRepo().getById(id);
+
             return View(model);
         }
 

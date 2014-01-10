@@ -97,7 +97,9 @@ namespace Coffee.WebUi.Controllers
         {
             var request = RepoFactory.GetRequestsRepo().GetRequestById(requestToView.Id);
             request.IssueDate = DateTimeHelper.GetCurrentTime();
-            return View(new Coffee.WebUi.Models.Request.CreditRequest(request));
+            var model = new Coffee.WebUi.Models.Request.CreditRequest(request);
+            model.CreditLines = RepoFactory.GetCreditLineRepo().getAll();
+            return View(model);
         }
 
         [Authorize(Roles = "Clerk, Cashier, CoffeeAdmin, Committee")]

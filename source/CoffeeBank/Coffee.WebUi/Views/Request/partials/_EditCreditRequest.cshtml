@@ -1,4 +1,5 @@
-﻿@model Coffee.WebUi.Models.Request.CreditRequest
+﻿@using Coffee.Entities
+@model Coffee.WebUi.Models.Request.CreditRequest
 
 @{
     ViewBag.Title = "_EditCreditRequest";
@@ -12,7 +13,7 @@
 
 <tr>
     <td>Credit product:</td>
-    <td>@Html.DropDownListFor(x => x.CreditLine.Id, Model.GetCreditDropdownItems())</td>
+    <td>@Html.DropDownListFor(x => x.CreditLine.Id, Model.CreditLines.ConvertAll(z=>new SelectListItem{Selected = z.Id == Model.CreditLine.Id, Text = z.Name, Value=z.Id.ToString()}))</td>
 </tr>
 
 <tr>

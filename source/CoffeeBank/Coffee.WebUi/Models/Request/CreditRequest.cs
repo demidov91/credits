@@ -29,6 +29,8 @@ namespace Coffee.WebUi.Models.Request
         [DisplayFormat(ApplyFormatInEditMode=true, DataFormatString="{0:dd.MM.yyyy}")]
         public DateTime IssueDate { get { return adaptee.IssueDate; } set { adaptee.IssueDate = value; } }
 
+        public List<CreditLine> CreditLines { get; set; }
+
         private Coffee.Entities.CreditRequest adaptee;
 
         public CreditRequest() {
