@@ -7,32 +7,49 @@
 
 @section javascript{
     @RenderSection("javascript", false)
+    <script src="@Url.Content("~/Content/bootstrap/js/bootstrap.min.js")" type="text/javascript"></script>
+
+    
+    
 }
 
 @section css{
     @RenderSection("css", false)
+    <link href="@Url.Content("~/Content/bootstrap/css/bootstrap-responsive.min.css")" rel="stylesheet" type="text/css" />
 }
 
 @section AfterHeader{
 
 <div class="navbar">
-    <div class="navbar-inner @(HttpContext.Current.User.IsInRole("Clerk") ? "clerk" : (HttpContext.Current.User.IsInRole("Committee") ? "committee": ""))" id="change-modes-on-top"> 
-        @if(HttpContext.Current.User.IsInRole("Clerk")){
+    <div class="navbar-inner @(HttpContext.Current.User.IsInRole("Clerk") ? "clerk" : (HttpContext.Current.User.IsInRole("Committee") ? "committee" : ""))" id="change-modes-on-top"> 
+        @if (HttpContext.Current.User.IsInRole("Clerk"))
+        {
         <ul class="nav">
             <li class="@RenderSection("requestsActive", required: false)">
             @Html.ActionLink("Credit requests", "List", "Request")
              </li>
         </ul>
         }
-        @if(HttpContext.Current.User.IsInRole("Committee")){
+        @if (HttpContext.Current.User.IsInRole("Committee"))
+        {
+            
             <ul class="nav">
                 <li class="@RenderSection("undecidedActive", required: false)">
                 @Html.ActionLink("Undecided requests", "UnapprovedList", "Request")
                 </li>
             </ul>
-            <ul class="nav">
-                <li class="@RenderSection("statisticsActive", required: false)">
-                @Html.ActionLink("Statistics", "Overview", "Statistics")
+            <ul class="nav statistics">
+                <li class="dropdown @RenderSection("statisticsActive", required: false)">
+                    <a class="dropdown-toggle" data-toggle="dropdown"  href="#">Statistics</a>
+                    <ul class="dropdown-menu">
+                    <li>
+                    @Html.ActionLink("Compare credit products", "Overview", "Statistics")
+                    </li>
+                    <li>
+                    @Html.ActionLink("View statistics on credit products", "Overview", "Statistics")
+                    </li>
+                    
+                    </ul>
                 </li>
             </ul>
             <ul class="nav">
@@ -49,7 +66,7 @@
                 </li>
             </ul>
          }
-        <ul class="nav pull-right">
+        <ul class="nav">
             <li class="@RenderSection("creditsActive", required: false)">
             @Html.ActionLink("Active credits", "List", "Credit")
             </li>

@@ -107,6 +107,8 @@ header > .current-date
 #change-modes-on-top ul>li{width:100%; text-align:center;}
 #change-modes-on-top.committee ul{width:20%;}
 
+#change-modes-on-top.committee .statistics.nav .dropdown-menu {width: 100%;}
+
 /**
 -----------------------------------------------
 public credit requests
