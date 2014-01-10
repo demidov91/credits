@@ -41,6 +41,8 @@ namespace Coffee.Entities
         public decimal? MaxAmountBoundary { get; set; }
         public int? MinMonthsBoundary { get; set; }
         public int? MaxMonthsBoundary { get; set; }
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:%d}")]
         public TimeSpan? MinWorkTimeBoundary { get; set; }
         public decimal? MinAverageSalaryBoundary { get; set; }
 
