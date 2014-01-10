@@ -12,7 +12,7 @@ namespace Coffee.Entities
 
         public string Position { get; set; }
 
-        public TimeSpan WorkTime { get; set; }
+        public double WorkYears { get; set; }
 
         public decimal AverageSalary { get; set; }
     }

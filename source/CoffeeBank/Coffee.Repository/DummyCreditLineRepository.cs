@@ -39,7 +39,7 @@ namespace Coffee.Repository
                 Rate = 30,
                 MinAmountBoundary = 1000000,
                 MaxAmountBoundary = 20000000,
-                MinWorkTimeBoundary = TimeSpan.FromDays(365),
+                MinWorkYearsBoundary = 1,
                 MinAverageSalaryBoundary = 1500000,
                 KindOfPayments = PaymentKind.ANNUITY
             };

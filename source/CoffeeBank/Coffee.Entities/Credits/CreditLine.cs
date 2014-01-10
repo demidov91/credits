@@ -41,10 +41,12 @@ namespace Coffee.Entities
         public decimal? MaxAmountBoundary { get; set; }
         public int? MinMonthsBoundary { get; set; }
         public int? MaxMonthsBoundary { get; set; }
-        public TimeSpan? MinWorkTimeBoundary { get; set; }
+        public double? MinWorkYearsBoundary { get; set; }
         public decimal? MinAverageSalaryBoundary { get; set; }
 
-        /// <summary>
+        public bool IsActive { get; set; }
+
+		/// <summary>
         /// Light weight form of IsAcceptable. It checks only fields of the new credit request form.
         /// </summary>
         /// <param name="request"></param>
@@ -65,7 +67,7 @@ namespace Coffee.Entities
                 (MinMonthsBoundary == null || request.Period >= MinMonthsBoundary) && 
                 (MaxMonthsBoundary == null || request.Period <= MaxMonthsBoundary) &&
                 (MinAverageSalaryBoundary == null || request.SalaryInfo.AverageSalary >= MinAverageSalaryBoundary) &&
-                (MinWorkTimeBoundary == null || request.SalaryInfo.WorkTime >= MinWorkTimeBoundary);
+                (MinWorkYearsBoundary == null || request.SalaryInfo.WorkYears >= MinWorkYearsBoundary);
         }
 
         public override string ToString()
@@ -75,7 +77,7 @@ namespace Coffee.Entities
             builder.AppendLine(string.Format("Credit line \"{0}\" with {1}% rate.", Name, Rate));
 
             if (MinAgeBoundary != null || MaxAgeBoundary != null || MinAmountBoundary != null || MaxAmountBoundary != null ||
-                MinMonthsBoundary != null || MaxMonthsBoundary != null || MinWorkTimeBoundary != null || MinAverageSalaryBoundary != null)
+                MinMonthsBoundary != null || MaxMonthsBoundary != null || MinWorkYearsBoundary != null || MinAverageSalaryBoundary != null)
             {
                 builder.AppendLine("Credit requirements:");
                 if (MinAgeBoundary != null && MaxAgeBoundary != null)
@@ -99,8 +101,8 @@ namespace Coffee.Entities
                 else if (MaxMonthsBoundary != null)
                     builder.AppendLine(string.Format("Up to {0} months", MaxMonthsBoundary));
 
-                if (MinWorkTimeBoundary != null)
-                    builder.AppendLine(string.Format("No less than {0} months working in your current company", (int)(MinWorkTimeBoundary.Value.TotalDays / 30)));
+                if (MinWorkYearsBoundary != null)
+                    builder.AppendLine(string.Format("No less than {0} years working in your current company", MinWorkYearsBoundary));
 
                 if (MinAverageSalaryBoundary != null)
                     builder.AppendLine(string.Format("No less than {0}BYR average salary", (int)MinAverageSalaryBoundary));
@@ -118,6 +120,11 @@ namespace Coffee.Entities
                 1000000 - 40000000 belorussian rubles
                 6 - 24 months
              */
+        }
+
+        public CreditLine()
+        {
+            IsActive = true;
         }
     }
 
