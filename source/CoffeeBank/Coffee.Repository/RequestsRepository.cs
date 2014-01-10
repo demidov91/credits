@@ -73,10 +73,9 @@ namespace Coffee.Repository
         
         public void AddCreditRequest(CreditRequest request)
         {
-            if (request.CreditLine != null && request.CreditLine.Id == 0)
-            {
-                request.CreditLine = null;
-            }
+            if (request.CreditLine != null)
+                request.CreditLine = RepoFactory.GetCreditLineRepo().getById(request.CreditLine.Id);
+            request.IssueDate = DateTimeHelper.GetCurrentTime();
             Context.CreditRequests.Add(request);
             Context.SaveChanges();
         }
