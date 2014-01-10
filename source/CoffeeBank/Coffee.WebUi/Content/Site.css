@@ -103,7 +103,7 @@ header > .current-date
     text-decoration: none;
     }
     
-#change-modes-on-top ul{width:30%}
+#change-modes-on-top.clerk ul{width:40%}
 #change-modes-on-top ul>li{width:100%; text-align:center;}
 
 /**

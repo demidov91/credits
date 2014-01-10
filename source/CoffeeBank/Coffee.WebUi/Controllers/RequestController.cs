@@ -4,6 +4,7 @@ using Coffee.Entities;
 using Coffee.Repository;
 using System.Collections.Generic;
 using Coffee.WebUi.Models;
+using Coffee.WebUi.Scripts;
 
 namespace Coffee.WebUi.Controllers
 {
@@ -77,8 +78,7 @@ namespace Coffee.WebUi.Controllers
         public ActionResult List(string passportNumber)
         {
             List<CreditRequest> requestsToShow = RepoFactory.GetRequestsRepo().GetAllCreditRequests();
-            bool isSimpleUser = User.Identity.Name != "BankWorker";
-            if(isSimpleUser){
+            if(MembershipHelper.IsExternalUser(User)){
                 requestsToShow = requestsToShow.FindAll(x => x.Username == User.Identity.Name);
                 return View("ListForUser", new RequestsPlusCreditProposesModel { 
                     Requests=requestsToShow,
@@ -209,7 +209,6 @@ namespace Coffee.WebUi.Controllers
 
             request.Decision = decision;
             
-            RepoFactory.GetRequestsRepo().CommitChanges();
             return Redirect("~");
         }
 
@@ -227,7 +226,6 @@ namespace Coffee.WebUi.Controllers
 
             request.Decision = decision;
 
-            RepoFactory.GetRequestsRepo().CommitChanges();
             return Redirect("~");
         }
 
@@ -245,7 +243,6 @@ namespace Coffee.WebUi.Controllers
 
             request.Decision = decision;
 
-            RepoFactory.GetRequestsRepo().CommitChanges();
             return Redirect("~");
         }
 

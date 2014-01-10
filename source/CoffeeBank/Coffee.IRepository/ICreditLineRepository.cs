@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Coffee.Entities; 
 
 
@@ -14,8 +11,8 @@ namespace Coffee.IRepository
 
         CreditLine getById(long id);
 
-        void Add(CreditLine line);
-
+        void Add(CreditLine oneMore);
+        
         void AddUpdateListener(EventHandler handler);
 
     }

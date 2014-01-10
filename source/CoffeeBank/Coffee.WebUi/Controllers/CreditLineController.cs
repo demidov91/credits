@@ -37,7 +37,8 @@ namespace Coffee.WebUi.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Clerk, CoffeeAdmin")]
-        public ActionResult TeoreticalPayments(Coffee.Entities.CreditRequest creditRequest){
+        public ActionResult TeoreticalPayments(Coffee.Entities.CreditRequest creditRequest)
+        {
             return View(new Payments(RepoFactory.GetRequestsRepo().GetRequestById(creditRequest.Id)));
         }
     }

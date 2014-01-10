@@ -59,7 +59,7 @@ namespace Coffee.Entities
             this.Surname = other.Surname;
         }
 
-        public override int GetHashCode() {
+        /*public override int GetHashCode() {
             return this.IdentificationNumber[0].GetHashCode();
         }
 
@@ -69,6 +69,6 @@ namespace Coffee.Entities
                 return false;
             }
             return this.IdentificationNumber == otherPassport.IdentificationNumber;
-        }
+        }*/
     }
 }

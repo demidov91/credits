@@ -2,6 +2,7 @@
 
 using Coffee.Repository;
 using System.Collections.Generic;
+using Coffee.WebUi.Scripts;
 
 namespace Coffee.WebUi.Controllers
 {
@@ -17,8 +18,7 @@ namespace Coffee.WebUi.Controllers
         public ActionResult Index()
         {
             if (Request.IsAuthenticated) {
-                bool isSimpleUser = User.Identity.Name != "BankWorker";
-                if (isSimpleUser) {
+                if (MembershipHelper.IsExternalUser(User)) {
                     return RedirectToAction("UserHome");
                 }
                 return RedirectToAction("List", "Request");

@@ -48,7 +48,8 @@ namespace Coffee.WebUi.Scripts
         /// <param name="amount"></param>
         /// <param name="percent">0.4 for 40% / year, for example.</param>
         /// <returns></returns>
-        private static List<decimal> GetAnnuityPaymentsList(decimal amount, decimal percent, int duration) {
+        private static List<decimal> GetAnnuityPaymentsList(decimal amount, decimal percent, int duration)
+        {
             //        m
             //      Ap (p - 1)                 percent
             // x = ------------, where p = 1 + -------
@@ -76,12 +77,14 @@ namespace Coffee.WebUi.Scripts
         /// <param name="percent">For example, *0.4* for 40% / year.</param>
         /// <param name="duration">Number of months.</param>
         /// <returns>List of payments to do.</returns>
-        private static List<decimal> GetFacticalPaymentsList(decimal amount, decimal percent, int duration) {
+        private static List<decimal> GetFacticalPaymentsList(decimal amount, decimal percent, int duration)
+        {
             decimal monthPercent = percent / 12;
             decimal partOfCreditPerMonth = amount / duration;
             List<decimal> payments = new List<decimal>(duration);
             decimal remainigToPay = amount;
-            for (int i = 0; i < duration; i++) {
+            for (int i = 0; i < duration; i++)
+            {
                 payments.Add(partOfCreditPerMonth + remainigToPay * monthPercent);
                 remainigToPay -= partOfCreditPerMonth;
             }
@@ -95,20 +98,24 @@ namespace Coffee.WebUi.Scripts
         /// <param name="percent">For example, *0.4* for 40% / year.</param>
         /// <param name="duration">Number of months.</param>
         /// <returns>List of payments to do.</returns>
-        private static List<decimal> GetOnlyPercentsPaymentsList(decimal amount, decimal percent, int duration) {
+        private static List<decimal> GetOnlyPercentsPaymentsList(decimal amount, decimal percent, int duration)
+        {
             decimal payPerMonth = amount * percent / 12;
             List<decimal> payments = new List<decimal>(duration);
-            for (int i = 0; i < duration; i++) {
+            for (int i = 0; i < duration; i++)
+            {
                 payments.Add(payPerMonth);
             }
-            payments[payments.Count - 1] =  payments.Last() + amount;
+            payments[payments.Count - 1] = payments.Last() + amount;
             return Normalize(payments);
         }
 
-        public static SortedDictionary<DateTime, decimal> GetPaymentsCalendar(Coffee.Entities.CreditRequest request){
+        public static SortedDictionary<DateTime, decimal> GetPaymentsCalendar(Coffee.Entities.CreditRequest request)
+        {
             SortedDictionary<DateTime, decimal> paymentsTodo = new SortedDictionary<DateTime, decimal>();
             List<decimal> payments = null;
-            switch (request.CreditLine.KindOfPayments) {
+            switch (request.CreditLine.KindOfPayments)
+            {
                 case PaymentKind.ANNUITY:
                     payments = GetAnnuityPaymentsList(request.Amount, request.CreditLine.Rate / 100, request.Period);
                     break;
@@ -122,7 +129,8 @@ namespace Coffee.WebUi.Scripts
                     throw new NotImplementedException("Unknown kind of credit.");
             }
             DateTime dateToCountFor = new DateTime(request.IssueDate.Ticks);
-            foreach (decimal payment in payments) {
+            foreach (decimal payment in payments)
+            {
                 dateToCountFor = dateToCountFor.AddMonths(1);
                 paymentsTodo.Add(dateToCountFor, payment);
             }
@@ -133,7 +141,7 @@ namespace Coffee.WebUi.Scripts
         {
             SortedDictionary<DateTime, decimal> payments = new SortedDictionary<DateTime, decimal>();
             List<decimal> paymentAmounts = null;
-            
+
             int duration;
             DateTime endDate = credit.IssueDate.AddMonths(credit.Period).Date, startOfMonth, start;
             if ((DateTimeHelper.GetCurrentTime().Date.Month == credit.IssueDate.Date.Month) ||
@@ -147,7 +155,7 @@ namespace Coffee.WebUi.Scripts
             else
             {
                 DateTime currentDate = DateTimeHelper.GetCurrentTime().Date;
-                duration = (endDate.Year - currentDate.Year) * 12 + 
+                duration = (endDate.Year - currentDate.Year) * 12 +
                     (endDate.Month - currentDate.Month) + (currentDate.Day <= endDate.Day ? 1 : 0);
                 startOfMonth = credit.IssueDate.Date.AddDays(1);
                 while (startOfMonth.AddMonths(1) <= DateTimeHelper.GetCurrentTime().Date) startOfMonth = startOfMonth.AddMonths(1);
@@ -166,19 +174,21 @@ namespace Coffee.WebUi.Scripts
                     paymentAmounts = GetFacticalPaymentsList(amount, credit.Line.Rate / 100, duration);
                     break;
                 case PaymentKind.PERCENTS_ONLY:
-                    paymentAmounts = GetOnlyPercentsPaymentsList(amount, credit.Line.Rate / 100,  duration);
+                    paymentAmounts = GetOnlyPercentsPaymentsList(amount, credit.Line.Rate / 100, duration);
                     break;
                 default: throw new NotImplementedException();
             }
             decimal paidThisMonth = p.Where(x => x.PaymentTime >= startOfMonth).Sum(x => x.Amount);
-            for (int i = 0; i < paymentAmounts.Count; ++i) {
+            for (int i = 0; i < paymentAmounts.Count; ++i)
+            {
                 if (paidThisMonth == 0) break;
                 decimal min = Math.Min(paymentAmounts[i], paidThisMonth);
                 paymentAmounts[i] -= min;
                 paidThisMonth -= min;
             }
 
-            foreach (decimal payment in paymentAmounts) {
+            foreach (decimal payment in paymentAmounts)
+            {
                 payments.Add(start, payment);
                 start = start.AddMonths(1);
             }
@@ -209,10 +219,10 @@ namespace Coffee.WebUi.Scripts
         public static TotalAccountInfo GetAccountInfo(string username)
         {
             IRepository.ICreditRepository repo = Repository.RepoFactory.GetCreditsRepo();
-            List<Tuple<Credit, decimal, decimal>> info = 
+            List<Tuple<Credit, decimal, decimal>> info =
                 (from c in repo.GetCreditsByOwner(username)
-                let p = repo.GetPaymentsForCredit(c.Id)
-                select new Tuple<Credit, decimal, decimal>(c, p.Sum(x => x.Amount), GetCurrentDebt(c, p)))
+                 let p = repo.GetPaymentsForCredit(c.Id)
+                 select new Tuple<Credit, decimal, decimal>(c, p.Sum(x => x.Amount), GetCurrentDebt(c, p)))
                 .ToList();
             return new TotalAccountInfo(info, info.Sum(x => x.Item3), username);
         }

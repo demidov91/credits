@@ -19,8 +19,6 @@ namespace Coffee.IRepository
 
         CreditRequest Update(CreditRequest request);
 
-        void CommitChanges();
-
         void AddCreditRequest(CreditRequest request);
 
         /// <summary>
