@@ -35,11 +35,15 @@ namespace Coffee.Entities
 
         //...some other info
 
-        public CreditRequest()
+        public CreditRequest(bool activate)
         {
             PassportInfo = new PassportInfo();
             SalaryInfo = new SalaryInfo();
             IssueDate = new DateTime(2000, 1, 1);
+        }
+
+        public CreditRequest()
+        {
         }
 
     }

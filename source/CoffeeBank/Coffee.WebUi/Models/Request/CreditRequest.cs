@@ -32,7 +32,7 @@ namespace Coffee.WebUi.Models.Request
         private Coffee.Entities.CreditRequest adaptee;
 
         public CreditRequest() {
-            this.adaptee = new Coffee.Entities.CreditRequest();
+            this.adaptee = new Coffee.Entities.CreditRequest(true);
         }
 
         public CreditRequest(Coffee.Entities.CreditRequest request) {
