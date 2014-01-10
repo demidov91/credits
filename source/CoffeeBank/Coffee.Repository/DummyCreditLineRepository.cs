@@ -90,5 +90,10 @@ namespace Coffee.Repository
             }
         }
 
+
+        public void Update(CreditLine line)
+        { }
     }
 }
+
+

@@ -37,6 +37,31 @@ namespace Coffee.Repository
             }
         }
 
+        public void Update(CreditLine line)
+        {
+            var result = Context.CreditLines.Find(line.Id);
+            if (result == null)
+            {
+                Context.CreditLines.Add(line);
+            }
+            else
+            {
+                result.IsActive = line.IsActive;
+                result.KindOfPayments = line.KindOfPayments;
+                result.MaxAgeBoundary = line.MaxAgeBoundary;
+                result.MaxAmountBoundary = line.MaxAmountBoundary;
+                result.MaxMonthsBoundary = line.MaxMonthsBoundary;
+                result.MinAgeBoundary = line.MinAgeBoundary;
+                result.MinAmountBoundary = line.MinAmountBoundary;
+                result.MinAverageSalaryBoundary = line.MinAverageSalaryBoundary;
+                result.MinMonthsBoundary = line.MinMonthsBoundary;
+                result.MinWorkYearsBoundary = line.MinWorkYearsBoundary;
+                result.Name = line.Name;
+                result.Rate = line.Rate;
+            }
+            Context.SaveChanges();
+        }
+
         public void AddUpdateListener(EventHandler handler)
         {
             wasUpdated += handler;

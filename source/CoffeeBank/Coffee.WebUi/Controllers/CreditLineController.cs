@@ -53,5 +53,15 @@ namespace Coffee.WebUi.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [Authorize(Roles = "Committee, CoffeeAdmin")]
+        public ActionResult ActivateDeactivate(CreditLine line)
+        {
+            CreditLine fromDB =  RepoFactory.GetCreditLineRepo().getById(line.Id);
+            fromDB.IsActive = !line.IsActive;
+            RepoFactory.GetCreditLineRepo().Update(fromDB);
+            return RedirectToAction("ListForCommittee", "CreditLine");
+        }
+
     }
 }

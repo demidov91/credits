@@ -1,0 +1,12 @@
+﻿@model Coffee.Entities.CreditLine
+
+@Html.HiddenFor(x => x.Id)
+                @Html.HiddenFor(x => x.IsActive)
+                <div class="modal-body">
+                    <p>@Model.ToString()</p>
+                    <p><b>Are you shure, you want to @(Model.IsActive ? "Deactivate" : "Activate") this credit product?</b></p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
+                    <input type="submit" class="btn btn-primary" value="Yes" />
+                </div>

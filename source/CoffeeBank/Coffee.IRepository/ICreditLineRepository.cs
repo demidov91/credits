@@ -15,5 +15,7 @@ namespace Coffee.IRepository
         
         void AddUpdateListener(EventHandler handler);
 
+        void Update(CreditLine line);
+
     }
 }
