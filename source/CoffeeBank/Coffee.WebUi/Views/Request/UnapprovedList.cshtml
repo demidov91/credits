@@ -6,8 +6,6 @@
 }
 
 
-@section undecidedActive{active}
-
 <h2>UnapprovedList</h2>
 
 @if (Model.Count == 0)
@@ -31,7 +29,16 @@ else
 {
         <tr>
             <td>@req.PassportInfo.FullName</td>
-            <td>@req.CreditLine.Name</td>
+            @{
+                if (req.CreditLine != null)
+                {
+                    <td>req.CreditLine.Name</td>
+                }
+                else
+                {
+                    <td>-no line selected-</td>
+                }
+            }
             <td>@req.Amount</td>
             <td>@Html.ActionLink("Details", "RequestDetail", new RouteValueDictionary() { { "reqId", req.Id } })</td>
         </tr>

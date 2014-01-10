@@ -18,69 +18,36 @@ namespace Coffee.Repository
         public List<CreditRequest> GetAllCreditRequests()
         {
             var results = Context.CreditRequests.AsEnumerable().ToList();
-            foreach (var result in results)
-            {
-                Context.Entry(result).Reference(x => x.CreditLine);
-                Context.Entry(result).Reference(x => x.PassportInfo);
-                Context.Entry(result).Reference(x => x.SalaryInfo);
-            }
             return results;
         }
 
         public List<CreditRequest> GetApprovedCreditRequests()
         {
             var results = Context.CreditRequests.Where(x => x.Decision != null && x.Decision.Verdict == true).ToList();
-            foreach (var result in results)
-            {
-                Context.Entry(result).Reference(x => x.CreditLine);
-                Context.Entry(result).Reference(x => x.PassportInfo);
-                Context.Entry(result).Reference(x => x.SalaryInfo);
-            }
             return results;
         }
 
         public List<CreditRequest> GetUndecidedCreditRequests()
         {
-            var results = Context.CreditRequests.Where(x => x.Decision != null && x.Decision.Verdict == null).ToList();
-            foreach (var result in results)
-            {
-                Context.Entry(result).Reference(x => x.CreditLine);
-                Context.Entry(result).Reference(x => x.PassportInfo);
-                Context.Entry(result).Reference(x => x.SalaryInfo);
-            }
+            var results = Context.CreditRequests.Where(x => x.Decision == null || x.Decision.Verdict == null).ToList();
             return results;
         }
 
         public List<CreditRequest> GetRejectedCreditRequests()
         {
             var results = Context.CreditRequests.Where(x => x.Decision != null && x.Decision.Verdict == false).ToList();
-            foreach (var result in results)
-            {
-                Context.Entry(result).Reference(x => x.CreditLine);
-                Context.Entry(result).Reference(x => x.PassportInfo);
-                Context.Entry(result).Reference(x => x.SalaryInfo);
-            }
             return results;
         }
 
         public List<CreditRequest> GetRequestsByOwner(string username)
         {
             var results = Context.CreditRequests.Where(x => x.Username == username).ToList();
-            foreach (var result in results)
-            {
-                Context.Entry(result).Reference(x => x.CreditLine);
-                Context.Entry(result).Reference(x => x.PassportInfo);
-                Context.Entry(result).Reference(x => x.SalaryInfo);
-            }
             return results;
         }
 
         public CreditRequest GetRequestById(long id)
         {
             var result = Context.CreditRequests.Find(id);
-            Context.Entry(result).Reference(x => x.CreditLine);
-            Context.Entry(result).Reference(x => x.PassportInfo);
-            Context.Entry(result).Reference(x => x.SalaryInfo);
             return Context.CreditRequests.Find(id);
         }
 

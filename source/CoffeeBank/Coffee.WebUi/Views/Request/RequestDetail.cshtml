@@ -8,10 +8,13 @@
 
 <p>Name: @Model.PassportInfo.FullName</p>
 <p>Born: @Model.PassportInfo.BirthDate</p>
-<p>@Model.SalaryInfo.Position in @Model.SalaryInfo.Company for @((int)Model.SalaryInfo.WorkTime.TotalDays / 30) months</p>
+<p>@Model.SalaryInfo.Position in @Model.SalaryInfo.Company for @((int)Model.SalaryInfo.WorkYears ) years</p>
 <p>Average salary: @Model.SalaryInfo.AverageSalary BYR</p>
 
-<p>Credit line: @Model.CreditLine.Name</p>
+@if (Model.CreditLine != null)
+{
+    <p>Credit line: @Model.CreditLine.Name</p>
+}
 <p>Amount: @Model.Amount BYR</p>
 <p>Period: @Model.Period months</p>
 <p>Additional info:</p>
