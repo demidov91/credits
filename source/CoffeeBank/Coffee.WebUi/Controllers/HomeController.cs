@@ -19,15 +19,19 @@ namespace Coffee.WebUi.Controllers
         {
             if (Request.IsAuthenticated) {
                 if (MembershipHelper.IsExternalUser(User)) {
-                    return RedirectToAction("UserHome");
+                    return RedirectToAction("List", "CreditLine");
                 } else if(User.IsInRole("Committee")) {
                     return RedirectToAction("UnapprovedList", "Request");
                 }
                 return RedirectToAction("List", "Request");
-            } 
-            return View();
+            }
+            return RedirectToAction("List", "CreditLine");
         }
 
+        /// <summary>
+        /// Not in use.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult UserHome() 
         {
             bool hasRequests = RepoFactory.GetRequestsRepo().GetRequestsByOwner(User.Identity.Name).Count > 0;

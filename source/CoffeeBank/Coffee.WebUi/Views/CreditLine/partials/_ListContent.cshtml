@@ -1,0 +1,10 @@
+﻿@model List<Coffee.Entities.CreditLine>
+
+<h2>Available credit products:</h2>
+
+@foreach (var line in Model)
+{
+    @Html.ActionLink(line.Name == null ? "Безымянный кредитный продукт" : line.Name, "Detail", new { id = line.Id })
+    <br />
+}
+@Html.ActionLink("Back", "UserHome", "Home")

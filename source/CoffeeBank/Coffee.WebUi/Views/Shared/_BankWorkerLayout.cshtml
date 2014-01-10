@@ -8,9 +8,6 @@
 @section javascript{
     @RenderSection("javascript", false)
     <script src="@Url.Content("~/Content/bootstrap/js/bootstrap.min.js")" type="text/javascript"></script>
-
-    
-    
 }
 
 @section css{
@@ -21,7 +18,26 @@
 @section AfterHeader{
 
 <div class="navbar">
-    <div class="navbar-inner @(HttpContext.Current.User.IsInRole("Clerk") ? "clerk" : (HttpContext.Current.User.IsInRole("Committee") ? "committee" : ""))" id="change-modes-on-top"> 
+    <div class="navbar-inner @(HttpContext.Current.User.IsInRole("Clerk") ? "clerk" : (HttpContext.Current.User.IsInRole("Committee") ? "committee" : (HttpContext.Current.User.IsInRole("Cashier") ? "cashier" : "external")))" id="change-modes-on-top"> 
+        @if (HttpContext.Current.User.Identity.IsAuthenticated && Coffee.WebUi.Scripts.MembershipHelper.IsExternalUser(HttpContext.Current.User))
+        {
+            <ul class="nav">
+                <li class="@RenderSection("createNewRequestActive", required: false)">
+                @Html.ActionLink("Create New Credit Request", "New", "Request")
+                 </li>
+            </ul>
+            <ul class="nav">
+                <li class="@RenderSection("showCreditLinesActive", required: false)">
+                @Html.ActionLink("Our Credit Products", "List", "CreditLine")
+                 </li>
+            </ul>
+            <ul class="nav">
+                <li class="@RenderSection("myRequestsActive", required: false)">
+                @Html.ActionLink("Your Credit Requests", "List", "Request")
+                 </li>
+            </ul>
+        }  
+
         @if (HttpContext.Current.User.IsInRole("Clerk"))
         {
         <ul class="nav">
@@ -66,11 +82,14 @@
                 </li>
             </ul>
          }
+        @if (!Coffee.WebUi.Scripts.MembershipHelper.IsExternalUser(HttpContext.Current.User))
+        {
         <ul class="nav">
             <li class="@RenderSection("creditsActive", required: false)">
             @Html.ActionLink("Active credits", "List", "Credit")
             </li>
         </ul>
+        }
     </div>
 </div>
     }

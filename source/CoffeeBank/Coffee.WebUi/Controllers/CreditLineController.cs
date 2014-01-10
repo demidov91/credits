@@ -11,6 +11,9 @@ namespace Coffee.WebUi.Controllers
         public ActionResult List()
         {
             List<CreditLine> model = RepoFactory.GetCreditLineRepo().getAll();
+            if (!User.Identity.IsAuthenticated) {
+                return View("ListNoneAuth", model);
+            }
             return View(model);
         }
 

@@ -1,14 +1,10 @@
 ﻿@model List<Coffee.Entities.CreditLine>
 
 @{
+   Layout = "~/Views/Shared/_BankWorkerLayout.cshtml";
     ViewBag.Title = "List";
 }
 
-<h2>Available credit products:</h2>
+@section showCreditLinesActive{active}
 
-@foreach (var line in Model)
-{
-    @Html.ActionLink(line.Name, "Detail", new { id = line.Id })
-    <br />
-}
-@Html.ActionLink("Back", "UserHome", "Home")
+@{Html.RenderPartial("partials/_ListContent", Model);}

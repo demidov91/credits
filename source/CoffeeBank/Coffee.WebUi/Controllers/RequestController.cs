@@ -22,7 +22,7 @@ namespace Coffee.WebUi.Controllers
         {
             CreditRequest model = form.CreditRequest;
             List<CreditLine> acceptableCreditLines = RepoFactory.GetCreditLineRepo().getAll()
-                .Where(line => line.IsAcceptable(model)).ToList();
+                .Where(line => line.CanAcceptFirstCreditRequest(model)).ToList();
 
             model.Username = User.Identity.Name;
             if (acceptableCreditLines.Count > 0) {

@@ -106,6 +106,7 @@ header > .current-date
 #change-modes-on-top.clerk ul{width:40%}
 #change-modes-on-top ul>li{width:100%; text-align:center;}
 #change-modes-on-top.committee ul{width:20%;}
+#change-modes-on-top.external ul{width:30%;}
 
 #change-modes-on-top.committee .statistics.nav .dropdown-menu {width: 100%;}
 

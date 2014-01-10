@@ -1,6 +1,7 @@
 ﻿@model Coffee.WebUi.Models.RequestsPlusCreditProposesModel
 
 @{
+    Layout = "~/Views/Shared/_BankWorkerLayout.cshtml";
     ViewBag.Title = "ListForUser";
 }
 
@@ -9,6 +10,8 @@
     <script type="text/javascript" src="@Url.Content("~/Content/js/lib/jquery.form.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/js/listRequestsForUser.js")"></script>
 }
+
+@section myRequestsActive{active}
 
 <div class="center-info">
 @if (Model.Requests.Count == 0)

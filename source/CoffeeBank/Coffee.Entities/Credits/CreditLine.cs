@@ -44,6 +44,17 @@ namespace Coffee.Entities
         public TimeSpan? MinWorkTimeBoundary { get; set; }
         public decimal? MinAverageSalaryBoundary { get; set; }
 
+        /// <summary>
+        /// Light weight form of IsAcceptable. It checks only fields of the new credit request form.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public bool CanAcceptFirstCreditRequest(CreditRequest request) {
+            return (MinAmountBoundary == null || request.Amount >= MinAmountBoundary) &&
+                (MaxAmountBoundary == null || request.Amount <= MaxAmountBoundary) &&
+                (MinAverageSalaryBoundary == null || request.SalaryInfo.AverageSalary >= MinAverageSalaryBoundary);
+        }
+
         public bool IsAcceptable(CreditRequest request)
         {
             return
