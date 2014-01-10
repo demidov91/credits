@@ -245,7 +245,7 @@ namespace Coffee.WebUi.Controllers
             return Redirect("~");
         }
 
-        [Authorize(Roles = "Cashier, Clerk, CoffeeAdmin")]
+        [Authorize(Roles = "Cashier, Clerk, CoffeeAdmin, Committee")]
         public ActionResult OpenCredit(long reqId)
         {
             var repo = RepoFactory.GetRequestsRepo();

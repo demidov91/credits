@@ -226,5 +226,34 @@ namespace Coffee.WebUi.Scripts
                 .ToList();
             return new TotalAccountInfo(info, info.Sum(x => x.Item3), username);
         }
+
+        public static bool IsUnderfunded(Credit credit)
+        {
+            List<decimal> th;
+            switch (credit.Line.KindOfPayments)
+            {
+                case PaymentKind.ANNUITY: th = GetAnnuityPaymentsList(credit.Amount, credit.Line.Rate / 100, credit.Period); break;
+                case PaymentKind.FACTICAL: th = GetFacticalPaymentsList(credit.Amount, credit.Line.Rate / 100, credit.Period); break;
+                case PaymentKind.PERCENTS_ONLY: th = GetOnlyPercentsPaymentsList(credit.Amount, credit.Line.Rate / 100, credit.Period); break;
+                default: throw new NotImplementedException();
+            }
+
+            decimal needed = credit.Amount, debtNow = credit.Amount;
+            DateTime next = credit.IssueDate.Date.AddMonths(1);
+            int ptrTh = 0, ptrP = 0;
+            List<Payment> P = Repository.RepoFactory.GetCreditsRepo().GetPaymentsForCredit(credit.Id);
+
+            while (next < DateTimeHelper.GetCurrentTime().Date)
+            {
+                needed *= (1 + credit.Line.Rate / 1200);
+                needed -= th[ptrTh++];
+                debtNow *= (1 + credit.Line.Rate / 1200);
+                while (ptrP < P.Count && P[ptrP].PaymentTime.Date <= next) debtNow -= P[ptrP++].Amount;
+                next = next.AddMonths(1);
+            }
+            while (ptrP < P.Count) debtNow -= P[ptrP++].Amount;
+
+            return debtNow > needed;
+        }
     }
 }
