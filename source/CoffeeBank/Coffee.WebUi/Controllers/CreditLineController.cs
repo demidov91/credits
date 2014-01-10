@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Coffee.Entities;
 using Coffee.Repository;
 using Coffee.WebUi.Models.Credit;
+using System.Linq;
 
 namespace Coffee.WebUi.Controllers
 {
@@ -10,7 +11,8 @@ namespace Coffee.WebUi.Controllers
     {
         public ActionResult List()
         {
-            List<CreditLine> model = RepoFactory.GetCreditLineRepo().getAll();
+            List<CreditLine> model = new List<CreditLine>(RepoFactory.GetCreditLineRepo().getAll().Where(x => x.IsActive));
+            
             if (!User.Identity.IsAuthenticated) {
                 return View("ListNoneAuth", model);
             }
