@@ -1,10 +1,21 @@
 ﻿@model List<Coffee.Entities.CreditRequest>
 
 @{
+    Layout = "~/Views/Shared/_BankWorkerLayout.cshtml";
     ViewBag.Title = "UnapprovedList";
 }
 
+
+@section undecidedActive{active}
+
 <h2>UnapprovedList</h2>
+
+@if (Model.Count == 0)
+{ 
+<div><i>There are no unapproved requests yet.</i></div>
+}
+else
+{
 
 <table>
     <thead>
@@ -27,3 +38,4 @@
 }
     </tbody>
 </table>
+}

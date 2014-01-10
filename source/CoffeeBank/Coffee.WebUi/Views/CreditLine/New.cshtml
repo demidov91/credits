@@ -1,59 +1,88 @@
 ﻿@model Coffee.Entities.CreditLine
 
 @{
-    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_BankWorkerLayout.cshtml";
+    ViewBag.Title = "Create new product";
 }
 
-<h2>New</h2>
+@section manageCreditLineActive{active}
 
-@using (Html.BeginForm(FormMethod.Post)) {
-    <span>Credit line name: </span>
-    @Html.TextBoxFor(x => x.Name)
-    <br />
+<div class="text-center"><h2>Create new product</h2></div>
 
-    <span>Credit line annual rate: </span>
-    @Html.TextBoxFor(x => x.Rate)<span>%</span>
-    <br />
-    
-    <span>Credit line payments:</span><br />
-    @Html.RadioButtonFor(x => x.KindOfPayments, Coffee.Entities.PaymentKind.ANNUITY,
-        new Dictionary<string, object>{{ "checked", "checked" }, { "name", "payments" }} )<span>Annuity</span><br />
-    @Html.RadioButtonFor(x => x.KindOfPayments, Coffee.Entities.PaymentKind.FACTICAL,
-        new Dictionary<string, object>{{ "name", "payments" }})<span>Factical</span><br />
-    @Html.RadioButtonFor(x => x.KindOfPayments, Coffee.Entities.PaymentKind.PERCENTS_ONLY,
-        new Dictionary<string, object>{{ "name", "payments" }})<span>Percents only</span><br />
-                            
-    <span>(leave field blank to specify no constraint)</span>
-    <br />
-    <span>Credit amount: from </span>
-    @Html.TextBoxFor(x => x.MinAmountBoundary)
-    <span> to </span>
-    @Html.TextBoxFor(x => x.MaxAmountBoundary)
-    <span> belorussian rubles</span>
-    <br />
-    
-    <span>Target age category: from </span>
-    @Html.TextBoxFor(x => x.MinAgeBoundary)
-    <span> to </span>
-    @Html.TextBoxFor(x => x.MaxAgeBoundary)
-    <span> years</span>
-    <br />
-    
-    <span>Credit period: from </span>
-    @Html.TextBoxFor(x => x.MinMonthsBoundary)
-    <span> to </span>
-    @Html.TextBoxFor(x => x.MaxMonthsBoundary)
-    <span> months</span>
-    <br />
-    
-    <span>Minimum working time on current position: </span>
-    @Html.TextBoxFor(x => x.MinWorkTimeBoundary)
-    <br />
+<form method="POST" action="" class="form-horizontal">
+    <div class="control-group">
+        <label class="control-label">Credit line name: </label>
+        <div class="controls">@Html.TextBoxFor(x => x.Name)</div>
+    </div>
 
-    <span>Minimum average salary: </span>
-    @Html.TextBoxFor(x => x.MinAverageSalaryBoundary)
-    <br />
+    <div class="control-group">
+        <label class="control-label">Credit line annual rate:</label>
+        <div class="controls">
+            @Html.TextBoxFor(x => x.Rate)<span>%</span>
+        </div>
+    </div>
     
-    <input type="submit" value="Create" />
-}
+    <div class="control-group">
+        <label class="control-label">Credit line payments:</label>
+        <div class="controls">
+            @Html.RadioButtonFor(x => x.KindOfPayments, Coffee.Entities.PaymentKind.ANNUITY,
+            new Dictionary<string, object>{{ "checked", "checked" }, { "name", "payments" }} )<span>Annuity</span><br />
+        @Html.RadioButtonFor(x => x.KindOfPayments, Coffee.Entities.PaymentKind.FACTICAL,
+            new Dictionary<string, object>{{ "name", "payments" }})<span>Factical</span><br />
+        @Html.RadioButtonFor(x => x.KindOfPayments, Coffee.Entities.PaymentKind.PERCENTS_ONLY,
+            new Dictionary<string, object>{{ "name", "payments" }})<span>Percents only</span>
+        </div>
+    </div>
+
+    <div class="control-group">                        
+    <label class="control-label">(leave field blank to specify no constraint)</span>
+    </div>
+
+    <div class="control-group">   
+        <label class="control-label">Credit amount: from </label>
+        <div class="controls">
+            @Html.TextBoxFor(x => x.MinAmountBoundary)
+            <span> to </span>
+            @Html.TextBoxFor(x => x.MaxAmountBoundary)
+            <span> belorussian rubles</span>
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label class="control-label">Target age category: from </label>
+        <div class="controls">
+            @Html.TextBoxFor(x => x.MinAgeBoundary)
+            <span> to </span>
+            @Html.TextBoxFor(x => x.MaxAgeBoundary)
+            <span> years</span>
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label class="control-label">Credit period: from </label>
+        <div class="controls">
+            @Html.TextBoxFor(x => x.MinMonthsBoundary)
+            <span> to </span>
+            @Html.TextBoxFor(x => x.MaxMonthsBoundary)
+            <span> months</span>
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label class="control-label">Minimum working time on current position: </label>
+        <div class="controls">
+            @Html.TextBoxFor(x => x.MinWorkTimeBoundary)
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">Minimum average salary: </label>
+        <div class="controls">
+            @Html.TextBoxFor(x => x.MinAverageSalaryBoundary)
+        </div>
+    </div>
+    <div class="text-center">
+    <input type="submit" value="Create!" class="btn btn-success btn-large" />
+    </div>
+</form>
 

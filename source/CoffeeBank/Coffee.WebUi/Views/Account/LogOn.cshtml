@@ -9,9 +9,9 @@
 <p>
     Please enter your user name and password. @Html.ActionLink("Register", "Register") if you don't have an account.
 </p>
-
-@Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
-
+<div class="no-bullet-list">
+@Html.ValidationSummary()
+</div>
 @using (Html.BeginForm("LogOn", "Account", FormMethod.Post, new { @id = "logon-form" }))
 {
     @Html.AntiForgeryToken()

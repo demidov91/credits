@@ -105,6 +105,7 @@ header > .current-date
     
 #change-modes-on-top.clerk ul{width:40%}
 #change-modes-on-top ul>li{width:100%; text-align:center;}
+#change-modes-on-top.committee ul{width:20%;}
 
 /**
 -----------------------------------------------
@@ -255,3 +256,31 @@ List of active credits
 {
     cursor: pointer;
     }
+
+/**
+--------
+validation styles
+*/
+
+.validation-summary-errors
+{
+    border-radius: 4px;
+    margin-bottom: 20px;
+    padding: 8px 35px 8px 14px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    background-color: #F2DEDE;
+    border-color: #EED3D7;
+    color: #B94A48;
+    }
+ .validation-summary-errors ul
+ {
+     margin-top: 10px;
+     margin-bottom: 12px;
+     }   
+ 
+.no-bullet-list li
+{
+    list-style: none;
+    }    
+
+    

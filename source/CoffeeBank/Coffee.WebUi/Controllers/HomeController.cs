@@ -20,6 +20,8 @@ namespace Coffee.WebUi.Controllers
             if (Request.IsAuthenticated) {
                 if (MembershipHelper.IsExternalUser(User)) {
                     return RedirectToAction("UserHome");
+                } else if(User.IsInRole("Committee")) {
+                    return RedirectToAction("UnapprovedList", "Request");
                 }
                 return RedirectToAction("List", "Request");
             } 
