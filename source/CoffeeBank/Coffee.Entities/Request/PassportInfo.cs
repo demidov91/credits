@@ -45,6 +45,8 @@ namespace Coffee.Entities
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
         public DateTime ExpireDate { get; set; }
 
+        [Required]
+        [StringLength(9)]
         public string PassportNumber { get; set; }
 
         public string IdentificationNumber { get; set; }
