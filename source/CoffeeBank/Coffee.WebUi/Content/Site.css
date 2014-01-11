@@ -133,7 +133,8 @@ input.select-credit-product-checkbox
 {
     margin-top: 1em;
     }
-    
+#login-and-save-request{opacity:0.8;}
+#login-and-save-request:hover{opacity:1;}
 /**
 ----------------------------
 List of requests
@@ -294,15 +295,46 @@ validation styles
 
 /**
 -----------
+List of credit lines for committee.
 */
     
-    .accordion-toggle
-    {
-        width: 20em;
-        }
-        a.accordion-toggle
-        {
-            text-decoration: none;
-            }
+.accordion-toggle{
+    width: 20em;
+}
+a.accordion-toggle{
+    text-decoration: none;
+}
             
 #credit-products-committee{margin-top: 3em;}
+
+
+/**
+------
+List of CreditLines for external user.
+*/
+
+#representative-list-of-credit-lines .description{
+    background: none repeat scroll 0 0 #008000;
+    border: 0 solid #000000;
+    border-radius: 10px;
+    color: #FFFFFF;
+    display: inline-block;
+    font-family: charcoal-regular;
+    font-style: normal;
+    font-weight: normal;
+    height: 27em;
+    letter-spacing: 0.1em;
+    padding: 1em 1.2em;
+    text-transform: uppercase;
+    transition: all 0s ease 0s;
+    margin: 1% 2%;
+    width: 25.5%;
+    text-align: center;
+}
+#representative-list-of-credit-lines .description>div{
+    margin: 0.5em 0;
+}
+
+#representative-list-of-credit-lines-caption{
+    margin-bottom: 20px;
+}

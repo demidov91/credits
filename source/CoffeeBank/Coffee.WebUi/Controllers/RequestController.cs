@@ -14,6 +14,9 @@ namespace Coffee.WebUi.Controllers
         public ActionResult New()
         {
             CreditRequestFormModel model = new CreditRequestFormModel();
+            if (!User.Identity.IsAuthenticated) {
+                return View("NewNoneAuth", model);
+            }
             return View(model);
         }
 
@@ -32,6 +35,10 @@ namespace Coffee.WebUi.Controllers
             if (form.ForceSave)
             {
                 RepoFactory.GetRequestsRepo().AddCreditRequest(model);
+                if (!User.Identity.IsAuthenticated)
+                {
+                    Session["last_credit_request_id"] = model.Id;
+                }
                 return View("Success", model);
             }
 
@@ -56,6 +63,10 @@ namespace Coffee.WebUi.Controllers
             }
             preformulatedCreditRequest.CreditLine = line;
             RepoFactory.GetRequestsRepo().AddCreditRequest(preformulatedCreditRequest);
+            if (!User.Identity.IsAuthenticated)
+            {
+                Session["last_credit_request_id"] = preformulatedCreditRequest.Id;
+            }
             return View("Success", preformulatedCreditRequest);
         }
 

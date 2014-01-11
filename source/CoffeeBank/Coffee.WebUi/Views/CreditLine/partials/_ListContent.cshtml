@@ -1,10 +1,51 @@
 ﻿@model List<Coffee.Entities.CreditLine>
 
-<h2>Available credit products:</h2>
 
+<div id="representative-list-of-credit-lines">
 @foreach (var line in Model)
 {
-    @Html.ActionLink(line.Name == null ? "Безымянный кредитный продукт" : line.Name, "Detail", new { id = line.Id })
-    <br />
+    if (line.Name != null) { 
+        <div class="description toLeft">
+        <h2>@line.Name</h2>
+        <div><b>@line.Rate%</b>
+        @{
+            switch(line.KindOfPayments){
+                case Coffee.Entities.PaymentKind.ANNUITY:
+                    <span>with annuity payments.</span>
+                    break;
+                case Coffee.Entities.PaymentKind.FACTICAL:
+                    <span>with decreasing payments.</span>
+                    break;
+                case Coffee.Entities.PaymentKind.PERCENTS_ONLY:
+                    <span>with loan body return only in the end of payments period.</span>
+                    break;
+
+            }
+        }
+        </div>
+        @if (line.MinAgeBoundary != null && line.MinAgeBoundary > 0)
+        {<div>Minimum age <b>@line.MinAgeBoundary</b></div>}
+        @if (line.MaxAgeBoundary != null && line.MinAgeBoundary > 0)
+        {<div>Maximum age <b>@line.MaxAgeBoundary</b></div>}
+
+        @if (line.MinAmountBoundary != null && line.MinAmountBoundary > 0)
+        {<div>From <b>@line.MinAmountBoundary</b> belorussian rubles</div>}
+        @if (line.MaxAmountBoundary != null && line.MinAmountBoundary > 0)
+        {<div>Up to <b>@line.MaxAmountBoundary</b> belorussian rubles</div>}     
+        
+        @if (line.MinMonthsBoundary != null && line.MinMonthsBoundary > 0)
+        {<div>From <b>@line.MinMonthsBoundary</b> months</div>}
+        @if (line.MaxMonthsBoundary != null && line.MaxMonthsBoundary > 0)
+        {<div>Up to <b>@line.MaxMonthsBoundary</b> months</div>}     
+        
+        @if (line.MinWorkYearsBoundary != null && line.MinWorkYearsBoundary > 0)
+        {<div>No less than <b>@line.MinWorkYearsBoundary</b> years working in your current company</div>}   
+        @if (line.MinAverageSalaryBoundary != null && line.MinAverageSalaryBoundary > 0)
+        {<div>No less than <b>@line.MinAverageSalaryBoundary</b> BYR average salary</div>}                                                                                                           
+
+        
+    </div>
+    }
+    
 }
-@Html.ActionLink("Back", "UserHome", "Home")
+</div>

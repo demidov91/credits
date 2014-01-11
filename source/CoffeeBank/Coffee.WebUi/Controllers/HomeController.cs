@@ -3,6 +3,7 @@
 using Coffee.Repository;
 using System.Collections.Generic;
 using Coffee.WebUi.Scripts;
+using Coffee.Entities;
 
 namespace Coffee.WebUi.Controllers
 {
@@ -19,6 +20,12 @@ namespace Coffee.WebUi.Controllers
         {
             if (Request.IsAuthenticated) {
                 if (MembershipHelper.IsExternalUser(User)) {
+                    long? requestId = (long?)Session["last_credit_request_id"];
+                    if (requestId != null){
+                        CreditRequest lastCreditRequest = RepoFactory.GetRequestsRepo().GetRequestById((long)requestId);
+                        lastCreditRequest.Username = User.Identity.Name;
+                        RepoFactory.GetRequestsRepo().Update(lastCreditRequest);
+                    }
                     return RedirectToAction("List", "CreditLine");
                 } else if(User.IsInRole("Committee")) {
                     return RedirectToAction("UnapprovedList", "Request");

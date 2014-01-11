@@ -7,4 +7,9 @@
 
 @section showCreditLinesActive{active}
 
+
+<div class="text-center" id="representative-list-of-credit-lines-caption">
+    @Html.ActionLink("Register New Credit Request", "New", "Request", null, new { @class = "btn btn-large btn-primary"})
+</div>
+
 @{Html.RenderPartial("partials/_ListContent", Model);}

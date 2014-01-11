@@ -8,5 +8,6 @@
     <h2>Credit request has been sucessfuly created.</h2>
     <div>
         <p>Go to our bank in 2 weeks with passport <b>@Model.PassportInfo.PassportNumber</b></p>
+        <p> @Html.ActionLink("Attach Credit Request To Your Account", "LogOn", "Account", null, new { @class="btn", id="login-and-save-request"}) </p>
     </div>
 </div>
